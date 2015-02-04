@@ -1,12 +1,13 @@
 package agent;
 
+import conceptualspace.Concept;
 import conceptualspace.Material;
 import experiment.Assertion;
 
 
 public class BasicAgent implements Agent {
 
-	public BasicAgent(final Interpretation interpretation) {
+	public BasicAgent(final Concept...concepts) {
 		// TODO Auto-generated constructor stub
 	}
 

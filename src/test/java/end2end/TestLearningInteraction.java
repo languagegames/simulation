@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import agent.Agent;
 import agent.BasicAgent;
-import agent.Interpretation;
 import agent.LabelMapping;
 import agent.OracleAgent;
 import conceptualspace.Concept;
@@ -33,10 +32,8 @@ public class TestLearningInteraction {
 				);
 
 		final Agent pupil = new BasicAgent(
-				new Interpretation(
-						new Concept(new Point(0.3, 0.4), 1.0),
-						new Concept(new Point(0.6, 0.5), 0.7)
-						)
+				new Concept(new Point(0.3, 0.4), 1.0),
+				new Concept(new Point(0.6, 0.5), 0.7)
 				);
 
 		final Agent teacher = new OracleAgent(new LabelMapping(data, asList(1, 2, 2, 1, 1)), 0.95);
