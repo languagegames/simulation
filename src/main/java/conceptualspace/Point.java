@@ -1,5 +1,9 @@
 package conceptualspace;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+import static java.util.Arrays.asList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +14,28 @@ public class Point {
 
 	private final List<Double> coordinates = new ArrayList<>();
 
-	public Point(final double...coordinates) {
-		for (final double coordinate : coordinates) {
-			this.coordinates.add(coordinate);
+	public Point(final List<Double> coordinates) {
+		this.coordinates.addAll(coordinates);
+	}
+
+	public Point(final Double...coordinates) {
+		this(asList(coordinates));
+	}
+
+	public double norm() {
+		double sumOfSquares = 0;
+		for (final Double coordinate : coordinates) {
+			sumOfSquares += pow(coordinate, 2);
 		}
+		return sqrt(sumOfSquares);
+	}
+
+	public Point minus(final Point other) {
+		final List<Double> resultCoordinates = new ArrayList<>();
+		for (int i=0; i<coordinates.size(); i++) {
+			resultCoordinates.add(coordinates.get(i) - other.coordinates.get(i));
+		}
+		return new Point(resultCoordinates);
 	}
 
 	@Override
