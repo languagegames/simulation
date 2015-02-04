@@ -13,6 +13,11 @@ public class SimpleMaterial implements Material {
 	}
 
 	@Override
+	public Point observation() {
+		return point;
+	}
+
+	@Override
 	public String toString() {
 		return "Simple material @ " + point.toString();
 	}
