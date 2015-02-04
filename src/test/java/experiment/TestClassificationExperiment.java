@@ -21,7 +21,8 @@ public class TestClassificationExperiment {
 	@Mock Agent teacher, pupil, trainedPupil;
 
 	private final Material trainingSample = someMaterial(), testSample0 = someMaterial(), testSample1 = someMaterial();
-	private final Assertion assertion = new Assertion("0"), anotherAssertion = new Assertion("1");
+	private final Assertion assertion = new Assertion(someMaterial(), "0", 0.42),
+			anotherAssertion = new Assertion(someMaterial(), "1", 0.42);
 
 	private final ExperimentData data =
 			new ExperimentData(asList(

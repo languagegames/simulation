@@ -3,16 +3,22 @@ package experiment;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import conceptualspace.Material;
+
 public class Assertion {
 
-	private final String name;
+	public final Material material;
+	public final String label;
+	public final double weight;
 
-	public Assertion(final String name) {
-		this.name = name;
+	public Assertion(final Material material, final String label, final double weight) {
+		this.material = material;
+		this.label = label;
+		this.weight = weight;
 	}
 
 	public boolean matches(final Assertion other) {
-		return name.equals(other.name);
+		return label.equals(other.label) && material.equals(other.material);
 	}
 
 	@Override
