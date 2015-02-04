@@ -1,7 +1,7 @@
 package agent;
 
 import conceptualspace.Material;
-import experiment.Label;
+import experiment.Assertion;
 
 
 public class OracleAgent implements Agent {
@@ -11,13 +11,13 @@ public class OracleAgent implements Agent {
 	}
 
 	@Override
-	public Label classify(final Material material) {
+	public Assertion classify(final Material material) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Agent learn(final Material material, final Label label) {
+	public Agent learn(final Assertion label) {
 		// TODO Auto-generated method stub
 		return null;
 	}

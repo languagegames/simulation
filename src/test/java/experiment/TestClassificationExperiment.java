@@ -21,7 +21,7 @@ public class TestClassificationExperiment {
 	@Mock Agent teacher, pupil, trainedPupil;
 
 	private final Material trainingSample = someMaterial(), testSample0 = someMaterial(), testSample1 = someMaterial();
-	private final Label label = new Label("0"), anotherLabel = new Label("1");
+	private final Assertion assertion = new Assertion("0"), anotherAssertion = new Assertion("1");
 
 	private final ExperimentData data =
 			new ExperimentData(asList(
@@ -33,13 +33,13 @@ public class TestClassificationExperiment {
 		final ClassificationExperiment experiment = new ClassificationExperiment(data, pupil, teacher);
 
 		context.checking(new Expectations() {{
-			exactly(3).of(teacher).classify(trainingSample); will(returnValue(label));
-			oneOf(pupil).learn(trainingSample, label); will(returnValue(trainedPupil));
-			exactly(2).of(trainedPupil).learn(trainingSample, label); will(returnValue(trainedPupil));
-			oneOf(teacher).classify(testSample0); will(returnValue(label));
-			oneOf(teacher).classify(testSample1); will(returnValue(label));
-			oneOf(trainedPupil).classify(testSample0); will(returnValue(label));
-			oneOf(trainedPupil).classify(testSample1); will(returnValue(anotherLabel));
+			exactly(3).of(teacher).classify(trainingSample); will(returnValue(assertion));
+			oneOf(pupil).learn(assertion); will(returnValue(trainedPupil));
+			exactly(2).of(trainedPupil).learn(assertion); will(returnValue(trainedPupil));
+			oneOf(teacher).classify(testSample0); will(returnValue(assertion));
+			oneOf(teacher).classify(testSample1); will(returnValue(assertion));
+			oneOf(trainedPupil).classify(testSample0); will(returnValue(assertion));
+			oneOf(trainedPupil).classify(testSample1); will(returnValue(anotherAssertion));
 		}});
 
 		assertThat(experiment.classificationScore(), equalTo(0.5));

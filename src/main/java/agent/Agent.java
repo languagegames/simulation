@@ -1,12 +1,12 @@
 package agent;
 
 import conceptualspace.Material;
-import experiment.Label;
+import experiment.Assertion;
 
 public interface Agent {
 
-	Label classify(Material material);
+	Assertion classify(Material material);
 
-	Agent learn(Material material, Label label);
+	Agent learn(Assertion label);
 
 }

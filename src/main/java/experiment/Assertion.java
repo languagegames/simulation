@@ -3,13 +3,16 @@ package experiment;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Label {
+public class Assertion {
 
-	@SuppressWarnings("unused")
 	private final String name;
 
-	public Label(final String name) {
+	public Assertion(final String name) {
 		this.name = name;
+	}
+
+	public boolean matches(final Assertion other) {
+		return name.equals(other.name);
 	}
 
 	@Override
