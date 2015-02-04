@@ -8,17 +8,17 @@ import conceptualspace.Material;
 public class Assertion {
 
 	public final Material material;
-	public final String label;
+	public final int label;
 	public final double weight;
 
-	public Assertion(final Material material, final String label, final double weight) {
+	public Assertion(final Material material, final int label, final double weight) {
 		this.material = material;
 		this.label = label;
 		this.weight = weight;
 	}
 
 	public boolean matches(final Assertion other) {
-		return label.equals(other.label) && material.equals(other.material);
+		return label == other.label && material.equals(other.material);
 	}
 
 	@Override
