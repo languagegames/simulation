@@ -21,6 +21,10 @@ public class ExperimentData {
 		testSet = materials.subList(trainingSetSize, materials.size());
 	}
 
+	public List<Material> allData() {
+		return materials;
+	}
+
 	public List<Material> trainingSet() {
 		return trainingSet;
 	}
