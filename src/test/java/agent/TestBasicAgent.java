@@ -15,10 +15,12 @@ public class TestBasicAgent {
 	@Test
 	public void learnsByUpdatingAppropriateConcept() {
 		final BasicAgent agent = new BasicAgent(
+				0.42,
 				new Concept(new Point(0.42), 0.42),
 				new Concept(new Point(0.5), 0.5));
 
 		final Agent updatedAgent = new BasicAgent(
+				0.42,
 				new Concept(new Point(0.42), 0.42),
 				new Concept(new Point(0.74), 0.8));
 

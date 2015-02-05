@@ -32,6 +32,7 @@ public class TestLearningInteraction {
 				);
 
 		final Agent pupil = new BasicAgent(
+				0.42,
 				new Concept(new Point(0.3, 0.4), 1.0),
 				new Concept(new Point(0.6, 0.5), 0.7)
 				);

@@ -16,13 +16,15 @@ import experiment.Assertion;
 public class BasicAgent implements Agent {
 
 	private final List<Concept> concepts = new ArrayList<>();
+	private final double weight;
 
-	public BasicAgent(final List<Concept> concepts) {
+	public BasicAgent(final double weight, final List<Concept> concepts) {
+		this.weight = weight;
 		this.concepts.addAll(concepts);
 	}
 
-	public BasicAgent(final Concept...concepts) {
-		this(asList(concepts));
+	public BasicAgent(final double weight, final Concept...concepts) {
+		this(weight, asList(concepts));
 	}
 
 	@Override
@@ -37,7 +39,7 @@ public class BasicAgent implements Agent {
 		final Concept updated = toUpdate.update(assertion);
 		final List<Concept> newConcepts = new ArrayList<>(concepts);
 		newConcepts.set(assertion.label, updated);
-		return new BasicAgent(newConcepts);
+		return new BasicAgent(weight, newConcepts);
 	}
 
 	@Override
