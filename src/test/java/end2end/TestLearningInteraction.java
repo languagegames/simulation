@@ -8,9 +8,9 @@ import org.junit.Test;
 
 import agent.Agent;
 import agent.BasicAgent;
+import agent.Concept;
 import agent.LabelMapping;
 import agent.OracleAgent;
-import conceptualspace.Concept;
 import conceptualspace.Material;
 import conceptualspace.Point;
 import conceptualspace.SimpleMaterial;

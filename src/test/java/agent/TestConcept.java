@@ -1,4 +1,4 @@
-package conceptualspace;
+package agent;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;
@@ -10,6 +10,8 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
+import conceptualspace.Material;
+import conceptualspace.Point;
 import experiment.Assertion;
 
 public class TestConcept {

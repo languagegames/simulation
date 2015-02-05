@@ -8,7 +8,6 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import conceptualspace.Concept;
 import conceptualspace.Material;
 import experiment.Assertion;
 

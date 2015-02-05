@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
-import conceptualspace.Concept;
 import conceptualspace.Material;
 import conceptualspace.Point;
 import conceptualspace.SimpleMaterial;
