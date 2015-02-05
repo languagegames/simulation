@@ -36,7 +36,7 @@ public class TestLearningInteraction {
 				new Concept(new Point(0.6, 0.5), 0.7)
 				);
 
-		final Agent teacher = new OracleAgent(new LabelMapping(data, asList(1, 2, 2, 1, 1)), 0.95);
+		final Agent teacher = new OracleAgent(new LabelMapping(data, asList(0, 1, 1, 0, 0)), 0.95);
 
 		final ClassificationExperiment experiment = new ClassificationExperiment(data, pupil, teacher);
 
