@@ -8,6 +8,22 @@ import org.junit.Test;
 public class TestPoint {
 
 	@Test
+	public void testTimesOperation() {
+		final Point a = new Point(0.5, 0.9);
+		final double k = 1.5;
+
+		assertThat(a.times(k), equalTo(new Point(0.75, 1.35)));
+	}
+
+	@Test
+	public void testPlusOperation() {
+		final Point a = new Point(0.5, 0.1);
+		final Point b = new Point(0.3, 0.6);
+
+		assertThat(a.plus(b), equalTo(new Point(0.8, 0.7)));
+	}
+
+	@Test
 	public void testNormOperation() {
 		final Point a = new Point(0.3, 0.4);
 

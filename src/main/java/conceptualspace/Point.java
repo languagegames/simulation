@@ -22,20 +22,32 @@ public class Point {
 		this(asList(coordinates));
 	}
 
+	public Point minus(final Point other) {
+		return plus(other.times(-1));
+	}
+
+	public Point times(final double k) {
+		final List<Double> resultCoordinates = new ArrayList<>();
+		for (final Double coordinate : coordinates) {
+			resultCoordinates.add(coordinate * k);
+		}
+		return new Point(resultCoordinates);
+	}
+
+	public Point plus(final Point other) {
+		final List<Double> resultCoordinates = new ArrayList<>();
+		for (int i=0; i<coordinates.size(); i++) {
+			resultCoordinates.add(coordinates.get(i) + other.coordinates.get(i));
+		}
+		return new Point(resultCoordinates);
+	}
+
 	public double norm() {
 		double sumOfSquares = 0;
 		for (final Double coordinate : coordinates) {
 			sumOfSquares += pow(coordinate, 2);
 		}
 		return sqrt(sumOfSquares);
-	}
-
-	public Point minus(final Point other) {
-		final List<Double> resultCoordinates = new ArrayList<>();
-		for (int i=0; i<coordinates.size(); i++) {
-			resultCoordinates.add(coordinates.get(i) - other.coordinates.get(i));
-		}
-		return new Point(resultCoordinates);
 	}
 
 	@Override
