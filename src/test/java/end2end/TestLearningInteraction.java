@@ -31,11 +31,11 @@ public class TestLearningInteraction {
 	@Test
 	public void fiveObjectsTwoConceptsUsingDataFromFile() {
 
-		final DataReader dataReader = new DataReader("testdata", "testlabels");
+		final DataReader dataReader = new DataReader();
 
-		final List<Material> materials = SimpleMaterial.makeListFrom(dataReader.points());
+		final List<Material> materials = SimpleMaterial.makeListFrom(dataReader.points("testdata"));
 		final ExperimentData data = new ExperimentData(materials, 0.8);
-		final List<Integer> labels = dataReader.labels();
+		final List<Integer> labels = dataReader.labels("testlabels");
 
 		final Agent teacher = new OracleAgent(new LabelMapping(data, labels), 0.95);
 

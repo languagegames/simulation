@@ -6,16 +6,16 @@ import conceptualspace.Point;
 
 public class DataReader {
 
-	public DataReader(final String dataFile, final String labelFile) {
+	public DataReader() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<Point> points() {
+	public List<Point> points(final String fileName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Integer> labels() {
+	public List<Integer> labels(final String fileName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
