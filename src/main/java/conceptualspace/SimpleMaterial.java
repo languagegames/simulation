@@ -1,5 +1,7 @@
 package conceptualspace;
 
+import java.util.List;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -30,6 +32,11 @@ public class SimpleMaterial implements Material {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	public static List<Material> makeListFrom(final List<Point> points) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
