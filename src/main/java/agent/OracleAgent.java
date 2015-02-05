@@ -6,14 +6,17 @@ import experiment.Assertion;
 
 public class OracleAgent implements Agent {
 
+	private final LabelMapping labelMapping;
+	private final double weight;
+
 	public OracleAgent(final LabelMapping labelMapping, final double weight) {
-		// TODO Auto-generated constructor stub
+		this.labelMapping = labelMapping;
+		this.weight = weight;
 	}
 
 	@Override
 	public Assertion classify(final Material material) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Assertion(material, labelMapping.label(material), weight);
 	}
 
 	@Override
