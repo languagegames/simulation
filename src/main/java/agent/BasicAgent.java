@@ -29,8 +29,15 @@ public class BasicAgent implements Agent {
 
 	@Override
 	public Assertion classify(final Material material) {
-		// TODO Auto-generated method stub
-		return null;
+		Concept mostAppropriate = concepts.get(0);
+		double maxAppropriateness = 0;
+		for (final Concept concept : concepts) {
+			if (concept.appropriatenessOf(material.observation()) > maxAppropriateness) {
+				mostAppropriate = concept;
+				maxAppropriateness = mostAppropriate.appropriatenessOf(material.observation());
+			}
+		}
+		return new Assertion(material, concepts.indexOf(mostAppropriate), weight);
 	}
 
 	@Override
