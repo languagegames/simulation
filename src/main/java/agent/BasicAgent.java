@@ -1,5 +1,7 @@
 package agent;
 
+import static java.util.Arrays.asList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +17,12 @@ public class BasicAgent implements Agent {
 
 	private final List<Concept> concepts = new ArrayList<>();
 
+	public BasicAgent(final List<Concept> concepts) {
+		this.concepts.addAll(concepts);
+	}
+
 	public BasicAgent(final Concept...concepts) {
-		for (final Concept concept : concepts) {
-			this.concepts.add(concept);
-		}
+		this(asList(concepts));
 	}
 
 	@Override
@@ -28,9 +32,12 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
-	public Agent learn(final Assertion label) {
-		// TODO Auto-generated method stub
-		return null;
+	public Agent learn(final Assertion assertion) {
+		final Concept toUpdate = concepts.get(assertion.label);
+		final Concept updated = toUpdate.update(assertion);
+		final List<Concept> newConcepts = new ArrayList<>(concepts);
+		newConcepts.set(assertion.label, updated);
+		return new BasicAgent(newConcepts);
 	}
 
 	@Override
