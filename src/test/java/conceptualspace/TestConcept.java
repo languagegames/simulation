@@ -1,6 +1,7 @@
 package conceptualspace;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.jmock.Expectations;
@@ -15,6 +16,12 @@ public class TestConcept {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 
 	@Mock Material material;
+
+	@Test
+	public void calculatesAppropriatenessOfAnObservation() {
+		final Concept concept = new Concept(new Point(0.5, 0.7), 0.5);
+		assertThat(concept.appropriatenessOf(new Point(0.4, 0.3)), closeTo(0.1754, 0.0001));
+	}
 
 	@Test
 	public void updatesAccordingToTargetAndWeight() {

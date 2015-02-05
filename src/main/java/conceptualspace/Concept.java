@@ -15,6 +15,10 @@ public class Concept {
 		this.threshold = threshold;
 	}
 
+	public double appropriatenessOf(final Point observation) {
+		return 1 - observation.minus(prototype).norm()/threshold;
+	}
+
 	public Concept update(final Assertion assertion) {
 		final Point target = assertion.material.observation();
 		final Point newPrototype = prototype.plus((target.minus(prototype)).times(lambda(assertion.weight, target)));
