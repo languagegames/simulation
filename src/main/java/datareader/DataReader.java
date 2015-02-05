@@ -1,6 +1,5 @@
 package datareader;
 
-import static java.lang.Double.valueOf;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.nio.file.Files.readAllLines;
 import static java.nio.file.Paths.get;
@@ -9,49 +8,63 @@ import static java.util.Arrays.asList;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import conceptualspace.Point;
 
 public class DataReader {
 
+	public List<Integer> labels(final String file) {
+		final List<String> lines = lines(file);
+		final List<Integer> labels = new ArrayList<>();
+		for (final String line : lines) {
+			labels.add(Integer.valueOf(line));
+		}
+		return labels;
+	}
+
 	public List<Point> points(final String file) {
+		final List<String> lines = lines(file);
 		final List<Point> points = new ArrayList<>();
-		try {
-			final List<String> lines = read(file);
-			for (final String line : lines) {
-				addNextPoint(points, line);
-			}
-		} catch (final IOException e) {
-			e.printStackTrace();
+		for (final String line : lines) {
+			points.add(point(line));
 		}
 		return points;
 	}
 
-	private void addNextPoint(final List<Point> points, final String line) {
-		if (! line.isEmpty()) {
-			final List<String> lineStrings = new ArrayList<>();
-			lineStrings.addAll(asList(line.split(",")));
-			points.add(point(lineStrings));
-		}
-	}
-
-	private Point point(final List<String> lineStrings) {
+	private Point point(final String line) {
+		final List<String> strings = asList(line.split(","));
 		final List<Double> coordinates = new ArrayList<>();
-		for (final String string : lineStrings) {
-			coordinates.add(valueOf(string));
+		for (final String string : strings) {
+			coordinates.add(Double.valueOf(string));
 		}
 		return new Point(coordinates);
+	}
+
+	private List<String> lines(final String file) {
+		final List<String> lines = new ArrayList<>();
+		try {
+			lines.addAll(read(file));
+		} catch (final IOException e) {
+			e.printStackTrace();
+		}
+		removeEmptyLines(lines);
+		return lines;
+	}
+
+	private void removeEmptyLines(final List<String> lines) {
+		for (final Iterator<String> iterator = lines.iterator(); iterator.hasNext();) {
+		    final String line = iterator.next();
+		    if (line.isEmpty()) {
+		        iterator.remove();
+		    }
+		}
 	}
 
 	private List<String> read(final String file) throws IOException {
 		final Path path = get(file);
 		return readAllLines(path, UTF_8);
-	}
-
-	public List<Integer> labels(final String file) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

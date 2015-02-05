@@ -10,6 +10,13 @@ import conceptualspace.Point;
 public class TestDataReader {
 
 	@Test
+	public void createsListOfLabelsFromDataFile() {
+		final DataReader reader = new DataReader();
+		assertThat(reader.labels("src/test/resources/testlabels.csv"),
+				contains(0, 1, 1, 0, 0));
+	}
+
+	@Test
 	public void createsListOfPointsFromDataFile() {
 		final DataReader reader = new DataReader();
 		assertThat(reader.points("src/test/resources/testdata.csv"), contains(
