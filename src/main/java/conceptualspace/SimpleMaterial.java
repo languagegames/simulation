@@ -1,5 +1,6 @@
 package conceptualspace;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -19,6 +20,14 @@ public class SimpleMaterial implements Material {
 		return point;
 	}
 
+	public static List<Material> makeListFrom(final List<Point> points) {
+		final List<Material> materials = new ArrayList<>();
+		for (final Point point : points) {
+			materials.add(new SimpleMaterial(point));
+		}
+		return materials;
+	}
+
 	@Override
 	public String toString() {
 		return "Simple material @ " + point.toString();
@@ -32,11 +41,6 @@ public class SimpleMaterial implements Material {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	public static List<Material> makeListFrom(final List<Point> points) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
