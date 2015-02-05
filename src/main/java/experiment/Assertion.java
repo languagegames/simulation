@@ -22,6 +22,11 @@ public class Assertion {
 	}
 
 	@Override
+	public String toString() {
+		return "Assertion: " + material.toString() + " is " + label + ", weight " + weight;
+	}
+
+	@Override
 	public boolean equals(final Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj);
 	}
