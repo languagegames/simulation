@@ -36,7 +36,7 @@ public class TestLearningInteraction {
 		final List<Material> materials = SimpleMaterial.makeListFrom(
 				dataReader.points("src/test/resources/testdata.csv"));
 		final ExperimentData data = new ExperimentData(materials, 0.8);
-		final List<Integer> labels = dataReader.labels("src/test/resources/testlabels.csv");
+		final List<Integer> labels = dataReader.integers("src/test/resources/testlabels.csv");
 
 		final Agent teacher = new OracleAgent(new LabelMapping(data, labels), 0.95);
 

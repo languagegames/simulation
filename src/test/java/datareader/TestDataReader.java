@@ -12,7 +12,7 @@ public class TestDataReader {
 	@Test
 	public void createsListOfLabelsFromDataFile() {
 		final DataReader reader = new DataReader();
-		assertThat(reader.labels("src/test/resources/testlabels.csv"),
+		assertThat(reader.integers("src/test/resources/testlabels.csv"),
 				contains(0, 1, 1, 0, 0));
 	}
 

@@ -15,13 +15,13 @@ import conceptualspace.Point;
 
 public class DataReader {
 
-	public List<Integer> labels(final String file) {
+	public List<Integer> integers(final String file) {
 		final List<String> lines = lines(file);
-		final List<Integer> labels = new ArrayList<>();
+		final List<Integer> integers = new ArrayList<>();
 		for (final String line : lines) {
-			labels.add(Integer.valueOf(line));
+			integers.add(Integer.valueOf(line));
 		}
-		return labels;
+		return integers;
 	}
 
 	public List<Point> points(final String file) {
