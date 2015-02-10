@@ -16,7 +16,15 @@ import conceptualspace.Point;
 public class TestConcept {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 
-	@Mock PerceptualObject material;
+	@Mock PerceptualObject object;
+
+	@Test
+	public void calculatesHausdorffDistanceFromAnotherConcept() {
+		final Concept concept = new Concept(new Point(0.5, 0.7), 0.5);
+		final Concept other = new Concept(new Point(0.2, 0.2), 0.8);
+
+		assertThat(concept.hausdorffDistanceFrom(other), closeTo(0.7331, 0.0001));
+	}
 
 	@Test
 	public void calculatesAppropriatenessOfAnObservation() {
@@ -29,12 +37,12 @@ public class TestConcept {
 		final Concept concept = new Concept(new Point(0.5, 0.7), 0.5);
 
 		context.checking(new Expectations() {{
-			oneOf(material).observation(); will(returnValue(new Point(0.9, 0.1)));
+			oneOf(object).observation(); will(returnValue(new Point(0.9, 0.1)));
 		}});
 
 		final Concept updatedConcept = new Concept(new Point(0.7756239843019817, 0.2865640235470274), 1.1211102550927978);
 
-		assertThat(concept.update(new Assertion(material, 42, 0.8)),
+		assertThat(concept.update(new Assertion(object, 42, 0.8)),
 				equalTo(updatedConcept));
 	}
 

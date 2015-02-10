@@ -1,5 +1,7 @@
 package agent;
 
+import static java.lang.Math.abs;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -13,6 +15,10 @@ public class Concept {
 	public Concept(final Point prototype, final double threshold) {
 		this.prototype = prototype;
 		this.threshold = threshold;
+	}
+
+	public double hausdorffDistanceFrom(final Concept other) {
+		return prototype.minus(other.prototype).norm() + abs(threshold-other.threshold)/2;
 	}
 
 	public double appropriatenessOf(final Point observation) {
