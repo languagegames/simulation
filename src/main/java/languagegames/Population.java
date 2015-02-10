@@ -10,4 +10,9 @@ public class Population {
 		// TODO Auto-generated constructor stub
 	}
 
+	public double convergence() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

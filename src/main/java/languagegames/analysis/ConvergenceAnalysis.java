@@ -6,8 +6,7 @@ public class ConvergenceAnalysis implements Analysis {
 
 	@Override
 	public double analyse(final Population population) {
-		// TODO Auto-generated method stub
-		return 0;
+		return population.convergence();
 	}
 
 }
