@@ -7,14 +7,14 @@ import static org.hamcrest.Matchers.contains;
 import org.junit.Test;
 
 import classifier.ExperimentData;
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
-import conceptualspace.SimpleMaterial;
+import conceptualspace.SimpleObject;
 
 public class TestExperimentData {
 
-	private final Material someMaterial = new SimpleMaterial(new Point(0.42));
-	private final Material material0 = someMaterial, material1 = someMaterial,
+	private final PerceptualObject someMaterial = new SimpleObject(new Point(0.42));
+	private final PerceptualObject material0 = someMaterial, material1 = someMaterial,
 			material2 = someMaterial, material3 = someMaterial;
 
 	@Test

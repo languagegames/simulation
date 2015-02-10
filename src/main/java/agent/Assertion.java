@@ -3,15 +3,15 @@ package agent;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 
 public class Assertion {
 
-	public final Material material;
+	public final PerceptualObject material;
 	public final int label;
 	public final double weight;
 
-	public Assertion(final Material material, final int label, final double weight) {
+	public Assertion(final PerceptualObject material, final int label, final double weight) {
 		this.material = material;
 		this.label = label;
 		this.weight = weight;

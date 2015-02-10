@@ -1,7 +1,7 @@
 package conceptualspace;
 
 
-public interface Material {
+public interface PerceptualObject {
 
 	Point observation();
 

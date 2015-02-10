@@ -1,10 +1,10 @@
 package agent;
 
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 
 public interface Agent {
 
-	Assertion classify(Material material);
+	Assertion classify(PerceptualObject material);
 
 	Agent learn(Assertion label);
 

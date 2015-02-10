@@ -5,9 +5,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
-import conceptualspace.SimpleMaterial;
+import conceptualspace.SimpleObject;
 
 public class TestBasicAgent {
 
@@ -20,8 +20,8 @@ public class TestBasicAgent {
 				new Concept(new Point(0.2), 0.7),
 				new Concept(new Point(0.5), 0.5));
 
-		final Material material0 = new SimpleMaterial(new Point(0.35));
-		final Material material1 = new SimpleMaterial(new Point(0.4));
+		final PerceptualObject material0 = new SimpleObject(new Point(0.35));
+		final PerceptualObject material1 = new SimpleObject(new Point(0.4));
 
 		assertThat(agent.classify(material0), equalTo(new Assertion(material0, 0, someWeight)));
 		assertThat(agent.classify(material1), equalTo(new Assertion(material1, 1, someWeight)));
@@ -39,7 +39,7 @@ public class TestBasicAgent {
 				new Concept(new Point(0.42), 0.42),
 				new Concept(new Point(0.74), 0.8));
 
-		assertThat(agent.learn(new Assertion(new SimpleMaterial(new Point(0.9)), 1, 0.8)),
+		assertThat(agent.learn(new Assertion(new SimpleObject(new Point(0.9)), 1, 0.8)),
 				equalTo(updatedAgent));
 	}
 

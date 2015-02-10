@@ -7,11 +7,11 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 
-public class SimpleMaterial implements Material {
+public class SimpleObject implements PerceptualObject {
 
 	private final Point point;
 
-	public SimpleMaterial(final Point point) {
+	public SimpleObject(final Point point) {
 		this.point = point;
 	}
 
@@ -20,10 +20,10 @@ public class SimpleMaterial implements Material {
 		return point;
 	}
 
-	public static List<Material> makeListFrom(final List<Point> points) {
-		final List<Material> materials = new ArrayList<>();
+	public static List<PerceptualObject> makeListFrom(final List<Point> points) {
+		final List<PerceptualObject> materials = new ArrayList<>();
 		for (final Point point : points) {
-			materials.add(new SimpleMaterial(point));
+			materials.add(new SimpleObject(point));
 		}
 		return materials;
 	}

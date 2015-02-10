@@ -4,12 +4,12 @@ import java.util.List;
 
 import agent.Agent;
 import agent.Assertion;
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 
 public class ClassificationExperiment {
 
-	private final List<Material> trainingData;
-	private final List<Material> testData;
+	private final List<PerceptualObject> trainingData;
+	private final List<PerceptualObject> testData;
 	private final Agent pupil;
 	private final Agent teacher;
 
@@ -27,7 +27,7 @@ public class ClassificationExperiment {
 
 	private double classificationScore(final Agent trainedPupil) {
 		double score = 0;
-		for (final Material material : testData) {
+		for (final PerceptualObject material : testData) {
 			if (pupilClassifiesAccurately(trainedPupil, material)) {
 				score++;
 			}
@@ -35,7 +35,7 @@ public class ClassificationExperiment {
 		return score / testData.size();
 	}
 
-	private boolean pupilClassifiesAccurately(final Agent trainedPupil, final Material material) {
+	private boolean pupilClassifiesAccurately(final Agent trainedPupil, final PerceptualObject material) {
 		final Assertion target = teacher.classify(material);
 		final Assertion output = trainedPupil.classify(material);
 		return target.matches(output);
@@ -43,7 +43,7 @@ public class ClassificationExperiment {
 
 	private Agent trainPupil() {
 		Agent trainedPupil = pupil;
-		for (final Material material : trainingData) {
+		for (final PerceptualObject material : trainingData) {
 			final Assertion assertion = teacher.classify(material);
 			trainedPupil = trainedPupil.learn(assertion);
 		}

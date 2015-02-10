@@ -6,30 +6,30 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 
 public class ExperimentData {
 
-	private final List<Material> materials = new ArrayList<>();
-	private final List<Material> trainingSet;
-	private final List<Material> testSet;
+	private final List<PerceptualObject> materials = new ArrayList<>();
+	private final List<PerceptualObject> trainingSet;
+	private final List<PerceptualObject> testSet;
 
-	public ExperimentData(final List<Material> materials, final double trainTestSplit) {
+	public ExperimentData(final List<PerceptualObject> materials, final double trainTestSplit) {
 		this.materials.addAll(materials);
 		final int trainingSetSize = (int) (trainTestSplit * materials.size());
 		trainingSet = materials.subList(0, trainingSetSize);
 		testSet = materials.subList(trainingSetSize, materials.size());
 	}
 
-	public List<Material> allData() {
+	public List<PerceptualObject> allData() {
 		return materials;
 	}
 
-	public List<Material> trainingSet() {
+	public List<PerceptualObject> trainingSet() {
 		return trainingSet;
 	}
 
-	public List<Material> testSet() {
+	public List<PerceptualObject> testSet() {
 		return testSet;
 	}
 

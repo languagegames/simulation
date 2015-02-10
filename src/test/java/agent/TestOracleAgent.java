@@ -7,15 +7,15 @@ import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
 
 import classifier.ExperimentData;
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
-import conceptualspace.SimpleMaterial;
+import conceptualspace.SimpleObject;
 
 public class TestOracleAgent {
 
-	private final Material material0 = someMaterial(0.42);
-	private final Material material1 = someMaterial(0.43);
-	private final Material material2 = someMaterial(0.44);
+	private final PerceptualObject material0 = someMaterial(0.42);
+	private final PerceptualObject material1 = someMaterial(0.43);
+	private final PerceptualObject material2 = someMaterial(0.44);
 	private final ExperimentData data = new ExperimentData(
 			asList(material0, material1, material2), 0.42);
 	private final double someWeight = 0.42;
@@ -29,8 +29,8 @@ public class TestOracleAgent {
 		assertThat(agent.classify(material2), equalTo(new Assertion(material2, 0, someWeight)));
 	}
 
-	private Material someMaterial(final double d) {
-		return new SimpleMaterial(new Point(d));
+	private PerceptualObject someMaterial(final double d) {
+		return new SimpleObject(new Point(d));
 	}
 
 }

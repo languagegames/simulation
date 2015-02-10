@@ -1,6 +1,6 @@
 package agent;
 
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 
 
 public class OracleAgent implements Agent {
@@ -14,7 +14,7 @@ public class OracleAgent implements Agent {
 	}
 
 	@Override
-	public Assertion classify(final Material material) {
+	public Assertion classify(final PerceptualObject material) {
 		return new Assertion(material, labelMapping.label(material), weight);
 	}
 

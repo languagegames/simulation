@@ -10,13 +10,13 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 
 public class TestConcept {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 
-	@Mock Material material;
+	@Mock PerceptualObject material;
 
 	@Test
 	public void calculatesAppropriatenessOfAnObservation() {

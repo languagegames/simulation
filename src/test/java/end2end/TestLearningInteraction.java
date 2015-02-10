@@ -15,9 +15,9 @@ import agent.BasicAgent;
 import agent.Concept;
 import agent.LabelMapping;
 import agent.OracleAgent;
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
-import conceptualspace.SimpleMaterial;
+import conceptualspace.SimpleObject;
 import datareader.DataReader;
 
 public class TestLearningInteraction {
@@ -33,7 +33,7 @@ public class TestLearningInteraction {
 
 		final DataReader dataReader = new DataReader();
 
-		final List<Material> materials = SimpleMaterial.makeListFrom(
+		final List<PerceptualObject> materials = SimpleObject.makeListFrom(
 				dataReader.points("src/test/resources/testdata.csv"));
 		final ExperimentData data = new ExperimentData(materials, 0.8);
 		final List<Integer> labels = dataReader.integers("src/test/resources/testlabels.csv");
@@ -64,8 +64,8 @@ public class TestLearningInteraction {
 		assertThat(experiment.classificationScore(), equalTo(1.0));
 	}
 
-	private Material simpleMaterial(final Point point) {
-		return new SimpleMaterial(point);
+	private PerceptualObject simpleMaterial(final Point point) {
+		return new SimpleObject(point);
 	}
 
 }

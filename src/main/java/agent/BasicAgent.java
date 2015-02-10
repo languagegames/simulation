@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 
 
 public class BasicAgent implements Agent {
@@ -26,7 +26,7 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
-	public Assertion classify(final Material material) {
+	public Assertion classify(final PerceptualObject material) {
 		Concept mostAppropriate = concepts.get(0);
 		double maxAppropriateness = 0;
 		for (final Concept concept : concepts) {

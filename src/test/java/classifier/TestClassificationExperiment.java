@@ -14,16 +14,16 @@ import classifier.ClassificationExperiment;
 import classifier.ExperimentData;
 import agent.Agent;
 import agent.Assertion;
-import conceptualspace.Material;
+import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
-import conceptualspace.SimpleMaterial;
+import conceptualspace.SimpleObject;
 
 public class TestClassificationExperiment {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 
 	@Mock Agent teacher, pupil, trainedPupil;
 
-	private final Material trainingSample = someMaterial(), testSample0 = someMaterial(), testSample1 = someMaterial();
+	private final PerceptualObject trainingSample = someMaterial(), testSample0 = someMaterial(), testSample1 = someMaterial();
 	private final Assertion assertion = new Assertion(someMaterial(), 0, 0.42),
 			anotherAssertion = new Assertion(someMaterial(), 1, 0.42);
 
@@ -49,8 +49,8 @@ public class TestClassificationExperiment {
 		assertThat(experiment.classificationScore(), equalTo(0.5));
 	}
 
-	private Material someMaterial() {
-		return new SimpleMaterial(new Point(0.42));
+	private PerceptualObject someMaterial() {
+		return new SimpleObject(new Point(0.42));
 	}
 
 }
