@@ -10,7 +10,14 @@ import conceptualspace.Point;
 public class TestDataReader {
 
 	@Test
-	public void createsListOfLabelsFromDataFile() {
+	public void readsIntegersAcrossRowsThenColumns() {
+		final DataReader reader = new DataReader();
+		assertThat(reader.integers("src/test/resources/interaction-specs.csv"),
+				contains(1, 0, 3, 2, 0, 2, 1, 3, 2, 3, 1, 0));
+	}
+
+	@Test
+	public void createsListOfIntegersFromDataFile() {
 		final DataReader reader = new DataReader();
 		assertThat(reader.integers("src/test/resources/testlabels.csv"),
 				contains(0, 1, 1, 0, 0));

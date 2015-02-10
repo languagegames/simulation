@@ -19,7 +19,16 @@ public class DataReader {
 		final List<String> lines = lines(file);
 		final List<Integer> integers = new ArrayList<>();
 		for (final String line : lines) {
-			integers.add(Integer.valueOf(line));
+			integers.addAll(lineInts(line));
+		}
+		return integers;
+	}
+
+	private List<Integer> lineInts(final String line) {
+		final List<String> strings = asList(line.split(","));
+		final List<Integer> integers = new ArrayList<>();
+		for (final String string : strings) {
+			integers.add(Integer.valueOf(string));
 		}
 		return integers;
 	}
