@@ -26,6 +26,20 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
+	public double convergenceWith(final List<Concept> concepts) {
+		double result = 0;
+		for (int i = 0; i < concepts.size(); i++) {
+			result += this.concepts.get(i).hausdorffDistanceFrom(concepts.get(i)) / concepts.size();
+		}
+		return result;
+	}
+
+	@Override
+	public double convergenceWith(final Agent other) {
+		return other.convergenceWith(concepts);
+	}
+
+	@Override
 	public Assertion classify(final PerceptualObject material) {
 		Concept mostAppropriate = concepts.get(0);
 		double maxAppropriateness = 0;
@@ -60,12 +74,6 @@ public class BasicAgent implements Agent {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	@Override
-	public double convergenceWith(final Agent other) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
