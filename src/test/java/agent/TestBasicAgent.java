@@ -14,6 +14,20 @@ public class TestBasicAgent {
 	private final double someWeight = 0.42;
 
 	@Test
+	public void getsConvergenceFromPairsOfCorrespondingConcepts() {
+		final BasicAgent agent = new BasicAgent(
+				someWeight,
+				new Concept(new Point(0.2), 0.7),
+				new Concept(new Point(0.5), 0.5));
+		final Agent other = new BasicAgent(
+				someWeight,
+				new Concept(new Point(0.4), 0.4),
+				new Concept(new Point(0.7), 0.8));
+
+		assertThat(agent.convergenceWith(other), equalTo(0.35));
+	}
+
+	@Test
 	public void classifiesAccordingToMostAppropriateConcept() {
 		final BasicAgent agent = new BasicAgent(
 				someWeight,
