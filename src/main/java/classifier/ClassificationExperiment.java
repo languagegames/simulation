@@ -1,8 +1,9 @@
-package experiment;
+package classifier;
 
 import java.util.List;
 
 import agent.Agent;
+import agent.Assertion;
 import conceptualspace.Material;
 
 public class ClassificationExperiment {

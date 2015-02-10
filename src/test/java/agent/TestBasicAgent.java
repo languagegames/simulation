@@ -8,7 +8,6 @@ import org.junit.Test;
 import conceptualspace.Material;
 import conceptualspace.Point;
 import conceptualspace.SimpleMaterial;
-import experiment.Assertion;
 
 public class TestBasicAgent {
 

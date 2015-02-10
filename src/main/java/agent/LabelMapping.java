@@ -3,8 +3,8 @@ package agent;
 import java.util.ArrayList;
 import java.util.List;
 
+import classifier.ExperimentData;
 import conceptualspace.Material;
-import experiment.ExperimentData;
 
 public class LabelMapping {
 

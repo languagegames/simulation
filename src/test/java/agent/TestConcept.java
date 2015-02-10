@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import conceptualspace.Material;
 import conceptualspace.Point;
-import experiment.Assertion;
 
 public class TestConcept {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();

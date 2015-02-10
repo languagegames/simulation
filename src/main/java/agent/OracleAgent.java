@@ -1,7 +1,6 @@
 package agent;
 
 import conceptualspace.Material;
-import experiment.Assertion;
 
 
 public class OracleAgent implements Agent {

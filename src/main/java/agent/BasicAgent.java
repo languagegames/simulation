@@ -9,7 +9,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import conceptualspace.Material;
-import experiment.Assertion;
 
 
 public class BasicAgent implements Agent {

@@ -1,4 +1,4 @@
-package experiment;
+package classifier;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.contains;
 
 import org.junit.Test;
 
+import classifier.ExperimentData;
 import conceptualspace.Material;
 import conceptualspace.Point;
 import conceptualspace.SimpleMaterial;

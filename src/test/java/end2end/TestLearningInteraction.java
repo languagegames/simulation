@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import classifier.ClassificationExperiment;
+import classifier.ExperimentData;
 import agent.Agent;
 import agent.BasicAgent;
 import agent.Concept;
@@ -17,8 +19,6 @@ import conceptualspace.Material;
 import conceptualspace.Point;
 import conceptualspace.SimpleMaterial;
 import datareader.DataReader;
-import experiment.ClassificationExperiment;
-import experiment.ExperimentData;
 
 public class TestLearningInteraction {
 

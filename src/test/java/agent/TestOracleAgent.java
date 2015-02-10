@@ -6,11 +6,10 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
+import classifier.ExperimentData;
 import conceptualspace.Material;
 import conceptualspace.Point;
 import conceptualspace.SimpleMaterial;
-import experiment.Assertion;
-import experiment.ExperimentData;
 
 public class TestOracleAgent {
 

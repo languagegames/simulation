@@ -1,4 +1,4 @@
-package experiment;
+package classifier;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,7 +10,10 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
+import classifier.ClassificationExperiment;
+import classifier.ExperimentData;
 import agent.Agent;
+import agent.Assertion;
 import conceptualspace.Material;
 import conceptualspace.Point;
 import conceptualspace.SimpleMaterial;

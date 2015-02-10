@@ -4,7 +4,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import conceptualspace.Point;
-import experiment.Assertion;
 
 public class Concept {
 
