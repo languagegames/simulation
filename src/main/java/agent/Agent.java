@@ -8,4 +8,6 @@ public interface Agent {
 
 	Agent learn(Assertion label);
 
+	double convergenceWith(Agent other);
+
 }

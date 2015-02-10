@@ -62,4 +62,10 @@ public class BasicAgent implements Agent {
 		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
+	@Override
+	public double convergenceWith(final Agent other) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

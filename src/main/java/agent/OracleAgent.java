@@ -24,4 +24,10 @@ public class OracleAgent implements Agent {
 		return null;
 	}
 
+	@Override
+	public double convergenceWith(final Agent other) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
