@@ -9,7 +9,11 @@ public class Population {
 
 	private final List<Agent> agents = new ArrayList<>();
 
-	public Population(final List<Agent> agents) {
+	public Population(
+			final List<Agent> agents,
+			final ObjectCreator objectCreator,
+			final AgentPairer agentPairer)
+	{
 		this.agents.addAll(agents);
 	}
 

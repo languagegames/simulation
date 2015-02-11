@@ -21,7 +21,7 @@ public class TestPopulation {
 
 	@Test
 	public void getsAverageConvergenceAcrossAllPairsOfAgents() {
-		final Population population = new Population(asList(agent0, agent1, agent2));
+		final Population population = new Population(asList(agent0, agent1, agent2), null, null);
 
 		context.checking(new Expectations() {{
 			oneOf(agent0).convergenceWith(agent1); will(returnValue(result0));

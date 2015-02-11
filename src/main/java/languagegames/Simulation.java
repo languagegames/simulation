@@ -1,20 +1,19 @@
 package languagegames;
 
+import static java.util.Arrays.asList;
+
 
 
 public class Simulation {
 
-	public Simulation(
-			final Population population,
-			final ObjectCreator objectCreator,
-			final AgentPairer agentPairer)
-	{
-		// TODO Auto-generated constructor stub
+	private final Population population;
+
+	public Simulation(final Population population) {
+		this.population = population;
 	}
 
 	public SimulationHistory run(final int timeSteps) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SimulationHistory(asList(population));
 	}
 
 }

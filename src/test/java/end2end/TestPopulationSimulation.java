@@ -51,9 +51,10 @@ public class TestPopulationSimulation {
 				new Concept(new Point(0.9, 1.0), 1.9),
 				new Concept(new Point(0.9, 0.1), 1.6));
 
-		final Population population = new Population(asList(agent0, agent1, agent2, agent3));
+		final Population population = new Population(
+				asList(agent0, agent1, agent2, agent3), objectCreator, staticPairer);
 
-		final Simulation simulation = new Simulation(population, objectCreator, staticPairer);
+		final Simulation simulation = new Simulation(population);
 		final SimulationHistory history = simulation.run(3);
 
 		final Analysis convergenceAnalysis = new ConvergenceAnalysis();

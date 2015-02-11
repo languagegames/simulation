@@ -41,7 +41,7 @@ public class TestSimulationHistory {
 
 	private Population somePopulation() {
 		final Agent someAgent = new BasicAgent(0.42, new Concept(new Point(0.42), 0.42));
-		return new Population(asList(someAgent));
+		return new Population(asList(someAgent), null, null);
 	}
 
 }
