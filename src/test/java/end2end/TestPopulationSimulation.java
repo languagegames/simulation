@@ -38,23 +38,23 @@ public class TestPopulationSimulation {
 		final AgentPairer staticPairer = new StaticPairer(
 				dataReader.integers("src/test/resources/interaction-specs.csv"));
 
-		final Agent agent0 = new BasicAgent(0.2,
+		final Agent agent0 = new BasicAgent(0.8,
 				new Concept(new Point(0.7, 0.5), 1.3),
 				new Concept(new Point(0.2, 0.8), 0.7));
-		final Agent agent1 = new BasicAgent(0.4,
+		final Agent agent1 = new BasicAgent(0.2,
 				new Concept(new Point(0.4, 0.6), 1.6),
 				new Concept(new Point(0.7, 0.6), 1.3));
-		final Agent agent2 = new BasicAgent(0.6,
+		final Agent agent2 = new BasicAgent(0.3,
 				new Concept(new Point(0.7, 0.2), 0.9),
 				new Concept(new Point(0.3, 0.4), 2.0));
-		final Agent agent3 = new BasicAgent(0.8,
+		final Agent agent3 = new BasicAgent(0.4,
 				new Concept(new Point(0.9, 1.0), 1.9),
 				new Concept(new Point(0.9, 0.1), 1.6));
 
 		final Population population = new Population(
 				asList(agent0, agent1, agent2, agent3), objectCreator, staticPairer);
 
-		final Simulation simulation = new Simulation(population);
+		final Simulation simulation = new Simulation(population, 0.1);
 		final SimulationHistory history = simulation.run(3);
 
 		final Analysis convergenceAnalysis = new ConvergenceAnalysis();

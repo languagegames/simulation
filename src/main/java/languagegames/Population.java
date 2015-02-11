@@ -28,4 +28,14 @@ public class Population {
 		return sum / numberOfPairs;
 	}
 
+	public Population runLanguageGames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Population incrementWeights(final double weightIncrement) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
