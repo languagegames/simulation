@@ -14,14 +14,14 @@ public class Population {
 	}
 
 	public double convergence() {
-		double result = 0;
-		final int numAgents = agents.size();
-		for (int i = 0; i < numAgents-1; i++) {
-			for (int j = i+1; j < numAgents; j++) {
-				result += agents.get(i).convergenceWith(agents.get(j)) / numAgents;
+		double sum = 0;
+		final int numberOfPairs = agents.size()*(agents.size()-1)/2;
+		for (int i = 0; i < agents.size()-1; i++) {
+			for (int j = i+1; j < agents.size(); j++) {
+				sum += agents.get(i).convergenceWith(agents.get(j));
 			}
 		}
-		return result;
+		return sum / numberOfPairs;
 	}
 
 }
