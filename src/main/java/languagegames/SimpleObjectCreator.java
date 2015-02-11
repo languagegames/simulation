@@ -10,4 +10,10 @@ public class SimpleObjectCreator implements ObjectCreator {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public PerceptualObject create() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
