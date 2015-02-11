@@ -7,23 +7,23 @@ import conceptualspace.PerceptualObject;
 
 public class Assertion {
 
-	public final PerceptualObject material;
+	public final PerceptualObject object;
 	public final int label;
 	public final double weight;
 
-	public Assertion(final PerceptualObject material, final int label, final double weight) {
-		this.material = material;
+	public Assertion(final PerceptualObject object, final int label, final double weight) {
+		this.object = object;
 		this.label = label;
 		this.weight = weight;
 	}
 
 	public boolean matches(final Assertion other) {
-		return label == other.label && material.equals(other.material);
+		return label == other.label && object.equals(other.object);
 	}
 
 	@Override
 	public String toString() {
-		return "Assertion: " + material.toString() + " is " + label + ", weight " + weight;
+		return "Assertion: " + object.toString() + " is " + label + ", weight " + weight;
 	}
 
 	@Override
