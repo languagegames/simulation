@@ -6,9 +6,9 @@ import conceptualspace.PerceptualObject;
 
 public interface Agent {
 
-	Assertion classify(PerceptualObject material);
+	Assertion classify(PerceptualObject object);
 
-	Agent learn(Assertion label);
+	Agent learn(Assertion assertion);
 
 	double convergenceWith(Agent other);
 

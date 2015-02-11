@@ -16,12 +16,12 @@ public class OracleAgent implements Agent {
 	}
 
 	@Override
-	public Assertion classify(final PerceptualObject material) {
-		return new Assertion(material, labelMapping.label(material), weight);
+	public Assertion classify(final PerceptualObject object) {
+		return new Assertion(object, labelMapping.label(object), weight);
 	}
 
 	@Override
-	public Agent learn(final Assertion label) {
+	public Agent learn(final Assertion assertion) {
 		// TODO Auto-generated method stub
 		return null;
 	}

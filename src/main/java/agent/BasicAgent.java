@@ -40,16 +40,16 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
-	public Assertion classify(final PerceptualObject material) {
+	public Assertion classify(final PerceptualObject object) {
 		Concept mostAppropriate = concepts.get(0);
 		double maxAppropriateness = 0;
 		for (final Concept concept : concepts) {
-			if (concept.appropriatenessOf(material.observation()) > maxAppropriateness) {
+			if (concept.appropriatenessOf(object.observation()) > maxAppropriateness) {
 				mostAppropriate = concept;
-				maxAppropriateness = mostAppropriate.appropriatenessOf(material.observation());
+				maxAppropriateness = mostAppropriate.appropriatenessOf(object.observation());
 			}
 		}
-		return new Assertion(material, concepts.indexOf(mostAppropriate), weight);
+		return new Assertion(object, concepts.indexOf(mostAppropriate), weight);
 	}
 
 	@Override
