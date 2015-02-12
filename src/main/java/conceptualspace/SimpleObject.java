@@ -30,7 +30,7 @@ public class SimpleObject implements PerceptualObject {
 
 	@Override
 	public String toString() {
-		return "Simple material @ " + point.toString();
+		return "Simple object @ " + point.toString();
 	}
 
 	@Override
