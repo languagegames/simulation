@@ -3,6 +3,8 @@ package agent;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import conceptualspace.PerceptualObject;
@@ -12,6 +14,13 @@ import conceptualspace.SimpleObject;
 public class TestBasicAgent {
 
 	private final double someWeight = 0.42;
+
+	@Test
+	public void incrementsWeight() {
+		final BasicAgent agent = new BasicAgent(0.5, new ArrayList<Concept>());
+		final Agent newAgent = agent.incrementWeight(0.1);
+		assertThat(newAgent.weight(), equalTo(0.6));
+	}
 
 	@Test
 	public void getsConvergenceFromPairsOfCorrespondingConcepts() {
