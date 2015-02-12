@@ -13,8 +13,10 @@ public class StaticPairer implements AgentPairer {
 
 	@Override
 	public List<Integer> pairingOrder(final int numAgents) {
-		final List<Integer> pairingOrder = new ArrayList<>(interactionSpecs.subList(0, numAgents));
-		interactionSpecs.removeAll(pairingOrder);
+		final List<Integer> pairingOrder = new ArrayList<>();
+		for (int i=0; i<numAgents; i++) {
+			pairingOrder.add(interactionSpecs.remove(0));
+		}
 		return pairingOrder;
 	}
 

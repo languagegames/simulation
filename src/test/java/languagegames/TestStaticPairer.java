@@ -10,10 +10,10 @@ public class TestStaticPairer {
 
 	@Test
 	public void createsPairingOrdersFromProvidedList() {
-		final StaticPairer pairer = new StaticPairer(asList(0, 1, 4, 2, 7, 3, 3, 6));
+		final StaticPairer pairer = new StaticPairer(asList(0, 1, 3, 2, 2, 3, 1, 0));
 
-		assertThat(pairer.pairingOrder(4), contains(0, 1, 4, 2));
-		assertThat(pairer.pairingOrder(4), contains(7, 3, 3, 6));
+		assertThat(pairer.pairingOrder(4), contains(0, 1, 3, 2));
+		assertThat(pairer.pairingOrder(4), contains(2, 3, 1, 0));
 	}
 
 }
