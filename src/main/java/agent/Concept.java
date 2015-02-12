@@ -1,6 +1,7 @@
 package agent;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.max;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -22,14 +23,17 @@ public class Concept {
 	}
 
 	public double appropriatenessOf(final Point observation) {
-		return 1 - observation.minus(prototype).norm()/threshold;
+		return max(1 - observation.minus(prototype).norm()/threshold, 0);
 	}
 
 	public Concept update(final Assertion assertion) {
 		final Point target = assertion.object.observation();
-		final Point newPrototype = prototype.plus((target.minus(prototype)).times(lambda(assertion.weight, target)));
-		final double newThreshold = alpha(assertion.weight, target) * threshold;
-		return new Concept(newPrototype, newThreshold);
+		if (appropriatenessOf(target) < assertion.weight) {
+			final Point newPrototype = prototype.plus((target.minus(prototype)).times(lambda(assertion.weight, target)));
+			final double newThreshold = alpha(assertion.weight, target) * threshold;
+			return new Concept(newPrototype, newThreshold);
+		}
+		return this;
 	}
 
 	private double lambda(final double weight, final Point target) {
