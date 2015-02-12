@@ -14,6 +14,4 @@ public interface Agent {
 
 	double convergenceWith(List<Concept> concepts);
 
-	double weight();
-
 }
