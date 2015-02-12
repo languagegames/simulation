@@ -28,7 +28,7 @@ public class BasicAgent implements Agent {
 	@Override
 	public Agent incrementWeight(final double weightIncrement) {
 		double newWeight = weight + weightIncrement;
-		if (newWeight >= 0.9) {
+		if (newWeight > 0.9) {
 			newWeight = 0.1;
 		}
 		return new BasicAgent(newWeight, concepts);
