@@ -19,31 +19,49 @@ import conceptualspace.SimpleObject;
 public class TestPopulation {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 
-	@Mock Agent agent0, agent1, agent2, agent3, updatedAgent0, updatedAgent3;
+	@Mock Agent agent0, agent1, agent2, agent3, updatedAgent;
 	@Mock ObjectCreator objectCreator;
 
-	private final AgentPairer agentPairer = new StaticPairer(asList(2, 0, 1, 3));
+	private final AgentPairer agentPairer = new StaticPairer(asList(1, 0, 2, 3));
 	private final double result0 = 0.42, result1 = 0.43, result2 = 0.44;
+	private final PerceptualObject object = new SimpleObject(new Point(0.42));
+	private final Assertion assertion0 = new Assertion(object, 42, 0.42);
+	private final Assertion assertion1 = new Assertion(object, 43, 0.42);
+	private final double highWeight = 0.8, lowWeight = 0.4;
+
+	@Test
+	public void agentWithHigherWeightIsAlwaysSpeaker() {
+		final Population population =
+				new Population(asList(agent0, agent1), objectCreator, agentPairer);
+
+		context.checking(new Expectations() {{
+			oneOf(agent0).weight(); will(returnValue(highWeight));
+			oneOf(agent1).weight(); will(returnValue(lowWeight));
+			oneOf(objectCreator).create(); will(returnValue(object));
+			oneOf(agent0).classify(object); will(returnValue(assertion0));
+			oneOf(agent1).learn(assertion0); will(returnValue(updatedAgent));
+		}});
+
+		assertThat(population.runLanguageGames(), equalTo(
+				new Population(asList(agent0, updatedAgent), objectCreator, agentPairer)));
+	}
 
 	@Test
 	public void pairsOffAgentsAndGetsThemToDoLanguageGames() {
 		final Population population =
 				new Population(asList(agent0, agent1, agent2, agent3), objectCreator, agentPairer);
 
-		final PerceptualObject object = new SimpleObject(new Point(0.42));
-		final Assertion assertion0 = new Assertion(object, 42, 0.42);
-		final Assertion assertion1 = new Assertion(object, 43, 0.42);
-
 		context.checking(new Expectations() {{
 			exactly(2).of(objectCreator).create(); will(returnValue(object));
-			oneOf(agent2).classify(object); will(returnValue(assertion0));
-			oneOf(agent0).learn(assertion0); will(returnValue(updatedAgent0));
-			oneOf(agent1).classify(object); will(returnValue(assertion1));
-			oneOf(agent3).learn(assertion1); will(returnValue(updatedAgent3));
+			oneOf(agent1).classify(object); will(returnValue(assertion0));
+			oneOf(agent2).classify(object); will(returnValue(assertion1));
+			oneOf(agent0).learn(assertion0); will(returnValue(updatedAgent));
+			oneOf(agent3).learn(assertion1); will(returnValue(updatedAgent));
+			ignoring(agent0).weight(); ignoring(agent1).weight(); ignoring(agent2).weight(); ignoring(agent3).weight();
 		}});
 
 		assertThat(population.runLanguageGames(), equalTo(
-				new Population(asList(updatedAgent0, agent1, agent2, updatedAgent3), objectCreator, agentPairer)));
+				new Population(asList(updatedAgent, agent1, agent2, updatedAgent), objectCreator, agentPairer)));
 	}
 
 	@Test

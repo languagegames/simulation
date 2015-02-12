@@ -29,17 +29,21 @@ public class Population {
 		final List<Integer> pairingOrder = agentPairer.pairingOrder(agents.size());
 		final List<Agent> updatedAgents = new ArrayList<>(agents);
 		for (int i=0; i<agents.size(); i+=2) {
-			final int speakerIndex = pairingOrder.get(i);
-			final int listenerIndex = pairingOrder.get(i+1);
-			final Agent updatedListener = languageGame(agents.get(speakerIndex), agents.get(listenerIndex));
-			updatedAgents.set(listenerIndex, updatedListener);
+			Agent speaker = agents.get(pairingOrder.get(i));
+			Agent listener = agents.get(pairingOrder.get(i+1));
+			if (speaker.weight() < listener.weight()) {
+				speaker = agents.get(pairingOrder.get(i+1));
+				listener = agents.get(pairingOrder.get(i));
+			}
+			updateListener(updatedAgents, speaker, listener);
 		}
 		return new Population(updatedAgents, objectCreator, agentPairer);
 	}
 
-	private Agent languageGame(final Agent speaker, final Agent listener) {
+	private void updateListener(
+			final List<Agent> updatedAgents, final Agent speaker, final Agent listener) {
 		final Assertion speakerAssertion = speaker.classify(objectCreator.create());
-		return listener.learn(speakerAssertion);
+		updatedAgents.set(agents.indexOf(listener), listener.learn(speakerAssertion));
 	}
 
 	public double convergence() {
