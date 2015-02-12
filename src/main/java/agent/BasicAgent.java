@@ -26,6 +26,11 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
+	public double weight() {
+		return weight;
+	}
+
+	@Override
 	public double convergenceWith(final List<Concept> concepts) {
 		double result = 0;
 		for (int i = 0; i < concepts.size(); i++) {
