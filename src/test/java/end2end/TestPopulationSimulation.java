@@ -7,11 +7,11 @@ import static org.hamcrest.Matchers.equalTo;
 import java.util.List;
 
 import languagegames.AgentPairer;
-import languagegames.ObjectCreator;
+import languagegames.ObjectPool;
 import languagegames.Population;
-import languagegames.SimpleObjectCreator;
 import languagegames.Simulation;
 import languagegames.SimulationHistory;
+import languagegames.StaticObjectPool;
 import languagegames.StaticPairer;
 import languagegames.analysis.Analysis;
 import languagegames.analysis.ConvergenceAnalysis;
@@ -34,7 +34,7 @@ public class TestPopulationSimulation {
 		final DataReader dataReader = new DataReader();
 		final List<PerceptualObject> materials = SimpleObject.makeListFrom(
 				dataReader.points("src/test/resources/randomdata.csv"));
-		final ObjectCreator objectCreator = new SimpleObjectCreator(materials);
+		final ObjectPool objectCreator = new StaticObjectPool(materials);
 		final AgentPairer staticPairer = new StaticPairer(
 				dataReader.integers("src/test/resources/interaction-specs.csv"));
 

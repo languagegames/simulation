@@ -2,8 +2,8 @@ package languagegames;
 
 import conceptualspace.PerceptualObject;
 
-public interface ObjectCreator {
+public interface ObjectPool {
 
-	PerceptualObject create();
+	PerceptualObject pick();
 
 }

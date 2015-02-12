@@ -12,12 +12,12 @@ import agent.Assertion;
 public class Population {
 
 	private final List<Agent> agents = new ArrayList<>();
-	private final ObjectCreator objectCreator;
+	private final ObjectPool objectCreator;
 	private final AgentPairer agentPairer;
 
 	public Population(
 			final List<Agent> agents,
-			final ObjectCreator objectCreator,
+			final ObjectPool objectCreator,
 			final AgentPairer agentPairer)
 	{
 		this.agents.addAll(agents);
@@ -42,7 +42,7 @@ public class Population {
 
 	private void updateListener(
 			final List<Agent> updatedAgents, final Agent speaker, final Agent listener) {
-		final Assertion speakerAssertion = speaker.classify(objectCreator.create());
+		final Assertion speakerAssertion = speaker.classify(objectCreator.pick());
 		updatedAgents.set(agents.indexOf(listener), listener.learn(speakerAssertion));
 	}
 
