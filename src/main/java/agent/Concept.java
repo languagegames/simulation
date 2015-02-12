@@ -26,7 +26,7 @@ public class Concept {
 	}
 
 	public Concept update(final Assertion assertion) {
-		final Point target = assertion.material.observation();
+		final Point target = assertion.object.observation();
 		final Point newPrototype = prototype.plus((target.minus(prototype)).times(lambda(assertion.weight, target)));
 		final double newThreshold = alpha(assertion.weight, target) * threshold;
 		return new Concept(newPrototype, newThreshold);
