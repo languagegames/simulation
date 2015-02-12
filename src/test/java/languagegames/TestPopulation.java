@@ -30,6 +30,20 @@ public class TestPopulation {
 	private final double highWeight = 0.8, lowWeight = 0.4;
 
 	@Test
+	public void agentsWeightsAreIncremented() {
+		final Population population = new Population(asList(agent0, agent1), null, null);
+
+		final double weightIncrement = 0.42;
+		context.checking(new Expectations() {{
+			oneOf(agent0).incrementWeight(weightIncrement); will(returnValue(updatedAgent));
+			oneOf(agent1).incrementWeight(weightIncrement); will(returnValue(updatedAgent));
+		}});
+
+		assertThat(population.incrementWeights(weightIncrement),
+				equalTo(new Population(asList(updatedAgent, updatedAgent), null, null)));
+	}
+
+	@Test
 	public void agentWithHigherWeightIsAlwaysSpeaker() {
 		final Population population =
 				new Population(asList(agent0, agent1), objectCreator, agentPairer);

@@ -58,8 +58,11 @@ public class Population {
 	}
 
 	public Population incrementWeights(final double weightIncrement) {
-		// TODO Auto-generated method stub
-		return null;
+		final List<Agent> updatedAgents = new ArrayList<>();
+		for (final Agent agent : agents) {
+			updatedAgents.add(agent.incrementWeight(weightIncrement));
+		}
+		return new Population(updatedAgents, objectCreator, agentPairer);
 	}
 
 	@Override
