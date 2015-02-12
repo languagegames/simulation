@@ -16,6 +16,12 @@ public class OracleAgent implements Agent {
 	}
 
 	@Override
+	public Agent incrementWeight(final double weightIncrement) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public double weight() {
 		return weight;
 	}

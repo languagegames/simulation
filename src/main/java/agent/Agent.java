@@ -16,4 +16,6 @@ public interface Agent {
 
 	double weight();
 
+	Agent incrementWeight(double weightIncrement);
+
 }
