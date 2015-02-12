@@ -12,21 +12,21 @@ public class TestDataReader {
 	@Test
 	public void readsIntegersAcrossRowsThenColumns() {
 		final DataReader reader = new DataReader();
-		assertThat(reader.integers("src/test/resources/interaction-specs.csv"),
+		assertThat(reader.integers("interaction-specs.csv"),
 				contains(1, 0, 3, 2, 0, 2, 1, 3, 2, 3, 1, 0));
 	}
 
 	@Test
 	public void createsListOfIntegersFromDataFile() {
 		final DataReader reader = new DataReader();
-		assertThat(reader.integers("src/test/resources/testlabels.csv"),
+		assertThat(reader.integers("testlabels.csv"),
 				contains(0, 1, 1, 0, 0));
 	}
 
 	@Test
 	public void createsListOfPointsFromDataFile() {
 		final DataReader reader = new DataReader();
-		assertThat(reader.points("src/test/resources/testdata.csv"), contains(
+		assertThat(reader.points("testdata.csv"), contains(
 				point(0.1, 0.8), point(0.5, 0.5), point(0.4, 0.2), point(0.9, 0.8), point(0.7, 0.3)));
 	}
 

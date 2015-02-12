@@ -8,13 +8,13 @@ import java.util.List;
 
 import org.junit.Test;
 
-import classifier.ClassificationExperiment;
-import classifier.ExperimentData;
 import agent.Agent;
 import agent.BasicAgent;
 import agent.Concept;
 import agent.LabelMapping;
 import agent.OracleAgent;
+import classifier.ClassificationExperiment;
+import classifier.ExperimentData;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
@@ -34,9 +34,9 @@ public class TestLearningInteraction {
 		final DataReader dataReader = new DataReader();
 
 		final List<PerceptualObject> materials = SimpleObject.makeListFrom(
-				dataReader.points("src/test/resources/testdata.csv"));
+				dataReader.points("testdata.csv"));
 		final ExperimentData data = new ExperimentData(materials, 0.8);
-		final List<Integer> labels = dataReader.integers("src/test/resources/testlabels.csv");
+		final List<Integer> labels = dataReader.integers("testlabels.csv");
 
 		final Agent teacher = new OracleAgent(new LabelMapping(data, labels), 0.95);
 

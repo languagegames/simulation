@@ -33,10 +33,10 @@ public class TestPopulationSimulation {
 	public void fourAgentsTwoConceptsThreeTimeSteps() {
 		final DataReader dataReader = new DataReader();
 		final List<PerceptualObject> materials = SimpleObject.makeListFrom(
-				dataReader.points("src/test/resources/randomdata.csv"));
+				dataReader.points("randomdata.csv"));
 		final ObjectPool objectCreator = new StaticObjectPool(materials);
 		final AgentPairer staticPairer = new StaticPairer(
-				dataReader.integers("src/test/resources/interaction-specs.csv"));
+				dataReader.integers("interaction-specs.csv"));
 
 		final Agent agent0 = new BasicAgent(0.8,
 				new Concept(new Point(0.7, 0.5), 1.3),

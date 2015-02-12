@@ -1,22 +1,20 @@
 package datareader;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.nio.file.Files.readAllLines;
-import static java.nio.file.Paths.get;
 import static java.util.Arrays.asList;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 import conceptualspace.Point;
 
 public class DataReader {
 
-	public List<Integer> integers(final String file) {
-		final List<String> lines = lines(file);
+	public List<Integer> integers(final String fileName) {
+		final List<String> lines = lines(fileName);
 		final List<Integer> integers = new ArrayList<>();
 		for (final String line : lines) {
 			integers.addAll(lineInts(line));
@@ -33,8 +31,8 @@ public class DataReader {
 		return integers;
 	}
 
-	public List<Point> points(final String file) {
-		final List<String> lines = lines(file);
+	public List<Point> points(final String fileName) {
+		final List<String> lines = lines(fileName);
 		final List<Point> points = new ArrayList<>();
 		for (final String line : lines) {
 			points.add(point(line));
@@ -51,13 +49,8 @@ public class DataReader {
 		return new Point(coordinates);
 	}
 
-	private List<String> lines(final String file) {
-		final List<String> lines = new ArrayList<>();
-		try {
-			lines.addAll(read(file));
-		} catch (final IOException e) {
-			e.printStackTrace();
-		}
+	private List<String> lines(final String fileName) {
+		final List<String> lines = read(fileName);
 		removeEmptyLines(lines);
 		return lines;
 	}
@@ -71,9 +64,20 @@ public class DataReader {
 		}
 	}
 
-	private List<String> read(final String file) throws IOException {
-		final Path path = get(file);
-		return readAllLines(path, UTF_8);
+	private List<String> read(final String fileName) {
+		final List<String> result = new ArrayList<>();
+		final ClassLoader classLoader = getClass().getClassLoader();
+		final File file = new File(classLoader.getResource(fileName).getFile());
+		try (Scanner scanner = new Scanner(file)) {
+			while (scanner.hasNextLine()) {
+				final String line = scanner.nextLine();
+				result.add(line);
+			}
+			scanner.close();
+		} catch (final IOException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
