@@ -28,6 +28,20 @@ public class TestOraclePopulation {
 	private final Assertion assertion1 = new Assertion(object, 43, 0.42);
 
 	@Test
+	public void agentsWeightsAreIncremented() {
+		final OraclePopulation population = new OraclePopulation(asList(agent0), asList(oracle), null, null);
+
+		final double weightIncrement = 0.42;
+		context.checking(new Expectations() {{
+			oneOf(agent0).incrementWeight(weightIncrement); will(returnValue(updatedAgent));
+			oneOf(oracle).incrementWeight(weightIncrement); will(returnValue(updatedAgent));
+		}});
+
+		assertThat(population.incrementWeights(weightIncrement),
+				equalTo(new OraclePopulation(asList(updatedAgent), asList(updatedAgent), null, null)));
+	}
+
+	@Test
 	public void usesAgentsAndOraclesInLanguageGames() {
 		final OraclePopulation population = new OraclePopulation(
 				asList(agent0, agent1, agent2), asList(oracle), objectPool, agentPairer);

@@ -29,6 +29,21 @@ public class OraclePopulation implements Population {
 	}
 
 	@Override
+	public OraclePopulation incrementWeights(final double weightIncrement) {
+		final List<Agent> updatedAgents = incrementWeights(agents, weightIncrement);
+		final List<Agent> updatedOracles = incrementWeights(oracles, weightIncrement);
+		return new OraclePopulation(updatedAgents, updatedOracles, objectPool, agentPairer);
+	}
+
+	private List<Agent> incrementWeights(final List<Agent> agents, final double weightIncrement) {
+		final List<Agent> updatedAgents = new ArrayList<>();
+		for (final Agent agent : agents) {
+			updatedAgents.add(agent.incrementWeight(weightIncrement));
+		}
+		return updatedAgents;
+	}
+
+	@Override
 	public OraclePopulation runLanguageGames() {
 		final List<Agent> allAgents = mergeAgents();
 		final List<Integer> pairingOrder = agentPairer.pairingOrder(allAgents.size());
@@ -65,12 +80,6 @@ public class OraclePopulation implements Population {
 	public double convergence() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public OraclePopulation incrementWeights(final double weightIncrement) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
