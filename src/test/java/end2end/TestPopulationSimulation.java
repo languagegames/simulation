@@ -9,6 +9,7 @@ import java.util.List;
 import languagegames.AgentPairer;
 import languagegames.BasicPopulation;
 import languagegames.ObjectPool;
+import languagegames.OraclePopulation;
 import languagegames.Population;
 import languagegames.Simulation;
 import languagegames.SimulationHistory;
@@ -18,11 +19,14 @@ import languagegames.analysis.Analysis;
 import languagegames.analysis.ConvergenceAnalysis;
 import languagegames.analysis.TimeSeries;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import agent.Agent;
 import agent.BasicAgent;
 import agent.Concept;
+import agent.LabelMapping;
+import agent.OracleAgent;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
@@ -30,28 +34,49 @@ import datareader.DataReader;
 
 public class TestPopulationSimulation {
 
-	@Test
-	public void fourAgentsTwoConceptsThreeTimeSteps() {
-		final DataReader dataReader = new DataReader();
-		final List<PerceptualObject> materials = SimpleObject.makeListFrom(
-				dataReader.points("randomdata.csv"));
-		final ObjectPool objectCreator = new StaticObjectPool(materials);
-		final AgentPairer staticPairer = new StaticPairer(
-				dataReader.integers("interaction-specs.csv"));
+	private final DataReader dataReader = new DataReader();
+	private Agent agent0, agent1, agent2, agent3;
+	private List<PerceptualObject> objects;
+	private ObjectPool objectCreator;
+	private AgentPairer staticPairer;
 
-		final Agent agent0 = new BasicAgent(0.8,
+	@Before
+	public void setUp() {
+		agent0 = new BasicAgent(0.8,
 				new Concept(new Point(0.7, 0.5), 1.3),
 				new Concept(new Point(0.2, 0.8), 0.7));
-		final Agent agent1 = new BasicAgent(0.2,
+		agent1 = new BasicAgent(0.2,
 				new Concept(new Point(0.4, 0.6), 1.6),
 				new Concept(new Point(0.7, 0.6), 1.3));
-		final Agent agent2 = new BasicAgent(0.3,
+		agent2 = new BasicAgent(0.3,
 				new Concept(new Point(0.7, 0.2), 0.9),
 				new Concept(new Point(0.3, 0.4), 2.0));
-		final Agent agent3 = new BasicAgent(0.4,
+		agent3 = new BasicAgent(0.4,
 				new Concept(new Point(0.9, 1.0), 1.9),
 				new Concept(new Point(0.9, 0.1), 1.6));
+		objects = SimpleObject.makeListFrom(dataReader.points("randomdata.csv"));
+		objectCreator = new StaticObjectPool(objects);
+		staticPairer = new StaticPairer(dataReader.integers("interaction-specs.csv"));
+	}
 
+	@Test
+	public void populationWithAnOracle() {
+		final Agent oracle = new OracleAgent(new LabelMapping(objects, asList(0, 1, 1, 0, 0, 1)), 0.9);
+
+		final Population population = new OraclePopulation(
+				asList(agent0, agent1, agent2), asList(oracle), objectCreator, staticPairer);
+
+		final Simulation simulation = new Simulation(population, 0.1);
+		final SimulationHistory history = simulation.run(3);
+
+		final Analysis convergenceAnalysis = new ConvergenceAnalysis();
+
+		assertThat(history.timeSeriesFrom(convergenceAnalysis), equalTo(
+				new TimeSeries(0.7523780675, 0.7870977036, 0.8075786743, 0.7316300842)));
+	}
+
+	@Test
+	public void fourAgentsTwoConceptsThreeTimeSteps() {
 		final Population population = new BasicPopulation(
 				asList(agent0, agent1, agent2, agent3), objectCreator, staticPairer);
 
