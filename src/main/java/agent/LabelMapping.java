@@ -11,9 +11,13 @@ public class LabelMapping {
 	private final List<PerceptualObject> data = new ArrayList<>();
 	private final List<Integer> labels = new ArrayList<>();
 
-	public LabelMapping(final ExperimentData data, final List<Integer> labels) {
-		this.data.addAll(data.allData());
+	public LabelMapping(final List<PerceptualObject> data, final List<Integer> labels) {
+		this.data.addAll(data);
 		this.labels.addAll(labels);
+	}
+
+	public LabelMapping(final ExperimentData data, final List<Integer> labels) {
+		this(data.allData(), labels);
 	}
 
 	public int label(final PerceptualObject material) {
