@@ -12,16 +12,16 @@ import agent.Assertion;
 public class BasicPopulation implements Population {
 
 	private final List<Agent> agents = new ArrayList<>();
-	private final ObjectPool objectCreator;
+	private final ObjectPool objectPool;
 	private final AgentPairer agentPairer;
 
 	public BasicPopulation(
 			final List<Agent> agents,
-			final ObjectPool objectCreator,
+			final ObjectPool objectPool,
 			final AgentPairer agentPairer)
 	{
 		this.agents.addAll(agents);
-		this.objectCreator = objectCreator;
+		this.objectPool = objectPool;
 		this.agentPairer = agentPairer;
 	}
 
@@ -38,12 +38,12 @@ public class BasicPopulation implements Population {
 			}
 			updateListener(updatedAgents, speaker, listener);
 		}
-		return new BasicPopulation(updatedAgents, objectCreator, agentPairer);
+		return new BasicPopulation(updatedAgents, objectPool, agentPairer);
 	}
 
 	private void updateListener(
 			final List<Agent> updatedAgents, final Agent speaker, final Agent listener) {
-		final Assertion speakerAssertion = speaker.classify(objectCreator.pick());
+		final Assertion speakerAssertion = speaker.classify(objectPool.pick());
 		updatedAgents.set(agents.indexOf(listener), listener.learn(speakerAssertion));
 	}
 
@@ -65,7 +65,7 @@ public class BasicPopulation implements Population {
 		for (final Agent agent : agents) {
 			updatedAgents.add(agent.incrementWeight(weightIncrement));
 		}
-		return new BasicPopulation(updatedAgents, objectCreator, agentPairer);
+		return new BasicPopulation(updatedAgents, objectPool, agentPairer);
 	}
 
 	@Override
