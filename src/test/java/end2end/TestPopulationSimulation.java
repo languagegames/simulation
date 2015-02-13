@@ -7,8 +7,9 @@ import static org.hamcrest.Matchers.equalTo;
 import java.util.List;
 
 import languagegames.AgentPairer;
-import languagegames.ObjectPool;
 import languagegames.BasicPopulation;
+import languagegames.ObjectPool;
+import languagegames.Population;
 import languagegames.Simulation;
 import languagegames.SimulationHistory;
 import languagegames.StaticObjectPool;
@@ -28,11 +29,6 @@ import conceptualspace.SimpleObject;
 import datareader.DataReader;
 
 public class TestPopulationSimulation {
-
-	@Test
-	public void populationWithAnOracle() {
-
-	}
 
 	@Test
 	public void fourAgentsTwoConceptsThreeTimeSteps() {
@@ -56,7 +52,7 @@ public class TestPopulationSimulation {
 				new Concept(new Point(0.9, 1.0), 1.9),
 				new Concept(new Point(0.9, 0.1), 1.6));
 
-		final BasicPopulation population = new BasicPopulation(
+		final Population population = new BasicPopulation(
 				asList(agent0, agent1, agent2, agent3), objectCreator, staticPairer);
 
 		final Simulation simulation = new Simulation(population, 0.1);

@@ -10,7 +10,7 @@ public class Simulation {
 	private final List<Population> populations = new ArrayList<>();
 	private final double weightIncrement;
 
-	public Simulation(final BasicPopulation population, final double weightIncrement) {
+	public Simulation(final Population population, final double weightIncrement) {
 		populations.add(population);
 		this.weightIncrement = weightIncrement;
 	}
