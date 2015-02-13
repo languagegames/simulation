@@ -20,7 +20,7 @@ import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
 
-public class TestPopulation {
+public class TestBasicPopulation {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 
 	@Mock Agent agent0, agent1, agent2, agent3, updatedAgent;
@@ -37,19 +37,19 @@ public class TestPopulation {
 	public void agentsWeightsAreIncremented() {
 		final Agent agent0 = new BasicAgent(0.5, new ArrayList<Concept>());
 		final Agent agent1 = new BasicAgent(0.9, new ArrayList<Concept>());
-		final Population population = new Population(asList(agent0, agent1), null, null);
+		final BasicPopulation population = new BasicPopulation(asList(agent0, agent1), null, null);
 
 		final Agent updatedAgent0 = new BasicAgent(0.6, new ArrayList<Concept>());
 		final Agent updatedAgent1 = new BasicAgent(0.1, new ArrayList<Concept>());
 
 		assertThat(population.incrementWeights(0.1),
-				equalTo(new Population(asList(updatedAgent0, updatedAgent1), null, null)));
+				equalTo(new BasicPopulation(asList(updatedAgent0, updatedAgent1), null, null)));
 	}
 
 	@Test
 	public void agentWithHigherWeightIsAlwaysSpeaker() {
-		final Population population =
-				new Population(asList(agent0, agent1), objectCreator, agentPairer);
+		final BasicPopulation population =
+				new BasicPopulation(asList(agent0, agent1), objectCreator, agentPairer);
 
 		context.checking(new Expectations() {{
 			oneOf(agent0).weight(); will(returnValue(highWeight));
@@ -60,13 +60,13 @@ public class TestPopulation {
 		}});
 
 		assertThat(population.runLanguageGames(), equalTo(
-				new Population(asList(agent0, updatedAgent), objectCreator, agentPairer)));
+				new BasicPopulation(asList(agent0, updatedAgent), objectCreator, agentPairer)));
 	}
 
 	@Test
 	public void pairsOffAgentsAndGetsThemToDoLanguageGames() {
-		final Population population =
-				new Population(asList(agent0, agent1, agent2, agent3), objectCreator, agentPairer);
+		final BasicPopulation population =
+				new BasicPopulation(asList(agent0, agent1, agent2, agent3), objectCreator, agentPairer);
 
 		context.checking(new Expectations() {{
 			exactly(2).of(objectCreator).pick(); will(returnValue(object));
@@ -78,12 +78,12 @@ public class TestPopulation {
 		}});
 
 		assertThat(population.runLanguageGames(), equalTo(
-				new Population(asList(updatedAgent, agent1, agent2, updatedAgent), objectCreator, agentPairer)));
+				new BasicPopulation(asList(updatedAgent, agent1, agent2, updatedAgent), objectCreator, agentPairer)));
 	}
 
 	@Test
 	public void getsAverageConvergenceAcrossAllPairsOfAgents() {
-		final Population population = new Population(asList(agent0, agent1, agent2), null, null);
+		final Population population = new BasicPopulation(asList(agent0, agent1, agent2), null, null);
 
 		context.checking(new Expectations() {{
 			oneOf(agent0).convergenceWith(agent1); will(returnValue(result0));

@@ -39,9 +39,9 @@ public class TestSimulationHistory {
 		assertThat(history.timeSeriesFrom(analysis), equalTo(new TimeSeries(result0, result1, result2)));
 	}
 
-	private Population somePopulation() {
+	private BasicPopulation somePopulation() {
 		final Agent someAgent = new BasicAgent(0.42, new Concept(new Point(0.42), 0.42));
-		return new Population(asList(someAgent), null, null);
+		return new BasicPopulation(asList(someAgent), null, null);
 	}
 
 }
