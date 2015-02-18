@@ -37,18 +37,17 @@ public class OracleAgent implements Agent {
 
 	@Override
 	public double convergenceWith(final Agent other) {
-		throw new UnsupportedOperationException("Cannot calculate convergence with oracles");
+		throw new UnsupportedOperationException("Cannot calculate convergence with oracles.");
 	}
 
 	@Override
 	public double convergenceWith(final List<Concept> concepts) {
-		throw new UnsupportedOperationException("Cannot calculate convergence with oracles");
+		throw new UnsupportedOperationException("Cannot calculate convergence with oracles.");
 	}
 
 	@Override
 	public double labelOverlap() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Cannot calculate overlap in oracle agent.");
 	}
 
 }
