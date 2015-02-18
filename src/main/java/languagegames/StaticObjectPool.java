@@ -18,4 +18,13 @@ public class StaticObjectPool implements ObjectPool {
 		return objects.remove(0);
 	}
 
+	@Override
+	public List<PerceptualObject> pick(final int numObjects) {
+		final List<PerceptualObject> objects = new ArrayList<>();
+		for (int i=0; i<numObjects; i++) {
+			objects.add(pick());
+		}
+		return objects;
+	}
+
 }
