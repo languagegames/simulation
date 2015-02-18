@@ -26,6 +26,18 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
+	public double labelOverlap() {
+		double sum = 0;
+		final int numberOfPairs = concepts.size()*(concepts.size()-1)/2;
+		for (int i = 0; i < concepts.size()-1; i++) {
+			for (int j = i+1; j < concepts.size(); j++) {
+				sum += concepts.get(i).overlapWith(concepts.get(j));
+			}
+		}
+		return sum / numberOfPairs;
+	}
+
+	@Override
 	public Agent incrementWeight(final double weightIncrement) {
 		double newWeight = weight + weightIncrement;
 		if (newWeight > 0.9) {
@@ -88,12 +100,6 @@ public class BasicAgent implements Agent {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	@Override
-	public double labelOverlap() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

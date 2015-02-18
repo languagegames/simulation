@@ -16,6 +16,23 @@ public class TestBasicAgent {
 	private final double someWeight = 0.42;
 
 	@Test
+	public void calculatesOverlapAcrossAllPairsOfConcepts() {
+		final Concept concept0 = new Concept(new Point(0.7), 0.9);
+		final Concept concept1 = new Concept(new Point(0.5), 0.5);
+		final Concept concept2 = new Concept(new Point(0.4), 0.2);
+		final BasicAgent agent = new BasicAgent(someWeight, concept0, concept1, concept2);
+
+		final double averageOverlap =
+				(overlap(concept0, concept1) + overlap(concept0, concept2) + overlap(concept1, concept2)) / 3;
+
+		assertThat(agent.labelOverlap(), equalTo(averageOverlap));
+	}
+
+	private double overlap(final Concept concept, final Concept other) {
+		return concept.overlapWith(other);
+	}
+
+	@Test
 	public void incrementsWeight() {
 		final BasicAgent agent = new BasicAgent(0.5, new ArrayList<Concept>());
 		final Agent newAgent = agent.incrementWeight(0.1);
