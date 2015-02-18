@@ -2,15 +2,9 @@ package languagegames.analysis;
 
 import java.util.List;
 
-import languagegames.Population;
 import agent.Agent;
 
 public class ConvergenceAnalysis implements Analysis {
-
-	@Override
-	public double analyse(final Population population) {
-		return population.convergence();
-	}
 
 	@Override
 	public double analyse(final List<Agent> agents) {
