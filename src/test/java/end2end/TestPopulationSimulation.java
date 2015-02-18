@@ -72,7 +72,7 @@ public class TestPopulationSimulation {
 		final Analysis convergenceAnalysis = new ConvergenceAnalysis();
 
 		assertThat(history.timeSeriesFrom(convergenceAnalysis), equalTo(
-				new TimeSeries(0.7523780675, 0.7870977036, 0.8075786743, 0.7316300842)));
+				new TimeSeries(0.7523780674653353, 0.7870977036456587, 0.8075786742883934, 0.7316300842449858)));
 	}
 
 	@Test
