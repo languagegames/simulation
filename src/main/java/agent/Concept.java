@@ -18,6 +18,15 @@ public class Concept {
 		this.threshold = threshold;
 	}
 
+	public double overlapWith(final Concept other) {
+		final double prototypeDistance = prototype.minus(other.prototype).norm();
+		final double sumOfThresholds = threshold + other.threshold;
+		if (prototypeDistance > sumOfThresholds) {
+			return 0;
+		}
+		return 1 - prototypeDistance / sumOfThresholds;
+	}
+
 	public double hausdorffDistanceFrom(final Concept other) {
 		return prototype.minus(other.prototype).norm() + abs(threshold-other.threshold)/2;
 	}

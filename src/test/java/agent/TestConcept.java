@@ -16,6 +16,14 @@ public class TestConcept {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 
 	@Test
+	public void calculatesOverlapWithAnotherConcept() {
+		final Concept concept = new Concept(new Point(0.2), 0.8);
+		final Concept other = new Concept(new Point(0.4), 0.5);
+
+		assertThat(concept.overlapWith(other), equalTo(1 - (0.4 - 0.2) / (0.8 + 0.5)));
+	}
+
+	@Test
 	public void onlyUpdateIfCurrentAppropriatenessIsLessThanWeight() {
 		final Concept concept = new Concept(new Point(0.5, 0.7), 0.5);
 
