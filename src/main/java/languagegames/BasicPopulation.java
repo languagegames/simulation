@@ -28,6 +28,11 @@ public class BasicPopulation implements Population {
 	}
 
 	@Override
+	public double apply(final Analysis analysis) {
+		return analysis.analyse(agents);
+	}
+
+	@Override
 	public BasicPopulation runLanguageGames() {
 		final List<Integer> pairingOrder = agentPairer.pairingOrder(agents.size());
 		final List<Agent> updatedAgents = new ArrayList<>(agents);
@@ -83,12 +88,6 @@ public class BasicPopulation implements Population {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	@Override
-	public double apply(final Analysis analysis) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

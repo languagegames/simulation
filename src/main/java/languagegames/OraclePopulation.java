@@ -31,6 +31,11 @@ public class OraclePopulation implements Population {
 	}
 
 	@Override
+	public double apply(final Analysis analysis) {
+		return analysis.analyse(agents);
+	}
+
+	@Override
 	public double convergence() {
 		double sum = 0;
 		final int numberOfPairs = agents.size()*(agents.size()-1)/2;
@@ -103,12 +108,6 @@ public class OraclePopulation implements Population {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	@Override
-	public double apply(final Analysis analysis) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
