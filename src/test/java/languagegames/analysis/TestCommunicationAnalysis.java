@@ -45,7 +45,7 @@ public class TestCommunicationAnalysis {
 		final CommunicationAnalysis analysis = new CommunicationAnalysis(numObjects, agentPairer, objectPool);
 
 		final Assertion assertion0 = new Assertion(object, 0, 0.42);
-		final Assertion assertion1 = new Assertion(object, numObjects, 0.42);
+		final Assertion assertion1 = new Assertion(object, 1, 0.42);
 
 		context.checking(new Expectations() {{
 			exactly(2).of(objectPool).pick(numObjects); will(returnValue(asList(object)));
