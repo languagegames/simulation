@@ -17,7 +17,7 @@ public class SimulationHistory {
 	public TimeSeries timeSeriesFrom(final Analysis analysis) {
 		final List<Double> results = new ArrayList<>();
 		for (final Population population : populations) {
-			results.add(analysis.analyse(population));
+			results.add(population.apply(analysis));
 		}
 		return new TimeSeries(results);
 	}

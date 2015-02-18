@@ -3,6 +3,8 @@ package languagegames;
 import java.util.ArrayList;
 import java.util.List;
 
+import languagegames.analysis.Analysis;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -81,6 +83,12 @@ public class BasicPopulation implements Population {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	@Override
+	public double apply(final Analysis analysis) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

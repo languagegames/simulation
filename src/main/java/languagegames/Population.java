@@ -1,5 +1,7 @@
 package languagegames;
 
+import languagegames.analysis.Analysis;
+
 public interface Population {
 
 	Population runLanguageGames();
@@ -7,5 +9,7 @@ public interface Population {
 	double convergence();
 
 	Population incrementWeights(double weightIncrement);
+
+	double apply(Analysis analysis);
 
 }
