@@ -41,13 +41,14 @@ public class TestCommunicationAnalysis {
 
 	@Test
 	public void comparesAssertionsAcrossPairsOfAgents() {
-		final CommunicationAnalysis analysis = new CommunicationAnalysis(agentPairer, objectPool);
+		final int numObjects = 1;
+		final CommunicationAnalysis analysis = new CommunicationAnalysis(numObjects, agentPairer, objectPool);
 
 		final Assertion assertion0 = new Assertion(object, 0, 0.42);
-		final Assertion assertion1 = new Assertion(object, 1, 0.42);
+		final Assertion assertion1 = new Assertion(object, numObjects, 0.42);
 
 		context.checking(new Expectations() {{
-			exactly(2).of(objectPool).pick(); will(returnValue(object));
+			exactly(2).of(objectPool).pick(numObjects); will(returnValue(asList(object)));
 			oneOf(agent1).assertion(object); will(returnValue(assertion0));
 			oneOf(agent0).assertion(object); will(returnValue(assertion0));
 			oneOf(agent2).assertion(object); will(returnValue(assertion0));

@@ -9,10 +9,12 @@ import conceptualspace.PerceptualObject;
 
 public class CommunicationAnalysis implements Analysis {
 
+	private final int numObjects;
 	private final AgentPairer agentPairer;
 	private final ObjectPool objectPool;
 
-	public CommunicationAnalysis(final AgentPairer agentPairer, final ObjectPool objectPool) {
+	public CommunicationAnalysis(final int numObjects, final AgentPairer agentPairer, final ObjectPool objectPool) {
+		this.numObjects = numObjects;
 		this.agentPairer = agentPairer;
 		this.objectPool = objectPool;
 	}
@@ -30,8 +32,12 @@ public class CommunicationAnalysis implements Analysis {
 	}
 
 	private double communicationScore(final Agent agent, final Agent other) {
-		final PerceptualObject object = objectPool.pick();
-		return (agent.assertion(object).equals(other.assertion(object))) ? 1 : 0;
+		final List<PerceptualObject> objects = objectPool.pick(numObjects);
+		double sumOfScores = 0;
+		for (final PerceptualObject object : objects) {
+			sumOfScores += (agent.assertion(object).equals(other.assertion(object))) ? 1 : 0;
+		}
+		return sumOfScores / numObjects;
 	}
 
 }
