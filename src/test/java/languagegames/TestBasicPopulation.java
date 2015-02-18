@@ -27,7 +27,6 @@ public class TestBasicPopulation {
 	@Mock ObjectPool objectCreator;
 
 	private final AgentPairer agentPairer = new StaticPairer(asList(1, 0, 2, 3));
-	private final double result0 = 0.42, result1 = 0.43, result2 = 0.44;
 	private final PerceptualObject object = new SimpleObject(new Point(0.42));
 	private final Assertion assertion0 = new Assertion(object, 42, 0.42);
 	private final Assertion assertion1 = new Assertion(object, 43, 0.42);
@@ -79,19 +78,6 @@ public class TestBasicPopulation {
 
 		assertThat(population.runLanguageGames(), equalTo(
 				new BasicPopulation(asList(updatedAgent, agent1, agent2, updatedAgent), objectCreator, agentPairer)));
-	}
-
-	@Test
-	public void getsAverageConvergenceAcrossAllPairsOfAgents() {
-		final Population population = new BasicPopulation(asList(agent0, agent1, agent2), null, null);
-
-		context.checking(new Expectations() {{
-			oneOf(agent0).convergenceWith(agent1); will(returnValue(result0));
-			oneOf(agent0).convergenceWith(agent2); will(returnValue(result1));
-			oneOf(agent1).convergenceWith(agent2); will(returnValue(result2));
-		}});
-
-		assertThat(population.convergence(), equalTo((result0+result1+result2)/3));
 	}
 
 }

@@ -28,20 +28,6 @@ public class TestOraclePopulation {
 	private final Assertion assertion1 = new Assertion(object, 43, 0.42);
 
 	@Test
-	public void calculatesConvergenceAcrossBasicAgentsOnly() {
-		final OraclePopulation population =
-				new OraclePopulation(asList(agent0, agent1, agent2), asList(oracle), null, null);
-
-		context.checking(new Expectations() {{
-			oneOf(agent0).convergenceWith(agent1); will(returnValue(0.42));
-			oneOf(agent0).convergenceWith(agent2); will(returnValue(0.43));
-			oneOf(agent1).convergenceWith(agent2); will(returnValue(0.44));
-		}});
-
-		assertThat(population.convergence(), equalTo((0.42+0.43+0.44)/3));
-	}
-
-	@Test
 	public void agentsWeightsAreIncremented() {
 		final OraclePopulation population = new OraclePopulation(asList(agent0), asList(oracle), null, null);
 
