@@ -90,4 +90,10 @@ public class BasicAgent implements Agent {
 		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
+	@Override
+	public double labelOverlap() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -18,4 +18,6 @@ public interface Agent {
 
 	Agent incrementWeight(double weightIncrement);
 
+	double labelOverlap();
+
 }

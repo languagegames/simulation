@@ -45,4 +45,10 @@ public class OracleAgent implements Agent {
 		throw new UnsupportedOperationException("Cannot calculate convergence with oracles");
 	}
 
+	@Override
+	public double labelOverlap() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
