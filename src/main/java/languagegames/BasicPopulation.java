@@ -50,7 +50,7 @@ public class BasicPopulation implements Population {
 
 	private void updateListener(
 			final List<Agent> updatedAgents, final Agent speaker, final Agent listener) {
-		final Assertion speakerAssertion = speaker.classify(objectPool.pick());
+		final Assertion speakerAssertion = speaker.assertion(objectPool.pick());
 		updatedAgents.set(agents.indexOf(listener), listener.learn(speakerAssertion));
 	}
 

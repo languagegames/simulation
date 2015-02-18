@@ -63,8 +63,8 @@ public class TestBasicAgent {
 		final PerceptualObject material0 = new SimpleObject(new Point(0.35));
 		final PerceptualObject material1 = new SimpleObject(new Point(0.4));
 
-		assertThat(agent.classify(material0), equalTo(new Assertion(material0, 0, someWeight)));
-		assertThat(agent.classify(material1), equalTo(new Assertion(material1, 1, someWeight)));
+		assertThat(agent.assertion(material0), equalTo(new Assertion(material0, 0, someWeight)));
+		assertThat(agent.assertion(material1), equalTo(new Assertion(material1, 1, someWeight)));
 	}
 
 	@Test

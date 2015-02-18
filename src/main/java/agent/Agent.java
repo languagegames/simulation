@@ -6,7 +6,7 @@ import conceptualspace.PerceptualObject;
 
 public interface Agent {
 
-	Assertion classify(PerceptualObject object);
+	Assertion assertion(PerceptualObject object);
 
 	Agent learn(Assertion assertion);
 

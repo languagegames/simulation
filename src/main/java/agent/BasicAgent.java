@@ -66,7 +66,7 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
-	public Assertion classify(final PerceptualObject object) {
+	public Assertion assertion(final PerceptualObject object) {
 		Concept mostAppropriate = concepts.get(0);
 		double maxAppropriateness = 0;
 		for (final Concept concept : concepts) {

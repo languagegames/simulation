@@ -24,9 +24,9 @@ public class TestOracleAgent {
 	public void classifiesAccordingToPredefinedLabelMapping() {
 		final OracleAgent agent = new OracleAgent(new LabelMapping(data, asList(1, 2, 0)), someWeight);
 
-		assertThat(agent.classify(material0), equalTo(new Assertion(material0, 1, someWeight)));
-		assertThat(agent.classify(material1), equalTo(new Assertion(material1, 2, someWeight)));
-		assertThat(agent.classify(material2), equalTo(new Assertion(material2, 0, someWeight)));
+		assertThat(agent.assertion(material0), equalTo(new Assertion(material0, 1, someWeight)));
+		assertThat(agent.assertion(material1), equalTo(new Assertion(material1, 2, someWeight)));
+		assertThat(agent.assertion(material2), equalTo(new Assertion(material2, 0, someWeight)));
 	}
 
 	private PerceptualObject someMaterial(final double d) {

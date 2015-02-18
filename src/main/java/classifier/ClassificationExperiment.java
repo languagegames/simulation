@@ -36,15 +36,15 @@ public class ClassificationExperiment {
 	}
 
 	private boolean pupilClassifiesAccurately(final Agent trainedPupil, final PerceptualObject material) {
-		final Assertion target = teacher.classify(material);
-		final Assertion output = trainedPupil.classify(material);
+		final Assertion target = teacher.assertion(material);
+		final Assertion output = trainedPupil.assertion(material);
 		return target.matches(output);
 	}
 
 	private Agent trainPupil() {
 		Agent trainedPupil = pupil;
 		for (final PerceptualObject material : trainingData) {
-			final Assertion assertion = teacher.classify(material);
+			final Assertion assertion = teacher.assertion(material);
 			trainedPupil = trainedPupil.learn(assertion);
 		}
 		return trainedPupil;
