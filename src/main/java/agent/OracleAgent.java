@@ -16,6 +16,17 @@ public class OracleAgent implements Agent {
 	}
 
 	@Override
+	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
+		for (int i=0; i<guessingSet.size(); i++) {
+			final PerceptualObject object = guessingSet.get(i);
+			if (labelMapping.label(object) == assertion.label) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	@Override
 	public OracleAgent incrementWeight(final double weightIncrement) {
 		return this;
 	}
@@ -48,12 +59,6 @@ public class OracleAgent implements Agent {
 	@Override
 	public double labelOverlap() {
 		throw new UnsupportedOperationException("Cannot calculate overlap in oracle agent.");
-	}
-
-	@Override
-	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
