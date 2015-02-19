@@ -11,8 +11,18 @@ import utility.FakeRandom;
 public class TestGaussianObject {
 
 	@Test
+	public void doesNotProduceObservationsOutsideConceptualSpace() {
+		final double gaussianValue0 = 0.8, gaussianValue1 = 0.2;
+		final double mean = 0.5, stdDev = 0.8;
+		final GaussianObject object = new GaussianObject(asList(mean), asList(stdDev),
+				new FakeRandom(gaussianValue0, gaussianValue1));
+
+		assertThat(object.observation(), equalTo(new Point(mean + gaussianValue1*stdDev)));
+	}
+
+	@Test
 	public void drawsObservationsFromGaussianDistribution() {
-		final double gaussianValue0 = 0.2, gaussianValue1 = 0.8;
+		final double gaussianValue0 = 0.2, gaussianValue1 = 0.5;
 		final double mean0 = 0.5, mean1 = 0.7;
 		final double stdDev0 = 0.8, stdDev1 = 0.4;
 		final GaussianObject object = new GaussianObject(

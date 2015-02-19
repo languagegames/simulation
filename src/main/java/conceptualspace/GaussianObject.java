@@ -22,9 +22,17 @@ public class GaussianObject implements PerceptualObject {
 	public Point observation() {
 		final List<Double> coordinates = new ArrayList<>();
 		for (int i=0; i<mean.size(); i++) {
-			coordinates.add(mean.get(i) + standardDeviation.get(i)*random.nextGaussian());
+			coordinates.add(nextCoordinate(mean.get(i), standardDeviation.get(i)));
 		}
 		return new Point(coordinates);
+	}
+
+	private double nextCoordinate(final double mean, final double standardDeviation) {
+		double coordinate = mean + standardDeviation*random.nextGaussian();
+		while (coordinate > 1) {
+			coordinate = mean + standardDeviation*random.nextGaussian();
+		}
+		return coordinate;
 	}
 
 }
