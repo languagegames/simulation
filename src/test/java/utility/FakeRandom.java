@@ -1,4 +1,4 @@
-package languagegames;
+package utility;
 
 import static java.util.Arrays.asList;
 
