@@ -20,4 +20,6 @@ public interface Agent {
 
 	double labelOverlap();
 
+	int guess(List<PerceptualObject> guessingSet, Assertion assertion);
+
 }

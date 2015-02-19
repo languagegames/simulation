@@ -102,4 +102,10 @@ public class BasicAgent implements Agent {
 		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
+	@Override
+	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

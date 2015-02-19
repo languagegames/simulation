@@ -50,4 +50,10 @@ public class OracleAgent implements Agent {
 		throw new UnsupportedOperationException("Cannot calculate overlap in oracle agent.");
 	}
 
+	@Override
+	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
