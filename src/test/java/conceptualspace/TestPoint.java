@@ -1,11 +1,20 @@
 package conceptualspace;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
 public class TestPoint {
+
+	@Test
+	public void calculatesMeanOfListOfPoints() {
+		final Point a = new Point(0.5, 0.1);
+		final Point b = new Point(0.3, 0.6);
+
+		assertThat(Point.mean(asList(a, b)), equalTo(new Point(0.4, 0.35)));
+	}
 
 	@Test
 	public void testTimesOperation() {

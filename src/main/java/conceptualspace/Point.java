@@ -22,6 +22,14 @@ public class Point {
 		this(asList(coordinates));
 	}
 
+	public static Point mean(final List<Point> points) {
+		Point sum = points.get(0).minus(points.get(0));
+		for (final Point point : points) {
+			sum = sum.plus(point);
+		}
+		return sum.times(1.0/points.size());
+	}
+
 	public Point minus(final Point other) {
 		return plus(other.times(-1));
 	}
