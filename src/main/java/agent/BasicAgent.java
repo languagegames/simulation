@@ -26,6 +26,20 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
+	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
+		final Concept assertionConcept = concepts.get(assertion.label);
+		int guess = 0; double highestAppropriateness = 0;
+		for (final PerceptualObject object : guessingSet) {
+			final double appropriateness = assertionConcept.appropriatenessOf(object.observation());
+			if (appropriateness > highestAppropriateness) {
+				guess = guessingSet.indexOf(object);
+				highestAppropriateness = appropriateness;
+			}
+		}
+		return guess;
+	}
+
+	@Override
 	public double labelOverlap() {
 		double sum = 0;
 		final int numberOfPairs = concepts.size()*(concepts.size()-1)/2;
@@ -100,12 +114,6 @@ public class BasicAgent implements Agent {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	@Override
-	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
