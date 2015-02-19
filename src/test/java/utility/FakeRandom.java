@@ -21,6 +21,11 @@ public class FakeRandom extends Random {
 	}
 
 	@Override
+	public double nextGaussian() {
+		return doubles.remove(0);
+	}
+
+	@Override
 	public double nextDouble() {
 		return doubles.remove(0);
 	}
