@@ -20,8 +20,8 @@ public class LabelMapping {
 		this(data.allData(), labels);
 	}
 
-	public int label(final PerceptualObject material) {
-		final int index = data.indexOf(material);
+	public int label(final PerceptualObject object) {
+		final int index = data.indexOf(object);
 		return labels.get(index);
 	}
 
