@@ -22,6 +22,24 @@ public class Point {
 		this(asList(coordinates));
 	}
 
+	public static Point standardDeviation(final List<Point> points) {
+		final Point mean = mean(points);
+		final List<Double> coordinates = new ArrayList<>();
+		for (int dimension=0; dimension<mean.coordinates.size(); dimension++) {
+			final double standardDeviation = standardDeviation(points, mean, dimension);
+			coordinates.add(standardDeviation);
+		}
+		return new Point(coordinates);
+	}
+
+	private static double standardDeviation(final List<Point> points, final Point mean, final int dimension) {
+		double sumOfSquares = 0;
+		for (final Point point : points) {
+			sumOfSquares += pow(point.coordinates.get(dimension) - mean.coordinates.get(dimension), 2);
+		}
+		return sqrt(sumOfSquares / (points.size()-1));
+	}
+
 	public static Point mean(final List<Point> points) {
 		Point sum = points.get(0).minus(points.get(0));
 		for (final Point point : points) {

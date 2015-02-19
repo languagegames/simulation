@@ -9,6 +9,15 @@ import org.junit.Test;
 public class TestPoint {
 
 	@Test
+	public void calculatesStandardDeviationOfListOfPoints() {
+		final Point a = new Point(0.5, 0.1);
+		final Point b = new Point(0.3, 0.6);
+
+		assertThat(Point.standardDeviation(asList(a, b)),
+				equalTo(new Point(0.14142135623730953, 0.35355339059327373)));
+	}
+
+	@Test
 	public void calculatesMeanOfListOfPoints() {
 		final Point a = new Point(0.5, 0.1);
 		final Point b = new Point(0.3, 0.6);
