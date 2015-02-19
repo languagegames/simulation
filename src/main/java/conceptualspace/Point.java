@@ -22,6 +22,10 @@ public class Point {
 		this(asList(coordinates));
 	}
 
+	public List<Double> coordinates() {
+		return coordinates;
+	}
+
 	public static Point standardDeviation(final List<Point> points) {
 		final Point mean = mean(points);
 		final List<Double> coordinates = new ArrayList<>();
