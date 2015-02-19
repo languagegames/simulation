@@ -1,6 +1,7 @@
 package languagegames.analysis;
 
 import java.util.List;
+import java.util.Random;
 
 import languagegames.AgentPairer;
 import languagegames.ObjectPool;
@@ -12,10 +13,12 @@ public class GuessingAnalysis implements Analysis {
 
 	private final AgentPairer agentPairer;
 	private final ObjectPool objectPool;
+	private final Random random;
 
-	public GuessingAnalysis(final AgentPairer agentPairer, final ObjectPool objectPool) {
+	public GuessingAnalysis(final AgentPairer agentPairer, final ObjectPool objectPool, final Random random) {
 		this.agentPairer = agentPairer;
 		this.objectPool = objectPool;
+		this.random = random;
 	}
 
 	@Override
@@ -32,8 +35,9 @@ public class GuessingAnalysis implements Analysis {
 
 	private double guessingScore(final Agent describer, final Agent guesser) {
 		final List<PerceptualObject> guessingSet = objectPool.pick(5);
-		final Assertion assertion = describer.assertion(guessingSet.get(0));
-		return (guesser.guess(guessingSet, assertion) == 0) ? 1 : 0;
+		final int targetIndex = random.nextInt(5);
+		final Assertion assertion = describer.assertion(guessingSet.get(targetIndex));
+		return (guesser.guess(guessingSet, assertion) == targetIndex) ? 1 : 0;
 	}
 
 }

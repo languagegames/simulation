@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import utility.FakeRandom;
 import agent.Agent;
 import agent.Assertion;
 import conceptualspace.PerceptualObject;
@@ -39,12 +40,29 @@ public class TestGuessingAnalysis {
 	@Before
 	public void setUp() {
 		agents.addAll(asList(agent0, agent1));
-		guessingSet.addAll(asList(target, otherObject, otherObject, otherObject, otherObject));
+	}
+
+	@Test
+	public void targetObjectIsSelectedAtRandom() {
+		final int targetIndex = 2;
+		guessingSet.addAll(asList(otherObject, otherObject, target, otherObject, otherObject));
+		final GuessingAnalysis analysis = new GuessingAnalysis(agentPairer, objectPool, new FakeRandom(targetIndex));
+
+		final Assertion assertion = new Assertion(otherObject, targetIndex, 0.42);
+
+		context.checking(new Expectations() {{
+			oneOf(objectPool).pick(5); will(returnValue(guessingSet));
+			oneOf(agent1).assertion(target); will(returnValue(assertion));
+			oneOf(agent0).guess(guessingSet, assertion); will(returnValue(targetIndex));
+		}});
+
+		assertThat(analysis.analyse(agents), equalTo(1.0));
 	}
 
 	@Test
 	public void pairSucceedsIfTargetObjectIsGuessedCorrectly() {
-		final GuessingAnalysis analysis = new GuessingAnalysis(agentPairer, objectPool);
+		guessingSet.addAll(asList(target, otherObject, otherObject, otherObject, otherObject));
+		final GuessingAnalysis analysis = new GuessingAnalysis(agentPairer, objectPool, new FakeRandom(0));
 
 		final Assertion assertion = new Assertion(otherObject, 0, 0.42);
 
