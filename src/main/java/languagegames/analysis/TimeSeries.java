@@ -13,9 +13,19 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class TimeSeries {
 
 	private final List<Double> values = new ArrayList<>();
+	private final List<Integer> timeSteps = new ArrayList<>();
+
+	public TimeSeries(final List<Double> values, final List<Integer> timeSteps) {
+		this.values.addAll(values);
+		this.timeSteps.addAll(timeSteps);
+	}
 
 	public TimeSeries(final List<Double> values) {
-		this.values.addAll(values);
+		int t = 0;
+		for (final Double value : values) {
+			this.values.add(value);
+			timeSteps.add(t++);
+		}
 	}
 
 	public TimeSeries(final Double...values) {
@@ -60,7 +70,12 @@ public class TimeSeries {
 
 	@Override
 	public String toString() {
-		return values.toString();
+		final StringBuilder string = new StringBuilder();
+		for (int t = 0; t < values.size(); t++) {
+			string.append(timeSteps.get(t));
+			string.append(", " + values.get(t) + "\n");
+		}
+		return string.toString();
 	}
 
 	@Override
