@@ -26,16 +26,22 @@ public class GaussianObject implements PerceptualObject {
 		this(mean, standardDeviation, new Random());
 	}
 
-	public static List<PerceptualObject> makeListFrom(final List<Point> points, final int pointsPerObject) {
+	public static List<PerceptualObject> makeListFrom(
+			final List<Point> points, final int pointsPerObject, final int numDimensions) {
 		final int numObjects = points.size() / pointsPerObject;
 		final List<PerceptualObject> objects = new ArrayList<>();
 		for (int i=0; i<numObjects; i++) {
 			final List<Point> objectPoints = points.subList(i*pointsPerObject, i*pointsPerObject+pointsPerObject);
 			final GaussianObject object = new GaussianObject(
-					mean(objectPoints).coordinates(), standardDeviation(objectPoints).coordinates());
+					coordinates(mean(objectPoints), numDimensions),
+					coordinates(standardDeviation(objectPoints), numDimensions));
 			objects.add(object);
 		}
 		return objects;
+	}
+
+	private static List<Double> coordinates(final Point point, final int numDimensions) {
+		return point.coordinates().subList(0, numDimensions);
 	}
 
 	@Override

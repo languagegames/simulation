@@ -17,15 +17,34 @@ import utility.FakeRandom;
 public class TestGaussianObject {
 
 	@Test
-	public void createsListOfObjectsFromListOfPoints() {
-		final List<Point> points = points(0.2, 0.3, 0.8, 0.5);
+	public void createsListOfObjectsWithSpecifiedDimensionality() {
+		final List<Point> points = asList(point(0.2, 0.42), point(0.3, 0.42), point(0.8, 0.42), point(0.5, 0.42));
 
 		final PerceptualObject object0 = new GaussianObject(
 				mean(points(0.2, 0.3)).coordinates(), standardDeviation(points(0.2, 0.3)).coordinates());
 		final PerceptualObject object1 = new GaussianObject(
 				mean(points(0.8, 0.5)).coordinates(), standardDeviation(points(0.8, 0.5)).coordinates());
 
-		assertThat(GaussianObject.makeListFrom(points, 2), contains(object0, object1));
+		assertThat(GaussianObject.makeListFrom(points, 2, 1), contains(object0, object1));
+	}
+
+	@Test
+	public void createsListOfObjectsFromListOfPoints() {
+		final List<Point> points = asList(point(0.2), point(0.3), point(0.8), point(0.5));
+
+		final List<Point> object0Points = points.subList(0, 2);
+		final List<Point> object1Points = points.subList(2, 4);
+
+		final PerceptualObject object0 = new GaussianObject(
+				mean(object0Points).coordinates(), standardDeviation(object0Points).coordinates());
+		final PerceptualObject object1 = new GaussianObject(
+				mean(object1Points).coordinates(), standardDeviation(object1Points).coordinates());
+
+		assertThat(GaussianObject.makeListFrom(points, 2, 1), contains(object0, object1));
+	}
+
+	private Point point(final Double...values) {
+		return new Point(values);
 	}
 
 	private List<Point> points(final double...values) {
