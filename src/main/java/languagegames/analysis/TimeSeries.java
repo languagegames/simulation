@@ -32,6 +32,13 @@ public class TimeSeries {
 		this(asList(values));
 	}
 
+	public static TimeSeriesAverage average(final List<TimeSeries> results) {
+		return new TimeSeriesAverage(
+				results.get(0).timeSteps,
+				mean(results).values,
+				standardDeviation(results).values);
+	}
+
 	public static TimeSeries standardDeviation(final List<TimeSeries> results) {
 		final TimeSeries mean = mean(results);
 		final List<Double> standardDeviation = new ArrayList<>();
