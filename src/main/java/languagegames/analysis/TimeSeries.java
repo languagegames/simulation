@@ -39,7 +39,7 @@ public class TimeSeries {
 		for (int timeStep=0; timeStep<numTimeSteps; timeStep++) {
 			standardDeviation.add(standardDeviation(results, mean, timeStep));
 		}
-		return new TimeSeries(standardDeviation);
+		return new TimeSeries(standardDeviation, results.get(0).timeSteps);
 	}
 
 	private static double standardDeviation(
@@ -57,7 +57,7 @@ public class TimeSeries {
 		for (int timeStep=0; timeStep<numTimeSteps; timeStep++) {
 			mean.add(mean(results, timeStep));
 		}
-		return new TimeSeries(mean);
+		return new TimeSeries(mean, results.get(0).timeSteps);
 	}
 
 	private static double mean(final List<TimeSeries> results, final int timeStep) {
