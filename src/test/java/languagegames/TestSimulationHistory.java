@@ -29,7 +29,8 @@ public class TestSimulationHistory {
 			oneOf(population2).apply(analysis); will(returnValue(result2));
 		}});
 
-		assertThat(history.timeSeriesFrom(analysis, 1), equalTo(new TimeSeries(result0, result2)));
+		assertThat(history.timeSeriesFrom(analysis, 1),
+				equalTo(new TimeSeries(asList(result0, result2), asList(0, 2))));
 	}
 
 	@Test
@@ -41,7 +42,8 @@ public class TestSimulationHistory {
 			oneOf(population2).apply(analysis); will(returnValue(result2));
 		}});
 
-		assertThat(history.timeSeriesFrom(analysis, asList(0, 2)), equalTo(new TimeSeries(result0, result2)));
+		assertThat(history.timeSeriesFrom(analysis, asList(0, 2)),
+				equalTo(new TimeSeries(asList(result0, result2), asList(0, 2))));
 	}
 
 	@Test

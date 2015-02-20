@@ -16,10 +16,10 @@ public class SimulationHistory {
 
 	public TimeSeries timeSeriesFrom(final Analysis analysis, final List<Integer> timeSteps) {
 		final List<Double> results = new ArrayList<>();
-		for (final Integer timeStep : timeSteps) {
-			results.add(populations.get(timeStep).apply(analysis));
+		for (final Integer t : timeSteps) {
+			results.add(populations.get(t).apply(analysis));
 		}
-		return new TimeSeries(results);
+		return new TimeSeries(results, timeSteps);
 	}
 
 	public TimeSeries timeSeriesFrom(final Analysis analysis, final int numTimeSteps) {
