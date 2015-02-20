@@ -20,9 +20,9 @@ public class TestGaussianObject {
 	public void createsListOfObjectsFromListOfPoints() {
 		final List<Point> points = points(0.2, 0.3, 0.8, 0.5);
 
-		final GaussianObject object0 = new GaussianObject(
+		final PerceptualObject object0 = new GaussianObject(
 				mean(points(0.2, 0.3)).coordinates(), standardDeviation(points(0.2, 0.3)).coordinates());
-		final GaussianObject object1 = new GaussianObject(
+		final PerceptualObject object1 = new GaussianObject(
 				mean(points(0.8, 0.5)).coordinates(), standardDeviation(points(0.8, 0.5)).coordinates());
 
 		assertThat(GaussianObject.makeListFrom(points, 2), contains(object0, object1));
