@@ -4,19 +4,24 @@ import java.util.List;
 
 import languagegames.AgentPairer;
 import languagegames.ObjectPool;
+import languagegames.RandomPairer;
 import agent.Agent;
 import conceptualspace.PerceptualObject;
 
 public class CommunicationAnalysis implements Analysis {
 
-	private final int numObjects;
+	private final int numGames;
 	private final AgentPairer agentPairer;
 	private final ObjectPool objectPool;
 
-	public CommunicationAnalysis(final int numObjects, final AgentPairer agentPairer, final ObjectPool objectPool) {
-		this.numObjects = numObjects;
+	public CommunicationAnalysis(final int numGames, final AgentPairer agentPairer, final ObjectPool objectPool) {
+		this.numGames = numGames;
 		this.agentPairer = agentPairer;
 		this.objectPool = objectPool;
+	}
+
+	public CommunicationAnalysis(final ObjectPool objectPool) {
+		this(10, new RandomPairer(), objectPool);
 	}
 
 	@Override
@@ -32,12 +37,12 @@ public class CommunicationAnalysis implements Analysis {
 	}
 
 	private double communicationScore(final Agent agent, final Agent other) {
-		final List<PerceptualObject> objects = objectPool.pick(numObjects);
+		final List<PerceptualObject> objects = objectPool.pick(numGames);
 		double sumOfScores = 0;
 		for (final PerceptualObject object : objects) {
 			sumOfScores += (agent.assertion(object).equals(other.assertion(object))) ? 1 : 0;
 		}
-		return sumOfScores / numObjects;
+		return sumOfScores / numGames;
 	}
 
 }
