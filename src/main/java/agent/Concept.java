@@ -3,6 +3,8 @@ package agent;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 
+import java.util.Random;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -16,6 +18,12 @@ public class Concept {
 	public Concept(final Point prototype, final double threshold) {
 		this.prototype = prototype;
 		this.threshold = threshold;
+	}
+
+	public static Concept randomConcept(final double minThreshold, final double maxThreshold, final Random random) {
+		final Point prototype = new Point(random.nextDouble(), random.nextDouble(), random.nextDouble());
+		final double threshold = minThreshold + (maxThreshold-minThreshold)*random.nextDouble();
+		return new Concept(prototype, threshold);
 	}
 
 	public double overlapWith(final Concept other) {
