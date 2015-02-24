@@ -12,18 +12,28 @@ import conceptualspace.PerceptualObject;
 
 public class GuessingAnalysis implements Analysis {
 
+	private final int numGames;
+	private final int numObjects;
 	private final AgentPairer agentPairer;
 	private final ObjectPool objectPool;
 	private final Random random;
 
-	public GuessingAnalysis(final AgentPairer agentPairer, final ObjectPool objectPool, final Random random) {
+	public GuessingAnalysis(
+			final int numGames,
+			final int numObjects,
+			final AgentPairer agentPairer,
+			final ObjectPool objectPool,
+			final Random random)
+	{
+		this.numGames = numGames;
+		this.numObjects = numObjects;
 		this.agentPairer = agentPairer;
 		this.objectPool = objectPool;
 		this.random = random;
 	}
 
 	public GuessingAnalysis(final ObjectPool objectPool) {
-		this(new RandomPairer(), objectPool, new Random());
+		this(10, 5, new RandomPairer(), objectPool, new Random());
 	}
 
 	@Override
@@ -39,10 +49,18 @@ public class GuessingAnalysis implements Analysis {
 	}
 
 	private double guessingScore(final Agent describer, final Agent guesser) {
-		final List<PerceptualObject> guessingSet = objectPool.pick(5);
-		final int targetIndex = random.nextInt(5);
+		double sumOfScores = 0;
+		for (int i=0; i<numGames; i++) {
+			sumOfScores += success(describer, guesser) ? 1 : 0;
+		}
+		return sumOfScores / numGames;
+	}
+
+	private boolean success(final Agent describer, final Agent guesser) {
+		final List<PerceptualObject> guessingSet = objectPool.pick(numObjects);
+		final int targetIndex = random.nextInt(numObjects);
 		final Assertion assertion = describer.assertion(guessingSet.get(targetIndex));
-		return (guesser.guess(guessingSet, assertion) == targetIndex) ? 1 : 0;
+		return (guesser.guess(guessingSet, assertion) == targetIndex);
 	}
 
 }

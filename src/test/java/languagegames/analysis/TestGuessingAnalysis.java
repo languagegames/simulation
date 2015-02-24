@@ -46,7 +46,7 @@ public class TestGuessingAnalysis {
 	public void targetObjectIsSelectedAtRandom() {
 		final int targetIndex = 2;
 		guessingSet.addAll(asList(otherObject, otherObject, target, otherObject, otherObject));
-		final GuessingAnalysis analysis = new GuessingAnalysis(agentPairer, objectPool, new FakeRandom(targetIndex));
+		final GuessingAnalysis analysis = new GuessingAnalysis(1, 5, agentPairer, objectPool, new FakeRandom(targetIndex));
 
 		final Assertion assertion = new Assertion(otherObject, targetIndex, 0.42);
 
@@ -62,7 +62,7 @@ public class TestGuessingAnalysis {
 	@Test
 	public void pairSucceedsIfTargetObjectIsGuessedCorrectly() {
 		guessingSet.addAll(asList(target, otherObject, otherObject, otherObject, otherObject));
-		final GuessingAnalysis analysis = new GuessingAnalysis(agentPairer, objectPool, new FakeRandom(0));
+		final GuessingAnalysis analysis = new GuessingAnalysis(1, 5, agentPairer, objectPool, new FakeRandom(0));
 
 		final Assertion assertion = new Assertion(otherObject, 0, 0.42);
 
