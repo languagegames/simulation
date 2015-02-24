@@ -5,6 +5,7 @@ import java.util.Random;
 
 import languagegames.AgentPairer;
 import languagegames.ObjectPool;
+import languagegames.RandomPairer;
 import agent.Agent;
 import agent.Assertion;
 import conceptualspace.PerceptualObject;
@@ -19,6 +20,10 @@ public class GuessingAnalysis implements Analysis {
 		this.agentPairer = agentPairer;
 		this.objectPool = objectPool;
 		this.random = random;
+	}
+
+	public GuessingAnalysis(final ObjectPool objectPool) {
+		this(new RandomPairer(), objectPool, new Random());
 	}
 
 	@Override
