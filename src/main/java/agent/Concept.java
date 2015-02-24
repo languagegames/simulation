@@ -3,6 +3,8 @@ package agent;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -20,10 +22,27 @@ public class Concept {
 		this.threshold = threshold;
 	}
 
-	public static Concept randomConcept(final double minThreshold, final double maxThreshold, final Random random) {
-		final Point prototype = new Point(random.nextDouble(), random.nextDouble(), random.nextDouble());
-		final double threshold = minThreshold + (maxThreshold-minThreshold)*random.nextDouble();
-		return new Concept(prototype, threshold);
+	public static Concept randomConcept(
+			final int numDimensions,
+			final double minThreshold,
+			final double maxThreshold,
+			final Random random)
+	{
+		return new Concept(
+				randomPrototype(numDimensions, random),
+				randomThreshold(minThreshold, maxThreshold, random));
+	}
+
+	private static Point randomPrototype(final int numDimensions, final Random random) {
+		final List<Double> coordinates = new ArrayList<>();
+		for (int i=0; i<numDimensions; i++) {
+			coordinates.add(random.nextDouble());
+		}
+		return new Point(coordinates);
+	}
+
+	private static double randomThreshold(final double minThreshold, final double maxThreshold, final Random random) {
+		return minThreshold + (maxThreshold-minThreshold)*random.nextDouble();
 	}
 
 	public double overlapWith(final Concept other) {
