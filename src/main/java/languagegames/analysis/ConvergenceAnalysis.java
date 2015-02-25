@@ -18,4 +18,9 @@ public class ConvergenceAnalysis implements Analysis {
 		return sum / numberOfPairs;
 	}
 
+	@Override
+	public String toString() {
+		return "convergence";
+	}
+
 }

@@ -63,4 +63,9 @@ public class GuessingAnalysis implements Analysis {
 		return (guesser.guess(guessingSet, assertion) == targetIndex);
 	}
 
+	@Override
+	public String toString() {
+		return "guessing";
+	}
+
 }

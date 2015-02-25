@@ -45,4 +45,9 @@ public class CommunicationAnalysis implements Analysis {
 		return sumOfScores / numGames;
 	}
 
+	@Override
+	public String toString() {
+		return "communication";
+	}
+
 }

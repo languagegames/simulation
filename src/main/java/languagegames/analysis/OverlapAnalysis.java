@@ -15,4 +15,9 @@ public class OverlapAnalysis implements Analysis {
 		return sum / agents.size();
 	}
 
+	@Override
+	public String toString() {
+		return "overlap";
+	}
+
 }
