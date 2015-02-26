@@ -54,21 +54,8 @@ public class OraclePopulation implements Population {
 	public OraclePopulation runLanguageGames() {
 		final List<Agent> allAgents = mergeAgents();
 		final List<Integer> pairingOrder = agentPairer.pairingOrder(allAgents.size());
-		final List<Agent> updatedAgents = new ArrayList<>(allAgents);
-		for (int i=0; i<allAgents.size(); i+=2) {
-			Agent speaker = allAgents.get(pairingOrder.get(i));
-			Agent listener = allAgents.get(pairingOrder.get(i+1));
-			if (speaker.weight() < listener.weight()) {
-				speaker = allAgents.get(pairingOrder.get(i+1));
-				listener = allAgents.get(pairingOrder.get(i));
-			}
-			updateListener(updatedAgents, speaker, listener);
-		}
+		final List<Agent> updatedAgents = runLanguageGames(allAgents, pairingOrder);
 		return new OraclePopulation(removeOracles(updatedAgents), oracles, objectPool, agentPairer);
-	}
-
-	private List<Agent> removeOracles(final List<Agent> updatedAgents) {
-		return updatedAgents.subList(0, agents.size());
 	}
 
 	private List<Agent> mergeAgents() {
@@ -77,8 +64,25 @@ public class OraclePopulation implements Population {
 		return allAgents;
 	}
 
-	private void updateListener(
-			final List<Agent> updatedAgents, final Agent speaker, final Agent listener) {
+	private List<Agent> removeOracles(final List<Agent> updatedAgents) {
+		return updatedAgents.subList(0, agents.size());
+	}
+
+	private List<Agent> runLanguageGames(final List<Agent> allAgents, final List<Integer> pairingOrder) {
+		final List<Agent> updatedAgents = new ArrayList<>(allAgents);
+		for (int i=0; i<allAgents.size()-1; i+=2) {
+			Agent speaker = allAgents.get(pairingOrder.get(i));
+			Agent listener = allAgents.get(pairingOrder.get(i+1));
+			if (speaker.weight() < listener.weight()) {
+				speaker = allAgents.get(pairingOrder.get(i+1));
+				listener = allAgents.get(pairingOrder.get(i));
+			}
+			updateListener(updatedAgents, speaker, listener);
+		}
+		return updatedAgents;
+	}
+
+	private void updateListener(final List<Agent> updatedAgents, final Agent speaker, final Agent listener) {
 		final Assertion speakerAssertion = speaker.assertion(objectPool.pick());
 		updatedAgents.set(agents.indexOf(listener), listener.learn(speakerAssertion));
 	}
