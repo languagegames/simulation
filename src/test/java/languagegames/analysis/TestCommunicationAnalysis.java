@@ -14,7 +14,6 @@ import languagegames.StaticPairer;
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -34,21 +33,35 @@ public class TestCommunicationAnalysis {
 	private final PerceptualObject object = new SimpleObject(new Point(0.42));
 	private final List<Agent> agents = new ArrayList<>();
 
-	@Before
-	public void setUp() {
-		agents.addAll(asList(agent0, agent1, agent2, agent3));
+	@Test
+	public void assertionWeightIsIrrelevant() {
+		agents.addAll(asList(agent0, agent1));
+		final int numGames = 1;
+		final CommunicationAnalysis analysis = new CommunicationAnalysis(numGames, agentPairer, objectPool);
+
+		final Assertion assertion = new Assertion(object, 0, 0.4);
+		final Assertion equivalentAssertion = new Assertion(object, 0, 0.5);
+
+		context.checking(new Expectations() {{
+			oneOf(objectPool).pick(numGames); will(returnValue(asList(object)));
+			oneOf(agent1).assertion(object); will(returnValue(assertion));
+			oneOf(agent0).assertion(object); will(returnValue(equivalentAssertion));
+		}});
+
+		assertThat(analysis.analyse(agents), equalTo(1.0));
 	}
 
 	@Test
 	public void comparesAssertionsAcrossPairsOfAgents() {
-		final int numObjects = 1;
-		final CommunicationAnalysis analysis = new CommunicationAnalysis(numObjects, agentPairer, objectPool);
+		agents.addAll(asList(agent0, agent1, agent2, agent3));
+		final int numGames = 1;
+		final CommunicationAnalysis analysis = new CommunicationAnalysis(numGames, agentPairer, objectPool);
 
 		final Assertion assertion0 = new Assertion(object, 0, 0.42);
 		final Assertion assertion1 = new Assertion(object, 1, 0.42);
 
 		context.checking(new Expectations() {{
-			exactly(2).of(objectPool).pick(numObjects); will(returnValue(asList(object)));
+			exactly(2).of(objectPool).pick(numGames); will(returnValue(asList(object)));
 			oneOf(agent1).assertion(object); will(returnValue(assertion0));
 			oneOf(agent0).assertion(object); will(returnValue(assertion0));
 			oneOf(agent2).assertion(object); will(returnValue(assertion0));

@@ -6,6 +6,7 @@ import languagegames.AgentPairer;
 import languagegames.ObjectPool;
 import languagegames.RandomPairer;
 import agent.Agent;
+import agent.Assertion;
 import conceptualspace.PerceptualObject;
 
 public class CommunicationAnalysis implements Analysis {
@@ -40,7 +41,9 @@ public class CommunicationAnalysis implements Analysis {
 		final List<PerceptualObject> objects = objectPool.pick(numGames);
 		double sumOfScores = 0;
 		for (final PerceptualObject object : objects) {
-			sumOfScores += (agent.assertion(object).equals(other.assertion(object))) ? 1 : 0;
+			final Assertion first = agent.assertion(object);
+			final Assertion second = other.assertion(object);
+			sumOfScores += (first.matches(second)) ? 1 : 0;
 		}
 		return sumOfScores / numGames;
 	}
