@@ -10,12 +10,27 @@ import agent.Agent;
 import agent.BasicAgent;
 import agent.Concept;
 
-public class BasicPopulationFactory {
+public class PopulationFactory {
 
 	private final Random random;
 
-	public BasicPopulationFactory() {
+	public PopulationFactory() {
 		random = new Random();
+	}
+
+	public OraclePopulation createWithOracles(
+			final List<Agent> oracles,
+			final int numAgents,
+			final int numDimensions,
+			final double minThreshold,
+			final double maxThreshold,
+			final ObjectPool objectPool) {
+		final List<Agent> agents = new ArrayList<>();
+		for (double i=0; i<numAgents; i++) {
+			final double weight = i/numAgents;
+			agents.add(randomAgent(numDimensions, minThreshold, maxThreshold, weight));
+		}
+		return new OraclePopulation(agents, oracles, objectPool, new RandomPairer());
 	}
 
 	public BasicPopulation createRandom(
