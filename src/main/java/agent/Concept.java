@@ -22,15 +22,8 @@ public class Concept {
 		this.threshold = threshold;
 	}
 
-	public static Concept randomConcept(
-			final int numDimensions,
-			final double minThreshold,
-			final double maxThreshold,
-			final Random random)
-	{
-		return new Concept(
-				randomPrototype(numDimensions, random),
-				randomThreshold(minThreshold, maxThreshold, random));
+	public static Concept randomConcept(final int numDimensions, final double threshold, final Random random) {
+		return new Concept(randomPrototype(numDimensions, random), threshold);
 	}
 
 	private static Point randomPrototype(final int numDimensions, final Random random) {
@@ -39,10 +32,6 @@ public class Concept {
 			coordinates.add(random.nextDouble());
 		}
 		return new Point(coordinates);
-	}
-
-	private static double randomThreshold(final double minThreshold, final double maxThreshold, final Random random) {
-		return minThreshold + (maxThreshold-minThreshold)*random.nextDouble();
 	}
 
 	public double overlapWith(final Concept other) {

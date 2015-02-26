@@ -16,13 +16,12 @@ public class PopulationFactory {
 			final List<Agent> oracles,
 			final int numAgents,
 			final int numDimensions,
-			final double minThreshold,
-			final double maxThreshold,
+			final double initialThreshold,
 			final ObjectPool objectPool) {
 		final List<Agent> agents = new ArrayList<>();
 		for (double i=0; i<numAgents; i++) {
 			final double weight = i/numAgents;
-			agents.add(randomAgent(numDimensions, minThreshold, maxThreshold, weight));
+			agents.add(randomAgent(numDimensions, initialThreshold, weight));
 		}
 		return new OraclePopulation(agents, oracles, objectPool, new RandomPairer());
 	}
@@ -30,26 +29,24 @@ public class PopulationFactory {
 	public static BasicPopulation basicPopulation(
 			final int numAgents,
 			final int numDimensions,
-			final double minThreshold,
-			final double maxThreshold,
+			final double initialThreshold,
 			final ObjectPool objectPool) {
 		final List<Agent> agents = new ArrayList<>();
 		for (double i=0; i<numAgents; i++) {
 			final double weight = i/numAgents;
-			agents.add(randomAgent(numDimensions, minThreshold, maxThreshold, weight));
+			agents.add(randomAgent(numDimensions, initialThreshold, weight));
 		}
 		return new BasicPopulation(agents, objectPool, new RandomPairer());
 	}
 
 	private static BasicAgent randomAgent(
 			final int numDimensions,
-			final double minThreshold,
-			final double maxThreshold,
+			final double initialThreshold,
 			final double weight) {
 		final List<Concept> concepts = new ArrayList<>();
 		final Random random = new Random();
 		for (int i=0; i<10; i++) {
-			concepts.add(randomConcept(numDimensions, minThreshold, maxThreshold, random));
+			concepts.add(randomConcept(numDimensions, initialThreshold, random));
 		}
 		return new BasicAgent(weight, concepts);
 	}
