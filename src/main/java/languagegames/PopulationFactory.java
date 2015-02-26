@@ -12,13 +12,7 @@ import agent.Concept;
 
 public class PopulationFactory {
 
-	private final Random random;
-
-	public PopulationFactory() {
-		random = new Random();
-	}
-
-	public OraclePopulation createWithOracles(
+	public static OraclePopulation oraclePopulation(
 			final List<Agent> oracles,
 			final int numAgents,
 			final int numDimensions,
@@ -33,7 +27,7 @@ public class PopulationFactory {
 		return new OraclePopulation(agents, oracles, objectPool, new RandomPairer());
 	}
 
-	public BasicPopulation createRandom(
+	public static BasicPopulation basicPopulation(
 			final int numAgents,
 			final int numDimensions,
 			final double minThreshold,
@@ -47,12 +41,13 @@ public class PopulationFactory {
 		return new BasicPopulation(agents, objectPool, new RandomPairer());
 	}
 
-	private BasicAgent randomAgent(
+	private static BasicAgent randomAgent(
 			final int numDimensions,
 			final double minThreshold,
 			final double maxThreshold,
 			final double weight) {
 		final List<Concept> concepts = new ArrayList<>();
+		final Random random = new Random();
 		for (int i=0; i<10; i++) {
 			concepts.add(randomConcept(numDimensions, minThreshold, maxThreshold, random));
 		}
