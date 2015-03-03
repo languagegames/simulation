@@ -33,6 +33,16 @@ public class NegatingAgent implements Agent {
 	}
 
 	@Override
+	public Agent learn(final Assertion assertion) {
+		final Concept toUpdate = concepts.get(assertion.label);
+		final Concept updated = (assertion.isPositive) ?
+				toUpdate.update(assertion) : toUpdate.negativeUpdate(assertion);
+		final List<Concept> newConcepts = new ArrayList<>(concepts);
+		newConcepts.set(assertion.label, updated);
+		return new NegatingAgent(positivePrior, weight, newConcepts);
+	}
+
+	@Override
 	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
 		final Concept assertionConcept = concepts.get(assertion.label);
 		int guess = 0; double highestAppropriateness = 0;
@@ -151,15 +161,6 @@ public class NegatingAgent implements Agent {
 		        iterator.remove();
 		    }
 		}
-	}
-
-	@Override
-	public Agent learn(final Assertion assertion) {
-		final Concept toUpdate = concepts.get(assertion.label);
-		final Concept updated = toUpdate.update(assertion);
-		final List<Concept> newConcepts = new ArrayList<>(concepts);
-		newConcepts.set(assertion.label, updated);
-		return new NegatingAgent(positivePrior, weight, newConcepts);
 	}
 
 	@Override

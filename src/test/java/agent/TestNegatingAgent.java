@@ -21,6 +21,42 @@ public class TestNegatingAgent {
 	private final double someWeight = 0.42;
 
 	@Test
+	public void negativeUpdateIfAssertionIsNegative() {
+		final NegatingAgent agent = new NegatingAgent(
+				somePrior,
+				someWeight,
+				new Concept(new Point(0.42), 0.42),
+				new Concept(new Point(0.5), 0.5));
+
+		final Agent updatedAgent = new NegatingAgent(
+				somePrior,
+				someWeight,
+				new Concept(new Point(0.42), 0.42),
+				new Concept(new Point(0.425), 0.25));
+
+		assertThat(agent.learn(negativeAssertion(new SimpleObject(new Point(0.6)), 1, 0.7)),
+				equalTo(updatedAgent));
+	}
+
+	@Test
+	public void learnsByUpdatingAppropriateConcept() {
+		final NegatingAgent agent = new NegatingAgent(
+				somePrior,
+				someWeight,
+				new Concept(new Point(0.42), 0.42),
+				new Concept(new Point(0.5), 0.5));
+
+		final Agent updatedAgent = new NegatingAgent(
+				somePrior,
+				someWeight,
+				new Concept(new Point(0.42), 0.42),
+				new Concept(new Point(0.74), 0.8));
+
+		assertThat(agent.learn(new Assertion(new SimpleObject(new Point(0.9)), 1, 0.8)),
+				equalTo(updatedAgent));
+	}
+
+	@Test
 	public void assertionDependsOnPositivePrior() {
 		final List<Concept> concepts = asList(
 				new Concept(new Point(0.8), 0.6),
@@ -89,24 +125,6 @@ public class TestNegatingAgent {
 				new Concept(new Point(0.7), 0.8));
 
 		assertThat(agent.convergenceWith(other), equalTo(0.35));
-	}
-
-	@Test
-	public void learnsByUpdatingAppropriateConcept() {
-		final NegatingAgent agent = new NegatingAgent(
-				somePrior,
-				someWeight,
-				new Concept(new Point(0.42), 0.42),
-				new Concept(new Point(0.5), 0.5));
-
-		final Agent updatedAgent = new NegatingAgent(
-				somePrior,
-				someWeight,
-				new Concept(new Point(0.42), 0.42),
-				new Concept(new Point(0.74), 0.8));
-
-		assertThat(agent.learn(new Assertion(new SimpleObject(new Point(0.9)), 1, 0.8)),
-				equalTo(updatedAgent));
 	}
 
 	private SimpleObject object(final double d) {
