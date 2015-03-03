@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -100,6 +101,9 @@ public class NegatingAgent implements Agent {
 	public Assertion assertion(final PerceptualObject object) {
 		final Point observation = object.observation();
 		final List<Concept> sortedConcepts = sortConcepts(observation);
+		if (sortedConcepts.size() == 0) {
+			return positiveAssertion(object, new Random().nextInt(concepts.size()), weight);
+		}
 		if (positiveProbability(sortedConcepts, observation) >= negativeProbability(sortedConcepts, observation)) {
 			return positiveAssertion(object, concepts.indexOf(sortedConcepts.get(0)), weight);
 		} else {
