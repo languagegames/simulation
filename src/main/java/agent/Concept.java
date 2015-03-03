@@ -69,6 +69,24 @@ public class Concept {
 		return target.minus(prototype).norm() / threshold + weight;
 	}
 
+	public Concept negativeUpdate(final Assertion assertion) {
+		final Point target = assertion.object.observation();
+		if (appropriatenessOf(target) > 1-assertion.weight) {
+			final Point newPrototype = prototype.minus((target.minus(prototype)).times(negativeLambda(assertion.weight, target)));
+			final double newThreshold = negativeAlpha(assertion.weight, target) * threshold;
+			return new Concept(newPrototype, newThreshold);
+		}
+		return this;
+	}
+
+	private double negativeLambda(final double weight, final Point target) {
+		return (1-weight) * (threshold*weight/target.minus(prototype).norm() - 1);
+	}
+
+	private double negativeAlpha(final double weight, final Point target) {
+		return target.minus(prototype).norm() / threshold + 1 - weight;
+	}
+
 	@Override
 	public boolean equals(final Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj);
