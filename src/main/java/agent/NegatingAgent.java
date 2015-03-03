@@ -108,6 +108,11 @@ public class NegatingAgent implements Agent {
 	}
 
 	private double positiveProbability(final List<Concept> concepts, final Point observation) {
+		if (positivePrior == 1) {
+			return 1;
+		} else if (positivePrior == 0) {
+			return 0;
+		}
 		final int k = concepts.size(), n = this.concepts.size();
 		final double p = positivePrior, q = 1 - positivePrior;
 		final List<Double> appropriatenessDifferences = appropriatenessDifferences(concepts, observation);
@@ -121,6 +126,11 @@ public class NegatingAgent implements Agent {
 	}
 
 	private double negativeProbability(final List<Concept> concepts, final Point observation) {
+		if (positivePrior == 0) {
+			return 1;
+		} else if (positivePrior == 1) {
+			return 0;
+		}
 		final int k = concepts.size(), n = this.concepts.size();
 		final double p = positivePrior, q = 1 - positivePrior;
 		final List<Double> appropriatenessDifferences = appropriatenessDifferences(concepts, observation);
