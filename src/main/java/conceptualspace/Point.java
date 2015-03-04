@@ -26,10 +26,18 @@ public class Point {
 		return coordinates;
 	}
 
+	public int numDimensions() {
+		return coordinates.size();
+	}
+
+	public double get(final int index) {
+		return coordinates.get(index);
+	}
+
 	public static Point standardDeviation(final List<Point> points) {
 		final Point mean = mean(points);
 		final List<Double> coordinates = new ArrayList<>();
-		for (int dimension=0; dimension<mean.coordinates.size(); dimension++) {
+		for (int dimension=0; dimension<mean.numDimensions(); dimension++) {
 			final double standardDeviation = standardDeviation(points, mean, dimension);
 			coordinates.add(standardDeviation);
 		}
@@ -39,7 +47,7 @@ public class Point {
 	private static double standardDeviation(final List<Point> points, final Point mean, final int dimension) {
 		double sumOfSquares = 0;
 		for (final Point point : points) {
-			sumOfSquares += pow(point.coordinates.get(dimension) - mean.coordinates.get(dimension), 2);
+			sumOfSquares += pow(point.get(dimension) - mean.get(dimension), 2);
 		}
 		return sqrt(sumOfSquares / (points.size()-1));
 	}
@@ -66,8 +74,8 @@ public class Point {
 
 	public Point plus(final Point other) {
 		final List<Double> resultCoordinates = new ArrayList<>();
-		for (int i=0; i<coordinates.size(); i++) {
-			resultCoordinates.add(coordinates.get(i) + other.coordinates.get(i));
+		for (int i=0; i<numDimensions(); i++) {
+			resultCoordinates.add(get(i) + other.get(i));
 		}
 		return new Point(resultCoordinates);
 	}
