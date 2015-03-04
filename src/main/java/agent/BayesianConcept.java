@@ -11,6 +11,9 @@ import static java.util.Arrays.asList;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import conceptualspace.Point;
 
 public class BayesianConcept {
@@ -29,6 +32,12 @@ public class BayesianConcept {
 		this(asList(points));
 	}
 
+	public BayesianConcept update(final Point point) {
+		final List<Point> points = this.points;
+		points.add(point);
+		return new BayesianConcept(points);
+	}
+
 	public double likelihoodGiven(final Point point) {
 		double result = 1;
 		for (int i=0; i<point.numDimensions(); i++) {
@@ -39,6 +48,21 @@ public class BayesianConcept {
 
 	private double pdf(final double x, final double mu, final double sigma) {
 		return 1/(sigma*sqrt(2*PI))*exp(-pow(x-mu,2)/(2*pow(sigma,2)));
+	}
+
+	@Override
+	public String toString() {
+		return "Bayesian concept with mean " + mean + ", standard deviation" + stdDev;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 }
