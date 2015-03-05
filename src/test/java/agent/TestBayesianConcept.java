@@ -4,11 +4,26 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.equalTo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import conceptualspace.Point;
 
 public class TestBayesianConcept {
+
+	@Test
+	public void stores20PointsAtMost() {
+		final Point point = new Point(0.42);
+		BayesianConcept concept = new BayesianConcept(point, point);
+		final List<Point> points = new ArrayList<>();
+		for (int i=0; i<20; i++) {
+			points.add(point);
+			concept = concept.update(point);
+		}
+		assertThat(concept, equalTo(new BayesianConcept(points)));
+	}
 
 	@Test
 	public void addsNewPointToStartOfList() {
