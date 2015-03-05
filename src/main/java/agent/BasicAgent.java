@@ -9,6 +9,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import conceptualspace.PerceptualObject;
+import conceptualspace.Point;
 
 
 public class BasicAgent implements Agent {
@@ -84,9 +85,10 @@ public class BasicAgent implements Agent {
 		Concept mostAppropriate = concepts.get(0);
 		double maxAppropriateness = 0;
 		for (final Concept concept : concepts) {
-			if (concept.appropriatenessOf(object.observation()) > maxAppropriateness) {
+			final Point observation = object.observation();
+			if (concept.appropriatenessOf(observation) > maxAppropriateness) {
 				mostAppropriate = concept;
-				maxAppropriateness = mostAppropriate.appropriatenessOf(object.observation());
+				maxAppropriateness = mostAppropriate.appropriatenessOf(observation);
 			}
 		}
 		return new Assertion(object, concepts.indexOf(mostAppropriate), weight);
