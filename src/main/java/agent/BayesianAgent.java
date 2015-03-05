@@ -1,15 +1,31 @@
 package agent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import conceptualspace.PerceptualObject;
+import conceptualspace.Point;
 
 public class BayesianAgent implements Agent {
 
+	private final List<BayesianConcept> concepts = new ArrayList<>();
+
+	public BayesianAgent(final List<BayesianConcept> concepts) {
+		this.concepts.addAll(concepts);
+	}
+
 	@Override
 	public Assertion assertion(final PerceptualObject object) {
-		// TODO Auto-generated method stub
-		return null;
+		BayesianConcept mostLikely = concepts.get(0);
+		double maxLikelihood = 0;
+		for (final BayesianConcept concept : concepts) {
+			final Point observation = object.observation();
+			if (concept.likelihoodGiven(observation) > maxLikelihood) {
+				mostLikely = concept;
+				maxLikelihood = mostLikely.likelihoodGiven(observation);
+			}
+		}
+		return new Assertion(object, concepts.indexOf(mostLikely), weight());
 	}
 
 	@Override
