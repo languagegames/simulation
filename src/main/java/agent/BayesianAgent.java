@@ -1,5 +1,7 @@
 package agent;
 
+import static java.util.Arrays.asList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,24 @@ public class BayesianAgent implements Agent {
 
 	public BayesianAgent(final List<BayesianConcept> concepts) {
 		this.concepts.addAll(concepts);
+	}
+
+	public BayesianAgent(final BayesianConcept...concepts) {
+		this(asList(concepts));
+	}
+
+	@Override
+	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
+		final BayesianConcept assertionConcept = concepts.get(assertion.label);
+		int guess = 0; double highestAppropriateness = 0;
+		for (final PerceptualObject object : guessingSet) {
+			final double appropriateness = assertionConcept.likelihoodGiven(object.observation());
+			if (appropriateness > highestAppropriateness) {
+				guess = guessingSet.indexOf(object);
+				highestAppropriateness = appropriateness;
+			}
+		}
+		return guess;
 	}
 
 	@Override
@@ -35,12 +55,6 @@ public class BayesianAgent implements Agent {
 			}
 		}
 		return new Assertion(object, concepts.indexOf(mostLikely), weight());
-	}
-
-	@Override
-	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
