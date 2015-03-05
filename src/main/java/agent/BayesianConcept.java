@@ -49,7 +49,7 @@ public class BayesianConcept {
 	}
 
 	public BayesianConcept update(final Point point) {
-		final List<Point> points = this.points;
+		final List<Point> points = new ArrayList<>(this.points);
 		points.add(point);
 		return new BayesianConcept(points);
 	}
