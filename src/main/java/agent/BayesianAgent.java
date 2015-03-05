@@ -15,6 +15,15 @@ public class BayesianAgent implements Agent {
 	}
 
 	@Override
+	public Agent learn(final Assertion assertion) {
+		final BayesianConcept toUpdate = concepts.get(assertion.label);
+		final BayesianConcept updated = toUpdate.update(assertion.object.observation());
+		final List<BayesianConcept> newConcepts = new ArrayList<>(concepts);
+		newConcepts.set(assertion.label, updated);
+		return new BayesianAgent(newConcepts);
+	}
+
+	@Override
 	public Assertion assertion(final PerceptualObject object) {
 		BayesianConcept mostLikely = concepts.get(0);
 		double maxLikelihood = 0;
@@ -26,12 +35,6 @@ public class BayesianAgent implements Agent {
 			}
 		}
 		return new Assertion(object, concepts.indexOf(mostLikely), weight());
-	}
-
-	@Override
-	public Agent learn(final Assertion assertion) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
