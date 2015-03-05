@@ -6,6 +6,7 @@ import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -20,6 +21,14 @@ public class Point {
 
 	public Point(final Double...coordinates) {
 		this(asList(coordinates));
+	}
+
+	public static Point randomPoint(final int numDimensions, final Random random) {
+		final List<Double> coordinates = new ArrayList<>();
+		for (int i=0; i<numDimensions; i++) {
+			coordinates.add(random.nextDouble());
+		}
+		return new Point(coordinates);
 	}
 
 	public List<Double> coordinates() {
