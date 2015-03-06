@@ -22,7 +22,7 @@ public class TestBayesianConcept {
 			points.add(point);
 			concept = concept.update(point);
 		}
-		assertThat(concept, equalTo(new BayesianConcept(points)));
+		assertThat(concept, equalTo(new BayesianConcept(points, 22)));
 	}
 
 	@Test

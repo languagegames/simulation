@@ -20,13 +20,20 @@ import conceptualspace.Point;
 public class BayesianConcept {
 
 	private final List<Point> points = new ArrayList<>();
+	private final int numObservations;
 	private final Point mean;
 	private final Point stdDev;
 
-	public BayesianConcept(final List<Point> points) {
+	public BayesianConcept(final List<Point> points, final int numObservations) {
 		this.points.addAll(points);
+		this.numObservations = numObservations;
 		mean = mean(points);
 		stdDev = standardDeviation(points);
+
+	}
+
+	public BayesianConcept(final List<Point> points) {
+		this(points, points.size());
 	}
 
 	public BayesianConcept(final Point...points) {
@@ -55,7 +62,7 @@ public class BayesianConcept {
 		if (points.size() > maxCapacity) {
 			points = points.subList(0, maxCapacity);
 		}
-		return new BayesianConcept(points);
+		return new BayesianConcept(points, numObservations+1);
 	}
 
 	public double likelihoodGiven(final Point point) {
@@ -63,7 +70,7 @@ public class BayesianConcept {
 		for (int i=0; i<point.numDimensions(); i++) {
 			result *= pdf(point.get(i), mean.get(i), stdDev.get(i));
 		}
-		return result * points.size();
+		return result * numObservations;
 	}
 
 	private double pdf(final double x, final double mu, final double sigma) {
