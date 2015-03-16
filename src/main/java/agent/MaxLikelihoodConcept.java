@@ -17,23 +17,16 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import conceptualspace.Point;
 
-public class MaxLikelihoodConcept {
+public class MaxLikelihoodConcept implements Concept {
 
 	private final List<Point> points = new ArrayList<>();
-	private final int numObservations;
 	private final Point mean;
 	private final Point stdDev;
 
-	public MaxLikelihoodConcept(final List<Point> points, final int numObservations) {
+	public MaxLikelihoodConcept(final List<Point> points) {
 		this.points.addAll(points);
-		this.numObservations = numObservations;
 		mean = mean(points);
 		stdDev = standardDeviation(points);
-
-	}
-
-	public MaxLikelihoodConcept(final List<Point> points) {
-		this(points, points.size());
 	}
 
 	public MaxLikelihoodConcept(final Point...points) {
@@ -55,17 +48,19 @@ public class MaxLikelihoodConcept {
 		return new Point(coordinates);
 	}
 
-	public MaxLikelihoodConcept update(final Point point) {
+	@Override
+	public MaxLikelihoodConcept update(final Assertion assertion) {
 		List<Point> points = new ArrayList<>(this.points);
-		points.add(0, point);
+		points.add(0, assertion.object.observation());
 		final int maxCapacity = 20;
 		if (points.size() > maxCapacity) {
 			points = points.subList(0, maxCapacity);
 		}
-		return new MaxLikelihoodConcept(points, numObservations+1);
+		return new MaxLikelihoodConcept(points);
 	}
 
-	public double likelihoodGiven(final Point point) {
+	@Override
+	public double appropriatenessOf(final Point point) {
 		double result = 1;
 		for (int i=0; i<point.numDimensions(); i++) {
 			result *= pdf(point.get(i), mean.get(i), stdDev.get(i));
