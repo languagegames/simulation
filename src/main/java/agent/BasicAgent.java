@@ -14,15 +14,15 @@ import conceptualspace.Point;
 
 public class BasicAgent implements Agent {
 
-	private final List<Concept> concepts = new ArrayList<>();
+	private final List<FuzzyConcept> concepts = new ArrayList<>();
 	private final double weight;
 
-	public BasicAgent(final double weight, final List<Concept> concepts) {
+	public BasicAgent(final double weight, final List<FuzzyConcept> concepts) {
 		this.weight = weight;
 		this.concepts.addAll(concepts);
 	}
 
-	public BasicAgent(final double weight, final Concept...concepts) {
+	public BasicAgent(final double weight, final FuzzyConcept...concepts) {
 		this(weight, asList(concepts));
 	}
 
@@ -67,7 +67,7 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
-	public double convergenceWith(final List<Concept> concepts) {
+	public double convergenceWith(final List<FuzzyConcept> concepts) {
 		double result = 0;
 		for (int i = 0; i < concepts.size(); i++) {
 			result += this.concepts.get(i).hausdorffDistanceFrom(concepts.get(i)) / concepts.size();
@@ -96,9 +96,9 @@ public class BasicAgent implements Agent {
 
 	@Override
 	public Agent learn(final Assertion assertion) {
-		final Concept toUpdate = concepts.get(assertion.label);
-		final Concept updated = toUpdate.update(assertion);
-		final List<Concept> newConcepts = new ArrayList<>(concepts);
+		final FuzzyConcept toUpdate = concepts.get(assertion.label);
+		final FuzzyConcept updated = toUpdate.update(assertion);
+		final List<FuzzyConcept> newConcepts = new ArrayList<>(concepts);
 		newConcepts.set(assertion.label, updated);
 		return new BasicAgent(weight, newConcepts);
 	}

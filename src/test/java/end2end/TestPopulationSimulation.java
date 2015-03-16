@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import agent.Agent;
 import agent.BasicAgent;
-import agent.Concept;
+import agent.FuzzyConcept;
 import agent.LabelMapping;
 import agent.OracleAgent;
 import conceptualspace.PerceptualObject;
@@ -43,17 +43,17 @@ public class TestPopulationSimulation {
 	@Before
 	public void setUp() {
 		agent0 = new BasicAgent(0.8,
-				new Concept(new Point(0.7, 0.5), 1.3),
-				new Concept(new Point(0.2, 0.8), 0.7));
+				new FuzzyConcept(new Point(0.7, 0.5), 1.3),
+				new FuzzyConcept(new Point(0.2, 0.8), 0.7));
 		agent1 = new BasicAgent(0.2,
-				new Concept(new Point(0.4, 0.6), 1.6),
-				new Concept(new Point(0.7, 0.6), 1.3));
+				new FuzzyConcept(new Point(0.4, 0.6), 1.6),
+				new FuzzyConcept(new Point(0.7, 0.6), 1.3));
 		agent2 = new BasicAgent(0.3,
-				new Concept(new Point(0.7, 0.2), 0.9),
-				new Concept(new Point(0.3, 0.4), 2.0));
+				new FuzzyConcept(new Point(0.7, 0.2), 0.9),
+				new FuzzyConcept(new Point(0.3, 0.4), 2.0));
 		agent3 = new BasicAgent(0.4,
-				new Concept(new Point(0.9, 1.0), 1.9),
-				new Concept(new Point(0.9, 0.1), 1.6));
+				new FuzzyConcept(new Point(0.9, 1.0), 1.9),
+				new FuzzyConcept(new Point(0.9, 0.1), 1.6));
 		objects = SimpleObject.makeListFrom(dataReader.points("randomdata.csv"));
 		objectCreator = new StaticObjectPool(objects);
 		staticPairer = new StaticPairer(dataReader.integers("interaction-specs.csv"));

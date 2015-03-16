@@ -12,7 +12,7 @@ public interface Agent {
 
 	double convergenceWith(Agent other);
 
-	double convergenceWith(List<Concept> concepts);
+	double convergenceWith(List<FuzzyConcept> concepts);
 
 	double weight();
 

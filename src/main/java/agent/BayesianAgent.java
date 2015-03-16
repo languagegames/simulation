@@ -73,7 +73,7 @@ public class BayesianAgent implements Agent {
 	}
 
 	@Override
-	public double convergenceWith(final List<Concept> concepts) {
+	public double convergenceWith(final List<FuzzyConcept> concepts) {
 		throw new UnsupportedOperationException("Cannot calculate convergence with oracles.");
 	}
 
