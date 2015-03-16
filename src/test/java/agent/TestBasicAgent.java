@@ -31,23 +31,6 @@ public class TestBasicAgent {
 	}
 
 	@Test
-	public void calculatesOverlapAcrossAllPairsOfConcepts() {
-		final FuzzyConcept concept0 = new FuzzyConcept(new Point(0.7), 0.9);
-		final FuzzyConcept concept1 = new FuzzyConcept(new Point(0.5), 0.5);
-		final FuzzyConcept concept2 = new FuzzyConcept(new Point(0.4), 0.2);
-		final BasicAgent agent = new BasicAgent(someWeight, concept0, concept1, concept2);
-
-		final double averageOverlap =
-				(overlap(concept0, concept1) + overlap(concept0, concept2) + overlap(concept1, concept2)) / 3;
-
-		assertThat(agent.labelOverlap(), equalTo(averageOverlap));
-	}
-
-	private double overlap(final FuzzyConcept concept, final FuzzyConcept other) {
-		return concept.overlapWith(other);
-	}
-
-	@Test
 	public void incrementsWeight() {
 		final BasicAgent agent = new BasicAgent(0.5, new ArrayList<FuzzyConcept>());
 		final Agent newAgent = agent.incrementWeight(0.1);
@@ -55,21 +38,7 @@ public class TestBasicAgent {
 	}
 
 	@Test
-	public void getsConvergenceFromPairsOfCorrespondingConcepts() {
-		final BasicAgent agent = new BasicAgent(
-				someWeight,
-				new FuzzyConcept(new Point(0.2), 0.7),
-				new FuzzyConcept(new Point(0.5), 0.5));
-		final Agent other = new BasicAgent(
-				someWeight,
-				new FuzzyConcept(new Point(0.4), 0.4),
-				new FuzzyConcept(new Point(0.7), 0.8));
-
-		assertThat(agent.convergenceWith(other), equalTo(0.35));
-	}
-
-	@Test
-	public void classifiesAccordingToMostAppropriateConcept() {
+	public void assertsAccordingToMostAppropriateConcept() {
 		final BasicAgent agent = new BasicAgent(
 				someWeight,
 				new FuzzyConcept(new Point(0.2), 0.7),

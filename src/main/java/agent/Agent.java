@@ -10,15 +10,9 @@ public interface Agent {
 
 	Agent learn(Assertion assertion);
 
-	double convergenceWith(Agent other);
-
-	double convergenceWith(List<FuzzyConcept> concepts);
-
 	double weight();
 
 	Agent incrementWeight(double weightIncrement);
-
-	double labelOverlap();
 
 	int guess(List<PerceptualObject> guessingSet, Assertion assertion);
 
