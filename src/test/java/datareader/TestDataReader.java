@@ -12,7 +12,7 @@ public class TestDataReader {
 	@Test
 	public void readsIntegersAcrossRowsThenColumns() {
 		final DataReader reader = new DataReader();
-		assertThat(reader.integers("interaction-specs.csv"),
+		assertThat(reader.integers("interaction-specs.csv").subList(0, 12),
 				contains(1, 0, 3, 2, 0, 2, 1, 3, 2, 3, 1, 0));
 	}
 
