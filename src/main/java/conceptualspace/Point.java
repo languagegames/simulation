@@ -70,6 +70,9 @@ public class Point {
 	}
 
 	public Point minus(final Point other) {
+		if (numDimensions() != other.numDimensions()) {
+			throw new IllegalArgumentException("Points must have same dimensionality");
+		}
 		return plus(other.times(-1));
 	}
 
@@ -82,6 +85,9 @@ public class Point {
 	}
 
 	public Point plus(final Point other) {
+		if (numDimensions() != other.numDimensions()) {
+			throw new IllegalArgumentException("Points must have same dimensionality");
+		}
 		final List<Double> resultCoordinates = new ArrayList<>();
 		for (int i=0; i<numDimensions(); i++) {
 			resultCoordinates.add(get(i) + other.get(i));
