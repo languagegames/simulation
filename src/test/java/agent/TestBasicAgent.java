@@ -32,7 +32,7 @@ public class TestBasicAgent {
 
 	@Test
 	public void incrementsWeight() {
-		final BasicAgent agent = new BasicAgent(0.5, new ArrayList<FuzzyConcept>());
+		final BasicAgent agent = new BasicAgent(0.5, new ArrayList<Concept>());
 		final Agent newAgent = agent.incrementWeight(0.1);
 		assertThat(newAgent.weight(), equalTo(0.6));
 	}

@@ -8,6 +8,7 @@ import agent.Agent;
 import agent.BasicAgent;
 import agent.BayesianAgent;
 import agent.BayesianConcept;
+import agent.Concept;
 import agent.FuzzyConcept;
 
 public class PopulationFactory {
@@ -64,7 +65,7 @@ public class PopulationFactory {
 			final int numDimensions,
 			final double initialThreshold,
 			final double weight) {
-		final List<FuzzyConcept> concepts = new ArrayList<>();
+		final List<Concept> concepts = new ArrayList<>();
 		final Random random = new Random();
 		for (int i=0; i<10; i++) {
 			concepts.add(FuzzyConcept.randomConcept(numDimensions, initialThreshold, random));

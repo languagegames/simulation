@@ -15,7 +15,7 @@ import org.junit.Test;
 import agent.Agent;
 import agent.Assertion;
 import agent.BasicAgent;
-import agent.FuzzyConcept;
+import agent.Concept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
@@ -34,12 +34,12 @@ public class TestBasicPopulation {
 
 	@Test
 	public void agentsWeightsAreIncremented() {
-		final Agent agent0 = new BasicAgent(0.5, new ArrayList<FuzzyConcept>());
-		final Agent agent1 = new BasicAgent(0.9, new ArrayList<FuzzyConcept>());
+		final Agent agent0 = new BasicAgent(0.5, new ArrayList<Concept>());
+		final Agent agent1 = new BasicAgent(0.9, new ArrayList<Concept>());
 		final BasicPopulation population = new BasicPopulation(asList(agent0, agent1), null, null);
 
-		final Agent updatedAgent0 = new BasicAgent(0.6, new ArrayList<FuzzyConcept>());
-		final Agent updatedAgent1 = new BasicAgent(0.1, new ArrayList<FuzzyConcept>());
+		final Agent updatedAgent0 = new BasicAgent(0.6, new ArrayList<Concept>());
+		final Agent updatedAgent1 = new BasicAgent(0.1, new ArrayList<Concept>());
 
 		assertThat(population.incrementWeights(0.1),
 				equalTo(new BasicPopulation(asList(updatedAgent0, updatedAgent1), null, null)));
