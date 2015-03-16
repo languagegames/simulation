@@ -6,7 +6,6 @@ import java.util.Random;
 
 import agent.Agent;
 import agent.BasicAgent;
-import agent.BayesianAgent;
 import agent.BayesianConcept;
 import agent.Concept;
 import agent.FuzzyConcept;
@@ -20,18 +19,19 @@ public class PopulationFactory {
 	{
 		final List<Agent> agents = new ArrayList<>();
 		for (double i=0; i<numAgents; i++) {
-			agents.add(bayesianAgent(numDimensions));
+			final double weight = i/numAgents;
+			agents.add(bayesianAgent(numDimensions, weight));
 		}
 		return new BasicPopulation(agents, objectPool, new RandomPairer());
 	}
 
-	private static BayesianAgent bayesianAgent(final int numDimensions) {
-		final List<BayesianConcept> concepts = new ArrayList<>();
+	private static BasicAgent bayesianAgent(final int numDimensions, final double weight) {
+		final List<Concept> concepts = new ArrayList<>();
 		final Random random = new Random();
 		for (int i=0; i<10; i++) {
 			concepts.add(BayesianConcept.randomConcept(numDimensions, random));
 		}
-		return new BayesianAgent(concepts);
+		return new BasicAgent(weight, concepts);
 	}
 
 	public static OraclePopulation oraclePopulation(
