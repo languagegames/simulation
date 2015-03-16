@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import conceptualspace.Point;
 
-public class BayesianConcept {
+public class BayesianConcept implements Concept {
 
 	private final List<Point> points = new ArrayList<>();
 	private final int numObservations;
@@ -55,9 +55,10 @@ public class BayesianConcept {
 		return new Point(coordinates);
 	}
 
-	public BayesianConcept update(final Point point) {
+	@Override
+	public BayesianConcept update(final Assertion assertion) {
 		List<Point> points = new ArrayList<>(this.points);
-		points.add(0, point);
+		points.add(0, assertion.object.observation());
 		final int maxCapacity = 20;
 		if (points.size() > maxCapacity) {
 			points = points.subList(0, maxCapacity);
@@ -65,7 +66,8 @@ public class BayesianConcept {
 		return new BayesianConcept(points, numObservations+1);
 	}
 
-	public double likelihoodGiven(final Point point) {
+	@Override
+	public double appropriatenessOf(final Point point) {
 		double result = 1;
 		for (int i=0; i<point.numDimensions(); i++) {
 			result *= pdf(point.get(i), mean.get(i), stdDev.get(i));

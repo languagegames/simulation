@@ -25,7 +25,7 @@ public class BayesianAgent implements Agent {
 		final BayesianConcept assertionConcept = concepts.get(assertion.label);
 		int guess = 0; double highestAppropriateness = 0;
 		for (final PerceptualObject object : guessingSet) {
-			final double appropriateness = assertionConcept.likelihoodGiven(object.observation());
+			final double appropriateness = assertionConcept.appropriatenessOf(object.observation());
 			if (appropriateness > highestAppropriateness) {
 				guess = guessingSet.indexOf(object);
 				highestAppropriateness = appropriateness;
@@ -37,7 +37,7 @@ public class BayesianAgent implements Agent {
 	@Override
 	public Agent learn(final Assertion assertion) {
 		final BayesianConcept toUpdate = concepts.get(assertion.label);
-		final BayesianConcept updated = toUpdate.update(assertion.object.observation());
+		final BayesianConcept updated = toUpdate.update(assertion);
 		final List<BayesianConcept> newConcepts = new ArrayList<>(concepts);
 		newConcepts.set(assertion.label, updated);
 		return new BayesianAgent(newConcepts);
@@ -49,9 +49,9 @@ public class BayesianAgent implements Agent {
 		double maxLikelihood = 0;
 		for (final BayesianConcept concept : concepts) {
 			final Point observation = object.observation();
-			if (concept.likelihoodGiven(observation) > maxLikelihood) {
+			if (concept.appropriatenessOf(observation) > maxLikelihood) {
 				mostLikely = concept;
-				maxLikelihood = mostLikely.likelihoodGiven(observation);
+				maxLikelihood = mostLikely.appropriatenessOf(observation);
 			}
 		}
 		return new Assertion(object, concepts.indexOf(mostLikely), weight());
