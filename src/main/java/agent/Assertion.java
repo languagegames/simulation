@@ -28,12 +28,12 @@ public class Assertion {
 		this(object, asList(label), weight);
 	}
 
-	public Assertion(final PerceptualObject object, final int label) {
-		this(object, asList(label), 0);
+	public Assertion(final int label) {
+		this(null, asList(label), 0);
 	}
 
-	public Assertion(final PerceptualObject object, final int label0, final int label1) {
-		this(object, asList(label0, label1), 0);
+	public Assertion(final int label0, final int label1) {
+		this(null, asList(label0, label1), 0);
 	}
 
 	public List<Integer> labels() {
