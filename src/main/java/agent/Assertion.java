@@ -42,7 +42,7 @@ public class Assertion {
 
 	@Override
 	public String toString() {
-		return "Assertion: " + object.toString() + " is " + label + ", weight " + weight;
+		return "Assertion: " + object.toString() + " is " + labels.toString() + ", weight " + weight;
 	}
 
 	@Override
