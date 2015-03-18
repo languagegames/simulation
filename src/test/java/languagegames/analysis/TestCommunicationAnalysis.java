@@ -1,5 +1,6 @@
 package languagegames.analysis;
 
+import static agent.Assertion.categoryGameAssertion;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -39,8 +40,8 @@ public class TestCommunicationAnalysis {
 		final int numGames = 1;
 		final CommunicationAnalysis analysis = new CommunicationAnalysis(numGames, agentPairer, objectPool);
 
-		final Assertion assertion = new Assertion(object, 0, 0.4);
-		final Assertion equivalentAssertion = new Assertion(object, 0, 0.5);
+		final Assertion assertion = categoryGameAssertion(object, 0, 0.4);
+		final Assertion equivalentAssertion = categoryGameAssertion(object, 0, 0.5);
 
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(numGames); will(returnValue(asList(object)));
@@ -57,8 +58,8 @@ public class TestCommunicationAnalysis {
 		final int numGames = 1;
 		final CommunicationAnalysis analysis = new CommunicationAnalysis(numGames, agentPairer, objectPool);
 
-		final Assertion assertion0 = new Assertion(object, 0, 0.42);
-		final Assertion assertion1 = new Assertion(object, 1, 0.42);
+		final Assertion assertion0 = categoryGameAssertion(object, 0, 0.42);
+		final Assertion assertion1 = categoryGameAssertion(object, 1, 0.42);
 
 		context.checking(new Expectations() {{
 			exactly(2).of(objectPool).pick(numGames); will(returnValue(asList(object)));

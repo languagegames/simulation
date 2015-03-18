@@ -1,5 +1,6 @@
 package agent;
 
+import static agent.Assertion.categoryGameAssertion;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -27,7 +28,7 @@ public class TestBasicAgent {
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(asList(other, mostAppropriate));
 
-		assertThat(agent.guess(guessingSet, new Assertion(mostAppropriate, 0, someWeight)), equalTo(1));
+		assertThat(agent.guess(guessingSet, categoryGameAssertion(mostAppropriate, 0, someWeight)), equalTo(1));
 	}
 
 	@Test
@@ -49,8 +50,8 @@ public class TestBasicAgent {
 		final PerceptualObject material0 = new SimpleObject(new Point(0.35));
 		final PerceptualObject material1 = new SimpleObject(new Point(0.4));
 
-		assertThat(agent.assertion(material0), equalTo(new Assertion(material0, 0, someWeight)));
-		assertThat(agent.assertion(material1), equalTo(new Assertion(material1, 1, someWeight)));
+		assertThat(agent.assertion(material0), equalTo(categoryGameAssertion(material0, 0, someWeight)));
+		assertThat(agent.assertion(material1), equalTo(categoryGameAssertion(material1, 1, someWeight)));
 	}
 
 	@Test
@@ -69,7 +70,7 @@ public class TestBasicAgent {
 				.withWeight(someWeight)
 				.build();
 
-		assertThat(agent.learn(new Assertion(new SimpleObject(new Point(0.9)), 1, 0.8)),
+		assertThat(agent.learn(categoryGameAssertion(new SimpleObject(new Point(0.9)), 1, 0.8)),
 				equalTo(updatedAgent));
 	}
 

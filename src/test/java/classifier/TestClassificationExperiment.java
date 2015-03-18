@@ -1,5 +1,6 @@
 package classifier;
 
+import static agent.Assertion.categoryGameAssertion;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -10,8 +11,6 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
-import classifier.ClassificationExperiment;
-import classifier.ExperimentData;
 import agent.Agent;
 import agent.Assertion;
 import conceptualspace.PerceptualObject;
@@ -24,8 +23,8 @@ public class TestClassificationExperiment {
 	@Mock Agent teacher, pupil, trainedPupil;
 
 	private final PerceptualObject trainingSample = someMaterial(), testSample0 = someMaterial(), testSample1 = someMaterial();
-	private final Assertion assertion = new Assertion(someMaterial(), 0, 0.42),
-			anotherAssertion = new Assertion(someMaterial(), 1, 0.42);
+	private final Assertion assertion = categoryGameAssertion(someMaterial(), 0, 0.42),
+			anotherAssertion = categoryGameAssertion(someMaterial(), 1, 0.42);
 
 	private final ExperimentData data =
 			new ExperimentData(asList(

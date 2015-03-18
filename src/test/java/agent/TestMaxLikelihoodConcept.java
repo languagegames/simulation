@@ -1,5 +1,6 @@
 package agent;
 
+import static agent.Assertion.categoryGameAssertion;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.equalTo;
@@ -17,7 +18,7 @@ public class TestMaxLikelihoodConcept {
 	@Test
 	public void stores20PointsAtMost() {
 		final Point point = new Point(0.42);
-		final Assertion assertion = new Assertion(new SimpleObject(point), 42, 0.42);
+		final Assertion assertion = categoryGameAssertion(new SimpleObject(point), 42, 0.42);
 		MaxLikelihoodConcept concept = new MaxLikelihoodConcept(point, point);
 		final List<Point> points = new ArrayList<>();
 		for (int i=0; i<20; i++) {
@@ -33,7 +34,7 @@ public class TestMaxLikelihoodConcept {
 		final Point point1 = new Point(0.1);
 		final Point point2 = new Point(0.2);
 		final MaxLikelihoodConcept concept = new MaxLikelihoodConcept(point1, point0);
-		final Assertion assertion = new Assertion(new SimpleObject(point2), 42, 0.42);
+		final Assertion assertion = categoryGameAssertion(new SimpleObject(point2), 42, 0.42);
 		assertThat(concept.update(assertion), equalTo(new MaxLikelihoodConcept(point2, point1, point0)));
 	}
 
