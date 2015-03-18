@@ -9,17 +9,18 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import conceptualspace.PerceptualObject;
-import conceptualspace.Point;
 
 
 public class BasicAgent implements Agent {
 
 	private final List<Concept> concepts = new ArrayList<>();
 	private final double weight;
+	private final AssertionModel assertionModel;
 
 	public BasicAgent(final double weight, final List<Concept> concepts) {
 		this.weight = weight;
 		this.concepts.addAll(concepts);
+		assertionModel = new AssertionModel();
 	}
 
 	public BasicAgent(final double weight, final Concept...concepts) {
@@ -56,16 +57,7 @@ public class BasicAgent implements Agent {
 
 	@Override
 	public Assertion assertion(final PerceptualObject object) {
-		Concept mostAppropriate = concepts.get(0);
-		double maxAppropriateness = 0;
-		for (final Concept concept : concepts) {
-			final Point observation = object.observation();
-			if (concept.appropriatenessOf(observation) > maxAppropriateness) {
-				mostAppropriate = concept;
-				maxAppropriateness = mostAppropriate.appropriatenessOf(observation);
-			}
-		}
-		return new Assertion(object, concepts.indexOf(mostAppropriate), weight);
+		return assertionModel.assertion(object, concepts, weight);
 	}
 
 	@Override
