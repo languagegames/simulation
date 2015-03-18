@@ -22,7 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import agent.Agent;
-import agent.BasicAgent;
+import agent.BasicAgentBuilder;
 import agent.FuzzyConcept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
@@ -39,18 +39,34 @@ public class TestPopulationSimulation {
 
 	@Before
 	public void setUp() {
-		agent0 = new BasicAgent(0.8,
-				new FuzzyConcept(new Point(0.7, 0.5), 1.3),
-				new FuzzyConcept(new Point(0.2, 0.8), 0.7));
-		agent1 = new BasicAgent(0.2,
-				new FuzzyConcept(new Point(0.4, 0.6), 1.6),
-				new FuzzyConcept(new Point(0.7, 0.6), 1.3));
-		agent2 = new BasicAgent(0.3,
-				new FuzzyConcept(new Point(0.7, 0.2), 0.9),
-				new FuzzyConcept(new Point(0.3, 0.4), 2.0));
-		agent3 = new BasicAgent(0.4,
-				new FuzzyConcept(new Point(0.9, 1.0), 1.9),
-				new FuzzyConcept(new Point(0.9, 0.1), 1.6));
+		agent0 = agent()
+					.withConcepts(
+							new FuzzyConcept(new Point(0.7, 0.5), 1.3),
+							new FuzzyConcept(new Point(0.2, 0.8), 0.7))
+					.withWeight(0.8)
+					.build();
+
+		agent1 = agent()
+				.withConcepts(
+						new FuzzyConcept(new Point(0.4, 0.6), 1.6),
+						new FuzzyConcept(new Point(0.7, 0.6), 1.3))
+				.withWeight(0.2)
+				.build();
+
+		agent2 = agent()
+				.withConcepts(
+						new FuzzyConcept(new Point(0.7, 0.2), 0.9),
+						new FuzzyConcept(new Point(0.3, 0.4), 2.0))
+				.withWeight(0.3)
+				.build();
+
+		agent3 = agent()
+				.withConcepts(
+						new FuzzyConcept(new Point(0.9, 1.0), 1.9),
+						new FuzzyConcept(new Point(0.9, 0.1), 1.6))
+				.withWeight(0.4)
+				.build();
+
 		objects = SimpleObject.makeListFrom(dataReader.points("randomdata.csv"));
 		objectPool = new StaticObjectPool(objects);
 		analysisPool = new StaticObjectPool(objects);
@@ -70,6 +86,10 @@ public class TestPopulationSimulation {
 		assertThat(history.timeSeriesFrom(communicationAnalysis), equalTo(
 				new TimeSeries(0.5, 0.0, 0.5, 0.5)));
 
+	}
+
+	private BasicAgentBuilder agent() {
+		return new BasicAgentBuilder();
 	}
 
 }

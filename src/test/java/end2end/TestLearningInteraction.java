@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import agent.Agent;
-import agent.BasicAgent;
+import agent.BasicAgentBuilder;
 import agent.FuzzyConcept;
 import agent.LabelMapping;
 import agent.OracleAgent;
@@ -22,11 +22,11 @@ import datareader.DataReader;
 
 public class TestLearningInteraction {
 
-	private final Agent pupil = new BasicAgent(
-			0.42,
-			new FuzzyConcept(new Point(0.3, 0.4), 1.0),
-			new FuzzyConcept(new Point(0.6, 0.5), 0.7)
-			);
+	private final Agent pupil = new BasicAgentBuilder()
+			.withConcepts(
+					new FuzzyConcept(new Point(0.3, 0.4), 1.0),
+					new FuzzyConcept(new Point(0.6, 0.5), 0.7))
+			.build();
 
 	@Test
 	public void fiveObjectsTwoConceptsUsingDataFromFile() {

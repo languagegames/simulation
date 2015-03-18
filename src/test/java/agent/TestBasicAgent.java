@@ -22,7 +22,7 @@ public class TestBasicAgent {
 		final PerceptualObject mostAppropriate = object(0.6);
 		final PerceptualObject other = object(0.5);
 		final FuzzyConcept concept0 = new FuzzyConcept(new Point(0.7), 0.9);
-		final BasicAgent agent = new BasicAgent(someWeight, concept0);
+		final BasicAgent agent = agent().withConcepts(concept0).withWeight(someWeight).build();
 
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(asList(other, mostAppropriate));
@@ -32,17 +32,19 @@ public class TestBasicAgent {
 
 	@Test
 	public void incrementsWeight() {
-		final BasicAgent agent = new BasicAgent(0.5, new ArrayList<Concept>());
+		final BasicAgent agent = agent().withWeight(0.5).build();
 		final Agent newAgent = agent.incrementWeight(0.1);
 		assertThat(newAgent.weight(), equalTo(0.6));
 	}
 
 	@Test
 	public void assertsAccordingToMostAppropriateConcept() {
-		final BasicAgent agent = new BasicAgent(
-				someWeight,
-				new FuzzyConcept(new Point(0.2), 0.7),
-				new FuzzyConcept(new Point(0.5), 0.5));
+		final BasicAgent agent = agent()
+				.withConcepts(
+						new FuzzyConcept(new Point(0.2), 0.7),
+						new FuzzyConcept(new Point(0.5), 0.5))
+				.withWeight(someWeight)
+				.build();
 
 		final PerceptualObject material0 = new SimpleObject(new Point(0.35));
 		final PerceptualObject material1 = new SimpleObject(new Point(0.4));
@@ -53,18 +55,26 @@ public class TestBasicAgent {
 
 	@Test
 	public void learnsByUpdatingAppropriateConcept() {
-		final BasicAgent agent = new BasicAgent(
-				someWeight,
-				new FuzzyConcept(new Point(0.42), 0.42),
-				new FuzzyConcept(new Point(0.5), 0.5));
+		final BasicAgent agent = agent()
+				.withConcepts(
+						new FuzzyConcept(new Point(0.42), 0.42),
+						new FuzzyConcept(new Point(0.5), 0.5))
+				.withWeight(someWeight)
+				.build();
 
-		final Agent updatedAgent = new BasicAgent(
-				someWeight,
-				new FuzzyConcept(new Point(0.42), 0.42),
-				new FuzzyConcept(new Point(0.74), 0.8));
+		final Agent updatedAgent = agent()
+				.withConcepts(
+						new FuzzyConcept(new Point(0.42), 0.42),
+						new FuzzyConcept(new Point(0.74), 0.8))
+				.withWeight(someWeight)
+				.build();
 
 		assertThat(agent.learn(new Assertion(new SimpleObject(new Point(0.9)), 1, 0.8)),
 				equalTo(updatedAgent));
+	}
+
+	private BasicAgentBuilder agent() {
+		return new BasicAgentBuilder();
 	}
 
 	private SimpleObject object(final double d) {

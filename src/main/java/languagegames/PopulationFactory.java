@@ -6,6 +6,7 @@ import java.util.Random;
 
 import agent.Agent;
 import agent.BasicAgent;
+import agent.BasicAgentBuilder;
 import agent.BayesianConcept;
 import agent.Concept;
 import agent.FuzzyConcept;
@@ -32,7 +33,7 @@ public class PopulationFactory {
 		for (int i=0; i<10; i++) {
 			concepts.add(MaxLikelihoodConcept.randomConcept(numDimensions, random));
 		}
-		return new BasicAgent(weight, concepts);
+		return agent().withConcepts(concepts).withWeight(weight).build();
 	}
 
 	public static BasicPopulation bayesianPopulation(
@@ -54,7 +55,7 @@ public class PopulationFactory {
 		for (int i=0; i<10; i++) {
 			concepts.add(BayesianConcept.randomConcept(numDimensions, random));
 		}
-		return new BasicAgent(weight, concepts);
+		return agent().withConcepts(concepts).withWeight(weight).build();
 	}
 
 	public static OraclePopulation oraclePopulation(
@@ -93,7 +94,11 @@ public class PopulationFactory {
 		for (int i=0; i<10; i++) {
 			concepts.add(FuzzyConcept.randomConcept(numDimensions, initialThreshold, random));
 		}
-		return new BasicAgent(weight, concepts);
+		return agent().withConcepts(concepts).withWeight(weight).build();
+	}
+
+	private static BasicAgentBuilder agent() {
+		return new BasicAgentBuilder();
 	}
 
 }

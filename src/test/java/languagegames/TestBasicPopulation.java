@@ -4,8 +4,6 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-import java.util.ArrayList;
-
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
@@ -14,8 +12,7 @@ import org.junit.Test;
 
 import agent.Agent;
 import agent.Assertion;
-import agent.BasicAgent;
-import agent.Concept;
+import agent.BasicAgentBuilder;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
@@ -34,15 +31,19 @@ public class TestBasicPopulation {
 
 	@Test
 	public void agentsWeightsAreIncremented() {
-		final Agent agent0 = new BasicAgent(0.5, new ArrayList<Concept>());
-		final Agent agent1 = new BasicAgent(0.9, new ArrayList<Concept>());
+		final Agent agent0 = agent().withWeight(0.5).build();
+		final Agent agent1 = agent().withWeight(0.9).build();
 		final BasicPopulation population = new BasicPopulation(asList(agent0, agent1), null, null);
 
-		final Agent updatedAgent0 = new BasicAgent(0.6, new ArrayList<Concept>());
-		final Agent updatedAgent1 = new BasicAgent(0.1, new ArrayList<Concept>());
+		final Agent updatedAgent0 = agent().withWeight(0.6).build();
+		final Agent updatedAgent1 = agent().withWeight(0.1).build();
 
 		assertThat(population.incrementWeights(0.1),
 				equalTo(new BasicPopulation(asList(updatedAgent0, updatedAgent1), null, null)));
+	}
+
+	private BasicAgentBuilder agent() {
+		return new BasicAgentBuilder();
 	}
 
 	@Test

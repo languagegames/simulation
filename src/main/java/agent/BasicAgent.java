@@ -1,7 +1,5 @@
 package agent;
 
-import static java.util.Arrays.asList;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +15,10 @@ public class BasicAgent implements Agent {
 	private final double weight;
 	private final AssertionModel assertionModel;
 
-	public BasicAgent(final double weight, final List<Concept> concepts) {
+	public BasicAgent(final List<Concept> concepts, final double weight) {
 		this.weight = weight;
 		this.concepts.addAll(concepts);
 		assertionModel = new BasicAssertionModel();
-	}
-
-	public BasicAgent(final double weight, final Concept...concepts) {
-		this(weight, asList(concepts));
 	}
 
 	@Override
@@ -47,7 +41,7 @@ public class BasicAgent implements Agent {
 		if (newWeight > 0.9) {
 			newWeight = 0.1;
 		}
-		return new BasicAgent(newWeight, concepts);
+		return new BasicAgent(concepts, newWeight);
 	}
 
 	@Override
@@ -66,7 +60,7 @@ public class BasicAgent implements Agent {
 		final Concept updated = toUpdate.update(assertion);
 		final List<Concept> newConcepts = new ArrayList<>(concepts);
 		newConcepts.set(assertion.label, updated);
-		return new BasicAgent(weight, newConcepts);
+		return new BasicAgent(newConcepts, weight);
 	}
 
 	@Override
