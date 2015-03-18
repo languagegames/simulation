@@ -1,7 +1,5 @@
 package agent;
 
-import static agent.Assertion.categoryGameAssertion;
-
 import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -23,7 +21,7 @@ public class BasicAssertionModel implements AssertionModel {
 				maxAppropriateness = mostAppropriate.appropriatenessOf(observation);
 			}
 		}
-		return categoryGameAssertion(object, concepts.indexOf(mostAppropriate), weight);
+		return new Assertion(object, concepts.indexOf(mostAppropriate), weight);
 	}
 
 	@Override

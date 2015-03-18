@@ -1,6 +1,5 @@
 package agent;
 
-import static agent.Assertion.categoryGameAssertion;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.equalTo;
@@ -30,7 +29,7 @@ public class TestConcept {
 
 		final PerceptualObject object = new SimpleObject(new Point(0.6, 0.8));
 
-		assertThat(concept.update(categoryGameAssertion(object, 42, 0.7)),
+		assertThat(concept.update(new Assertion(object, 42, 0.7)),
 				equalTo(concept));
 	}
 
@@ -60,7 +59,7 @@ public class TestConcept {
 		final PerceptualObject object = new SimpleObject(new Point(0.9, 0.1));
 		final Concept updated = new FuzzyConcept(new Point(0.7756239843019817, 0.2865640235470274), 1.1211102550927978);
 
-		assertThat(concept.update(categoryGameAssertion(object, 42, 0.8)), equalTo(updated));
+		assertThat(concept.update(new Assertion(object, 42, 0.8)), equalTo(updated));
 	}
 
 }

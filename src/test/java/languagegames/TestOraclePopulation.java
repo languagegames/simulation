@@ -1,6 +1,5 @@
 package languagegames;
 
-import static agent.Assertion.categoryGameAssertion;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -25,8 +24,8 @@ public class TestOraclePopulation {
 
 	private final AgentPairer agentPairer = new StaticPairer(asList(1, 0, 3, 2));
 	private final PerceptualObject object = new SimpleObject(new Point(0.42));
-	private final Assertion assertion0 = categoryGameAssertion(object, 42, 0.42);
-	private final Assertion assertion1 = categoryGameAssertion(object, 43, 0.42);
+	private final Assertion assertion0 = new Assertion(object, 42, 0.42);
+	private final Assertion assertion1 = new Assertion(object, 43, 0.42);
 
 	@Test
 	public void worksWhenNumberOfAllAgentsIsOdd() {

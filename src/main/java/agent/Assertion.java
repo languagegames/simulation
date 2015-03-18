@@ -24,17 +24,16 @@ public class Assertion {
 		this.weight = weight;
 	}
 
-	public static Assertion categoryGameAssertion(
-			final PerceptualObject object, final int label, final double weight) {
-		return new Assertion(object, asList(label), weight);
+	public Assertion(final PerceptualObject object, final int label, final double weight) {
+		this(object, asList(label), weight);
 	}
 
-	public static Assertion guessingGameAssertion(final PerceptualObject object, final int label) {
-		return new Assertion(object, asList(label), 0);
+	public Assertion(final PerceptualObject object, final int label) {
+		this(object, asList(label), 0);
 	}
 
-	public static Assertion guessingGameAssertion(final PerceptualObject object, final int label0, final int label1) {
-		return new Assertion(object, asList(label0, label1), 0);
+	public Assertion(final PerceptualObject object, final int label0, final int label1) {
+		this(object, asList(label0, label1), 0);
 	}
 
 	public List<Integer> labels() {

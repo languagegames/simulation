@@ -1,6 +1,5 @@
 package languagegames.analysis;
 
-import static agent.Assertion.categoryGameAssertion;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -49,7 +48,7 @@ public class TestGuessingAnalysis {
 		guessingSet.addAll(asList(otherObject, otherObject, target, otherObject, otherObject));
 		final GuessingAnalysis analysis = new GuessingAnalysis(1, 5, agentPairer, objectPool, new FakeRandom(targetIndex));
 
-		final Assertion assertion = categoryGameAssertion(otherObject, targetIndex, 0.42);
+		final Assertion assertion = new Assertion(otherObject, targetIndex, 0.42);
 
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(5); will(returnValue(guessingSet));
@@ -65,7 +64,7 @@ public class TestGuessingAnalysis {
 		guessingSet.addAll(asList(target, otherObject, otherObject, otherObject, otherObject));
 		final GuessingAnalysis analysis = new GuessingAnalysis(1, 5, agentPairer, objectPool, new FakeRandom(0));
 
-		final Assertion assertion = categoryGameAssertion(otherObject, 0, 0.42);
+		final Assertion assertion = new Assertion(otherObject, 0, 0.42);
 
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(5); will(returnValue(guessingSet));

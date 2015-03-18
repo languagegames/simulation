@@ -1,7 +1,5 @@
 package agent;
 
-import static agent.Assertion.categoryGameAssertion;
-
 import java.util.List;
 
 import conceptualspace.PerceptualObject;
@@ -40,7 +38,7 @@ public class OracleAgent implements Agent {
 
 	@Override
 	public Assertion assertion(final PerceptualObject object) {
-		return categoryGameAssertion(object, labelMapping.label(object), weight);
+		return new Assertion(object, labelMapping.label(object), weight);
 	}
 
 	@Override
