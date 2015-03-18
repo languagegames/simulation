@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import conceptualspace.PerceptualObject;
+import conceptualspace.Point;
 
 
 public class BasicAgent implements Agent {
@@ -23,16 +24,23 @@ public class BasicAgent implements Agent {
 
 	@Override
 	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
-		final Concept assertionConcept = concepts.get(assertion.label);
 		int guess = 0; double highestAppropriateness = 0;
 		for (final PerceptualObject object : guessingSet) {
-			final double appropriateness = assertionConcept.appropriatenessOf(object.observation());
+			final double appropriateness = appropriateness(assertion, object.observation());
 			if (appropriateness > highestAppropriateness) {
 				guess = guessingSet.indexOf(object);
 				highestAppropriateness = appropriateness;
 			}
 		}
 		return guess;
+	}
+
+	private double appropriateness(final Assertion assertion, final Point observation) {
+		double appropriateness = 1;
+		for (final Integer label : assertion.labels()) {
+			appropriateness *= concepts.get(label).appropriatenessOf(observation);
+		}
+		return appropriateness;
 	}
 
 	@Override

@@ -16,18 +16,29 @@ import conceptualspace.SimpleObject;
 public class TestBasicAgent {
 
 	private final double someWeight = 0.42;
+	private final Concept aConcept = new FuzzyConcept(new Point(0.7), 1),
+			anotherConcept = new FuzzyConcept(new Point(0.5), 1);
 
 	@Test
-	public void guessesMostAppropriateObjectGivenAssertionConcept() {
-		final PerceptualObject mostAppropriate = object(0.6);
-		final PerceptualObject other = object(0.5);
-		final FuzzyConcept concept0 = new FuzzyConcept(new Point(0.7), 0.9);
-		final BasicAgent agent = agent().withConcepts(concept0).withWeight(someWeight).build();
+	public void guessesMostAppropriateObjectGivenConjunctionAssertion() {
+		final BasicAgent agent = agent().withConcepts(aConcept, anotherConcept).build();
 
+		final PerceptualObject other = object(0.75), mostAppropriate = object(0.6);
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(asList(other, mostAppropriate));
 
-		assertThat(agent.guess(guessingSet, new Assertion(mostAppropriate, 0, someWeight)), equalTo(1));
+		assertThat(agent.guess(guessingSet, new Assertion(0, 1)), equalTo(1));
+	}
+
+	@Test
+	public void guessesMostAppropriateObjectGivenAssertion() {
+		final BasicAgent agent = agent().withConcepts(aConcept).build();
+
+		final PerceptualObject other = object(0.5), mostAppropriate = object(0.6);
+		final List<PerceptualObject> guessingSet = new ArrayList<>();
+		guessingSet.addAll(asList(other, mostAppropriate));
+
+		assertThat(agent.guess(guessingSet, new Assertion(0)), equalTo(1));
 	}
 
 	@Test
