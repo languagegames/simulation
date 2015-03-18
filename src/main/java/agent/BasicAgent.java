@@ -20,7 +20,7 @@ public class BasicAgent implements Agent {
 	public BasicAgent(final double weight, final List<Concept> concepts) {
 		this.weight = weight;
 		this.concepts.addAll(concepts);
-		assertionModel = new AssertionModel();
+		assertionModel = new BasicAssertionModel();
 	}
 
 	public BasicAgent(final double weight, final Concept...concepts) {
