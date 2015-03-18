@@ -9,6 +9,7 @@ public class BasicAgentBuilder {
 
 	private final List<Concept> concepts = new ArrayList<>();
 	private double weight = 0;
+	private AssertionModel assertionModel = new BasicAssertionModel();
 
 	public BasicAgentBuilder withConcepts(final List<Concept> concepts) {
 		this.concepts.addAll(concepts);
@@ -25,8 +26,13 @@ public class BasicAgentBuilder {
 		return this;
 	}
 
+	public BasicAgentBuilder withAssertionModel(final AssertionModel assertionModel) {
+		this.assertionModel = assertionModel;
+		return this;
+	}
+
 	public BasicAgent build() {
-		return new BasicAgent(concepts, weight);
+		return new BasicAgent(concepts, weight, assertionModel);
 	}
 
 }

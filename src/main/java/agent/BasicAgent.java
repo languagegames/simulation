@@ -15,10 +15,10 @@ public class BasicAgent implements Agent {
 	private final double weight;
 	private final AssertionModel assertionModel;
 
-	public BasicAgent(final List<Concept> concepts, final double weight) {
-		this.weight = weight;
+	public BasicAgent(final List<Concept> concepts, final double weight, final AssertionModel assertionModel) {
 		this.concepts.addAll(concepts);
-		assertionModel = new BasicAssertionModel();
+		this.weight = weight;
+		this.assertionModel = assertionModel;
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class BasicAgent implements Agent {
 		if (newWeight > 0.9) {
 			newWeight = 0.1;
 		}
-		return new BasicAgent(concepts, newWeight);
+		return new BasicAgent(concepts, newWeight, assertionModel);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class BasicAgent implements Agent {
 		final Concept updated = toUpdate.update(assertion);
 		final List<Concept> newConcepts = new ArrayList<>(concepts);
 		newConcepts.set(assertion.label, updated);
-		return new BasicAgent(newConcepts, weight);
+		return new BasicAgent(newConcepts, weight, assertionModel);
 	}
 
 	@Override
