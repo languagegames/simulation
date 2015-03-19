@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import agent.Agent;
+import agent.AssertionModel;
 import agent.BasicAgent;
 import agent.BasicAgentBuilder;
 import agent.BayesianConcept;
@@ -63,11 +64,13 @@ public class PopulationFactory {
 			final int numAgents,
 			final int numDimensions,
 			final double initialThreshold,
-			final ObjectPool objectPool) {
+			final ObjectPool objectPool,
+			final AssertionModel assertionModel)
+	{
 		final List<Agent> agents = new ArrayList<>();
 		for (double i=0; i<numAgents; i++) {
 			final double weight = i/numAgents;
-			agents.add(randomAgent(numDimensions, initialThreshold, weight));
+			agents.add(randomAgent(numDimensions, initialThreshold, weight, assertionModel));
 		}
 		return new OraclePopulation(agents, oracles, objectPool, new RandomPairer());
 	}
@@ -76,11 +79,13 @@ public class PopulationFactory {
 			final int numAgents,
 			final int numDimensions,
 			final double initialThreshold,
-			final ObjectPool objectPool) {
+			final ObjectPool objectPool,
+			final AssertionModel assertionModel)
+	{
 		final List<Agent> agents = new ArrayList<>();
 		for (double i=0; i<numAgents; i++) {
 			final double weight = i/numAgents;
-			agents.add(randomAgent(numDimensions, initialThreshold, weight));
+			agents.add(randomAgent(numDimensions, initialThreshold, weight, assertionModel));
 		}
 		return new BasicPopulation(agents, objectPool, new RandomPairer());
 	}
@@ -88,13 +93,15 @@ public class PopulationFactory {
 	private static BasicAgent randomAgent(
 			final int numDimensions,
 			final double initialThreshold,
-			final double weight) {
+			final double weight,
+			final AssertionModel assertionModel)
+	{
 		final List<Concept> concepts = new ArrayList<>();
 		final Random random = new Random();
 		for (int i=0; i<10; i++) {
 			concepts.add(FuzzyConcept.randomConcept(numDimensions, initialThreshold, random));
 		}
-		return agent().withConcepts(concepts).withWeight(weight).build();
+		return agent().withConcepts(concepts).withWeight(weight).withAssertionModel(assertionModel).build();
 	}
 
 	private static BasicAgentBuilder agent() {

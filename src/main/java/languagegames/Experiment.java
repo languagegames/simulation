@@ -1,6 +1,5 @@
 package languagegames;
 
-import static languagegames.PopulationFactory.basicPopulation;
 import static languagegames.analysis.TimeSeries.average;
 import static utility.ResultsPrinter.print;
 
@@ -11,6 +10,8 @@ import languagegames.analysis.Analysis;
 import languagegames.analysis.CommunicationAnalysis;
 import languagegames.analysis.GuessingAnalysis;
 import languagegames.analysis.TimeSeries;
+import agent.AssertionModel;
+import agent.BasicAssertionModel;
 
 public class Experiment {
 
@@ -26,9 +27,10 @@ public class Experiment {
 		final double weightIncrement = 0.0001;
 
 		final ObjectPool objectPool = new RandomObjectPool(numDimensions);
+		final AssertionModel assertionModel = new BasicAssertionModel();
 
 		final Experiment experiment = new Experiment(fileID, initialThreshold, numAgents,
-				numDimensions, numRuns, timeSteps, weightIncrement, objectPool);
+				numDimensions, numRuns, timeSteps, weightIncrement, objectPool, assertionModel);
 
 		experiment.run();
 	}
@@ -41,6 +43,7 @@ public class Experiment {
 	private final int timeSteps;
 	private final double weightIncrement;
 	private final ObjectPool objectPool;
+	private final AssertionModel assertionModel;
 
 	public Experiment(
 			final String fileID,
@@ -50,7 +53,8 @@ public class Experiment {
 			final int numRuns,
 			final int timeSteps,
 			final double weightIncrement,
-			final ObjectPool objectPool)
+			final ObjectPool objectPool,
+			final AssertionModel assertionModel)
 	{
 				this.fileID = fileID;
 				initialThreshold = maxThreshold;
@@ -60,6 +64,7 @@ public class Experiment {
 				this.timeSteps = timeSteps;
 				this.weightIncrement = weightIncrement;
 				this.objectPool = objectPool;
+				this.assertionModel = assertionModel;
 	}
 
 	public void run() {
@@ -67,8 +72,8 @@ public class Experiment {
 		final List<TimeSeries> guessingResults = new ArrayList<>();
 		for (int run=0; run<numRuns; run++) {
 
-			final Population population = basicPopulation(
-					numAgents, numDimensions, initialThreshold, objectPool);
+			final Population population = PopulationFactory.basicPopulation(
+					numAgents, numDimensions, initialThreshold, objectPool, assertionModel);
 
 			final Simulation simulation = new Simulation(population, weightIncrement);
 			final SimulationHistory history = simulation.run(timeSteps);
