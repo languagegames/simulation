@@ -2,12 +2,20 @@ package datareader;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
 import conceptualspace.Point;
 
 public class TestDataReader {
+
+	@Test
+	public void creates2dArrayFromFile() {
+		final DataReader reader = new DataReader();
+		final double[][] array = {{.1,.8},{.5,.5},{.4,.2},{.9,.8},{.7,.3}};
+		assertThat(reader.array2d("testdata.csv"), equalTo(array));
+	}
 
 	@Test
 	public void readsIntegersAcrossRowsThenColumns() {

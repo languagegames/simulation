@@ -13,6 +13,26 @@ import conceptualspace.Point;
 
 public class DataReader {
 
+	public double[][] array2d(final String fileName) {
+		final List<String> lines = lines(fileName);
+		final double[][] array = new double[lines.size()][0];
+		int index = 0;
+		for (final String line : lines) {
+			array[index++] = array(line);
+		}
+		return array;
+	}
+
+	private double[] array(final String line) {
+		final List<String> strings = asList(line.split(","));
+		final double[] array = new double[strings.size()];
+		int index = 0;
+		for (final String string : strings) {
+			array[index++] = Double.valueOf(string);
+		}
+		return array;
+	}
+
 	public List<Integer> integers(final String fileName) {
 		final List<String> lines = lines(fileName);
 		final List<Integer> integers = new ArrayList<>();
