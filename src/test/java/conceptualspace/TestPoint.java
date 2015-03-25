@@ -3,10 +3,18 @@ package conceptualspace;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import jama.Matrix;
 
 import org.junit.Test;
 
 public class TestPoint {
+
+	@Test
+	public void createsMatrixOfValues() {
+		final Point a = new Point(0.5, 0.1);
+
+		assertThat(a.asMatrix(), equalTo(new Matrix(new double[][] {{0.5, 0.1}})));
+	}
 
 	@Test
 	public void calculatesStandardDeviationOfListOfPoints() {

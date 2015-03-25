@@ -3,6 +3,7 @@ package conceptualspace;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static java.util.Arrays.asList;
+import jama.Matrix;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,14 @@ public class Point {
 			coordinates.add(random.nextDouble());
 		}
 		return new Point(coordinates);
+	}
+
+	public Matrix asMatrix() {
+		final double[][] vals = new double[1][coordinates.size()];
+		for (int i=0; i<coordinates.size(); i++) {
+			vals[0][i] = coordinates.get(i);
+		}
+		return new Matrix(vals);
 	}
 
 	public List<Double> coordinates() {
