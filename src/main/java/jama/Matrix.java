@@ -11,6 +11,7 @@ import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Locale;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -158,6 +159,11 @@ public class Matrix implements Cloneable, java.io.Serializable {
 	/* ------------------------
    Public Methods
 	 * ------------------------ */
+
+	public Matrix vertCat(final Matrix other) {
+		final double[][] result = ArrayUtils.addAll(A, other.A);
+		return new Matrix(result);
+	}
 
 	public Matrix covariance() {
 		final double[][] vals = new double[m][n];

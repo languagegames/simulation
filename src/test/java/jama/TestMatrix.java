@@ -10,6 +10,14 @@ import datareader.DataReader;
 public class TestMatrix {
 
 	@Test
+	public void verticalConcatenation() {
+		final Matrix matrix = new Matrix(new double[][] {{1, 2}, {3, 4}});
+		final Matrix other = new Matrix(new double[][] {{5, 6}});
+
+		assertThat(matrix.vertCat(other), equalTo(new Matrix(new double[][] {{1, 2}, {3, 4}, {5, 6}})));
+	}
+
+	@Test
 	public void calculateCovariance() {
 		final Matrix matrix = new Matrix(new DataReader().array2d("randomdata.csv"));
 
