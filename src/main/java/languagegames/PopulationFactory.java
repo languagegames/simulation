@@ -18,20 +18,21 @@ public class PopulationFactory {
 	public static Population maxLikelihoodPopulation(
 			final int numAgents,
 			final int numDimensions,
+			final int numLabels,
 			final ObjectPool objectPool)
 	{
 		final List<Agent> agents = new ArrayList<>();
 		for (double i=0; i<numAgents; i++) {
 			final double weight = i/numAgents;
-			agents.add(maxLikelihoodAgent(numDimensions, weight));
+			agents.add(maxLikelihoodAgent(numDimensions, numLabels, weight));
 		}
 		return new BasicPopulation(agents, objectPool, new RandomPairer());
 	}
 
-	private static Agent maxLikelihoodAgent(final int numDimensions, final double weight) {
+	private static Agent maxLikelihoodAgent(final int numDimensions, final int numLabels, final double weight) {
 		final List<Concept> concepts = new ArrayList<>();
 		final Random random = new Random();
-		for (int i=0; i<10; i++) {
+		for (int i=0; i<numLabels; i++) {
 			concepts.add(MaxLikelihoodConcept.randomConcept(numDimensions, random));
 		}
 		return agent().withConcepts(concepts).withWeight(weight).build();
@@ -40,20 +41,21 @@ public class PopulationFactory {
 	public static BasicPopulation bayesianPopulation(
 			final int numAgents,
 			final int numDimensions,
+			final int numLabels,
 			final ObjectPool objectPool)
 	{
 		final List<Agent> agents = new ArrayList<>();
 		for (double i=0; i<numAgents; i++) {
 			final double weight = i/numAgents;
-			agents.add(bayesianAgent(numDimensions, weight));
+			agents.add(bayesianAgent(numDimensions, numLabels, weight));
 		}
 		return new BasicPopulation(agents, objectPool, new RandomPairer());
 	}
 
-	private static BasicAgent bayesianAgent(final int numDimensions, final double weight) {
+	private static BasicAgent bayesianAgent(final int numDimensions, final int numLabels, final double weight) {
 		final List<Concept> concepts = new ArrayList<>();
 		final Random random = new Random();
-		for (int i=0; i<10; i++) {
+		for (int i=0; i<numLabels; i++) {
 			concepts.add(BayesianConcept.randomConcept(numDimensions, random));
 		}
 		return agent().withConcepts(concepts).withWeight(weight).build();
@@ -63,6 +65,7 @@ public class PopulationFactory {
 			final List<Agent> oracles,
 			final int numAgents,
 			final int numDimensions,
+			final int numLabels,
 			final double initialThreshold,
 			final ObjectPool objectPool,
 			final AssertionModel assertionModel)
@@ -70,7 +73,7 @@ public class PopulationFactory {
 		final List<Agent> agents = new ArrayList<>();
 		for (double i=0; i<numAgents; i++) {
 			final double weight = i/numAgents;
-			agents.add(randomAgent(numDimensions, initialThreshold, weight, assertionModel));
+			agents.add(randomAgent(numDimensions, numLabels, initialThreshold, weight, assertionModel));
 		}
 		return new OraclePopulation(agents, oracles, objectPool, new RandomPairer());
 	}
@@ -78,6 +81,7 @@ public class PopulationFactory {
 	public static BasicPopulation basicPopulation(
 			final int numAgents,
 			final int numDimensions,
+			final int numLabels,
 			final double initialThreshold,
 			final ObjectPool objectPool,
 			final AssertionModel assertionModel)
@@ -85,20 +89,21 @@ public class PopulationFactory {
 		final List<Agent> agents = new ArrayList<>();
 		for (double i=0; i<numAgents; i++) {
 			final double weight = i/numAgents;
-			agents.add(randomAgent(numDimensions, initialThreshold, weight, assertionModel));
+			agents.add(randomAgent(numDimensions, numLabels, initialThreshold, weight, assertionModel));
 		}
 		return new BasicPopulation(agents, objectPool, new RandomPairer());
 	}
 
 	private static BasicAgent randomAgent(
 			final int numDimensions,
+			final int numLabels,
 			final double initialThreshold,
 			final double weight,
 			final AssertionModel assertionModel)
 	{
 		final List<Concept> concepts = new ArrayList<>();
 		final Random random = new Random();
-		for (int i=0; i<10; i++) {
+		for (int i=0; i<numLabels; i++) {
 			concepts.add(FuzzyConcept.randomConcept(numDimensions, initialThreshold, random));
 		}
 		return agent().withConcepts(concepts).withWeight(weight).withAssertionModel(assertionModel).build();
