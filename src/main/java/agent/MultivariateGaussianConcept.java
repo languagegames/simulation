@@ -5,6 +5,10 @@ import static java.lang.Math.exp;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import jama.Matrix;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import conceptualspace.Point;
 
 public class MultivariateGaussianConcept implements Concept {
@@ -20,6 +24,16 @@ public class MultivariateGaussianConcept implements Concept {
 	}
 
 	@Override
+	public Concept update(final Assertion assertion) {
+		Matrix data = this.data;
+		while (data.getRowDimension() >= 20) {
+			data = data.removeFirstRow();
+		}
+		final Matrix x = assertion.object.observation().asMatrix();
+		return new MultivariateGaussianConcept(data.vertCat(x));
+	}
+
+	@Override
 	public double appropriatenessOf(final Point observation) {
 		final Matrix x = observation.asMatrix();
 		return (1./sqrt(sigma.det() * pow(2*PI, data.getColumnDimension()))) * exponent(x);
@@ -32,9 +46,18 @@ public class MultivariateGaussianConcept implements Concept {
 	}
 
 	@Override
-	public Concept update(final Assertion assertion) {
-		// TODO Auto-generated method stub
-		return null;
+	public String toString() {
+		return "Multivariate Gaussian concept with mean " + mu + ", covariance" + sigma;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 }
