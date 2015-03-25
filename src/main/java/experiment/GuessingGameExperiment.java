@@ -25,6 +25,7 @@ public class GuessingGameExperiment {
 	private final int numRuns = 100;
 	private final int numTrials = 10000;
 	private final int numDimensions = 3;
+	private final int numLabels = 10;
 	private final int numObjects = 20;
 	private final double weight = 0.42;
 	private final ObjectPool objectPool = new RandomObjectPool(numDimensions);
@@ -66,7 +67,7 @@ public class GuessingGameExperiment {
 			final ConjunctionAssertionModel assertionModel = new ConjunctionAssertionModel(p);
 			double score = 0;
 			for (int j = 0; j<numTrials; j++) {
-				final Agent describer = randomAgent(numDimensions, threshold, weight, assertionModel);
+				final Agent describer = randomAgent(numDimensions, numLabels, threshold, weight, assertionModel);
 				final Agent guesser = describer;
 				score += success(describer, guesser) ? 1 : 0;
 			}
