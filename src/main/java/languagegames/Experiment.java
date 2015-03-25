@@ -7,27 +7,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import languagegames.analysis.Analysis;
+import languagegames.analysis.CommunicationAnalysis;
 import languagegames.analysis.GuessingAnalysis;
 import languagegames.analysis.TimeSeries;
 import agent.AssertionModel;
-import agent.ConjunctionAssertionModel;
+import agent.BasicAssertionModel;
 
 public class Experiment {
 
 	public static void main(final String[] args) {
 
-		final String fileID = "p60";
+		final String fileID = "default";
 
 		final double initialThreshold = 2.0;
 		final int numAgents = 100;
 		final int numDimensions = 3;
 		final int numLabels = 10;
 		final int numRuns = 50;
-		final int timeSteps = 50000;
+		final int timeSteps = 10000;
 		final double weightIncrement = 0.0001;
 
 		final ObjectPool objectPool = new RandomObjectPool(numDimensions);
-		final AssertionModel assertionModel = new ConjunctionAssertionModel(0.6);
+		final AssertionModel assertionModel = new BasicAssertionModel();
 
 		final Experiment experiment = new Experiment(fileID, initialThreshold, numAgents, numDimensions,
 				numLabels, numRuns, timeSteps, weightIncrement, objectPool, assertionModel);
@@ -71,6 +72,7 @@ public class Experiment {
 	}
 
 	public void run() {
+		final List<TimeSeries> communicationResults = new ArrayList<>();
 		final List<TimeSeries> guessingResults = new ArrayList<>();
 		for (int run=0; run<numRuns; run++) {
 
@@ -80,9 +82,12 @@ public class Experiment {
 			final Simulation simulation = new Simulation(population, weightIncrement);
 			final SimulationHistory history = simulation.run(timeSteps);
 
+			final Analysis communicationAnalysis = new CommunicationAnalysis(objectPool);
 			final Analysis guessingAnalysis = new GuessingAnalysis(objectPool);
-			guessingResults.add(history.timeSeriesFrom(guessingAnalysis, 50));
+			communicationResults.add(history.timeSeriesFrom(communicationAnalysis, 10));
+			guessingResults.add(history.timeSeriesFrom(guessingAnalysis, 10));
 		}
+		print(average(communicationResults).toString(), "communication." + fileID + ".txt");
 		print(average(guessingResults).toString(), "guessing." + fileID + ".txt");
 	}
 
