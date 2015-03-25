@@ -10,6 +10,13 @@ import datareader.DataReader;
 public class TestMatrix {
 
 	@Test
+	public void removeSpecifiedRow() {
+		final Matrix matrix = new Matrix(new double[][] {{1, 2}, {3, 4}, {5, 6}});
+
+		assertThat(matrix.removeFirstRow(), equalTo(new Matrix(new double[][] {{3, 4}, {5, 6}})));
+	}
+
+	@Test
 	public void verticalConcatenation() {
 		final Matrix matrix = new Matrix(new double[][] {{1, 2}, {3, 4}});
 		final Matrix other = new Matrix(new double[][] {{5, 6}});

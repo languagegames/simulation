@@ -160,6 +160,11 @@ public class Matrix implements Cloneable, java.io.Serializable {
    Public Methods
 	 * ------------------------ */
 
+	public Matrix removeFirstRow() {
+		final double[][] vals = Arrays.copyOfRange(A, 1, m);
+		return new Matrix(vals);
+	}
+
 	public Matrix vertCat(final Matrix other) {
 		final double[][] result = ArrayUtils.addAll(A, other.A);
 		return new Matrix(result);
