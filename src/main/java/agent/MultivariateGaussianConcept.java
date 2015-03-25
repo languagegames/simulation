@@ -6,6 +6,8 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import jama.Matrix;
 
+import java.util.Random;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -21,6 +23,16 @@ public class MultivariateGaussianConcept implements Concept {
 		this.data = data;
 		mu = data.mean();
 		sigma = data.covariance();
+	}
+
+	public static MultivariateGaussianConcept randomConcept(final int numDimensions, final Random random) {
+		final double[][] vals = new double[2][numDimensions];
+		for (int i=0; i<2; i++) {
+			for (int j=0; j<numDimensions; j++) {
+				vals[i][j] = random.nextDouble();
+			}
+		}
+		return new MultivariateGaussianConcept(new Matrix(vals));
 	}
 
 	@Override
