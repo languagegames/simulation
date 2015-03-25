@@ -80,7 +80,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
 
 	/** Construct an m-by-n matrix of zeros.
    @param m    Number of rows.
-   @param n    Number of colums.
+   @param n    Number of columns.
 	 */
 
 	public Matrix (final int m, final int n) {
@@ -91,7 +91,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
 
 	/** Construct an m-by-n constant matrix.
    @param m    Number of rows.
-   @param n    Number of colums.
+   @param n    Number of columns.
    @param s    Fill the matrix with this scalar value.
 	 */
 
@@ -126,7 +126,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
 	/** Construct a matrix quickly without checking arguments.
    @param A    Two-dimensional array of doubles.
    @param m    Number of rows.
-   @param n    Number of colums.
+   @param n    Number of columns.
 	 */
 
 	public Matrix (final double[][] A, final int m, final int n) {
@@ -158,6 +158,18 @@ public class Matrix implements Cloneable, java.io.Serializable {
 	/* ------------------------
    Public Methods
 	 * ------------------------ */
+
+	public Matrix covariance() {
+		final double[][] vals = new double[m][n];
+		for (int i=0; i<m; i++) {
+			for (int j=0; j<n; j++) {
+				vals[i][j] = A[i][j] - mean(j);
+			}
+		}
+		final Matrix subtractedMean = new Matrix(vals);
+		final Matrix transpose = subtractedMean.transpose();
+		return transpose.times(subtractedMean).times(1./(m-1));
+	}
 
 	public Matrix mean() {
 		final double[][] mean = new double[1][n];

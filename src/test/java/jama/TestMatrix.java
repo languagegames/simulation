@@ -10,6 +10,15 @@ import datareader.DataReader;
 public class TestMatrix {
 
 	@Test
+	public void calculateCovariance() {
+		final Matrix matrix = new Matrix(new DataReader().array2d("randomdata.csv"));
+
+		final double[][] covariance = {{0.12677777777777777,0.012555555555555554}, {0.012555555555555554,0.07211111111111113}};
+
+		assertThat(matrix.covariance(), equalTo(new Matrix(covariance)));
+	}
+
+	@Test
 	public void calculateMean() {
 		final Matrix matrix = new Matrix(new DataReader().array2d("randomdata.csv"));
 
