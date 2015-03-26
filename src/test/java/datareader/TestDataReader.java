@@ -13,7 +13,7 @@ public class TestDataReader {
 	@Test
 	public void creates2dArrayFromFile() {
 		final DataReader reader = new DataReader();
-		final double[][] array = {{.1,.8},{.5,.5},{.4,.2},{.9,.8},{.7,.3}};
+		final double[][] array = {{.1,.8},{.5,.5},{.4,.2},{.9,.8},{.7,.3},{.8,.5}};
 		assertThat(reader.array2d("testdata.csv"), equalTo(array));
 	}
 
@@ -28,14 +28,14 @@ public class TestDataReader {
 	public void createsListOfIntegersFromDataFile() {
 		final DataReader reader = new DataReader();
 		assertThat(reader.integers("testlabels.csv"),
-				contains(0, 1, 1, 0, 0));
+				contains(0, 1, 1, 0, 0, 1));
 	}
 
 	@Test
 	public void createsListOfPointsFromDataFile() {
 		final DataReader reader = new DataReader();
 		assertThat(reader.points("testdata.csv"), contains(
-				point(0.1, 0.8), point(0.5, 0.5), point(0.4, 0.2), point(0.9, 0.8), point(0.7, 0.3)));
+				point(0.1, 0.8), point(0.5, 0.5), point(0.4, 0.2), point(0.9, 0.8), point(0.7, 0.3), point(0.8, 0.5)));
 	}
 
 	private Point point(final Double...coordinates) {

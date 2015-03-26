@@ -38,10 +38,13 @@ public class TestClassificationExperiment {
 
 		final ClassificationExperiment experiment = new ClassificationExperiment(pupil, teacher, objects, 2);
 
+		final List<PerceptualObject> firstSet = objects.subList(0, 3);
+		final List<PerceptualObject> secondSet = objects.subList(3, 6);
+
 		final ClassificationTrial trial0 =
-				new ClassificationTrial(pupil, teacher, objects.subList(0, 3), objects.subList(3, 5));
+				new ClassificationTrial(pupil, teacher, firstSet, secondSet);
 		final ClassificationTrial trial1 =
-				new ClassificationTrial(pupil, teacher, objects.subList(3, 5), objects.subList(0, 3));
+				new ClassificationTrial(pupil, teacher, secondSet, firstSet);
 
 		assertThat(experiment.score(),
 				equalTo((trial0.classificationScore() + trial1.classificationScore())/2));
