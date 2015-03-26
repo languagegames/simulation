@@ -12,7 +12,7 @@ import agent.BasicAgentBuilder;
 import agent.FuzzyConcept;
 import agent.LabelMapping;
 import agent.OracleAgent;
-import classifier.ClassificationExperiment;
+import classifier.ClassificationTrial;
 import classifier.ExperimentData;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
@@ -39,8 +39,8 @@ public class TestLearningInteraction {
 
 		final Agent teacher = new OracleAgent(new LabelMapping(objects, labels), 0.95);
 
-		final ClassificationExperiment experiment =
-				new ClassificationExperiment(pupil, teacher, data.trainingSet(), data.testSet());
+		final ClassificationTrial experiment =
+				new ClassificationTrial(pupil, teacher, data.trainingSet(), data.testSet());
 
 		assertThat(experiment.classificationScore(), equalTo(1.0));
 	}

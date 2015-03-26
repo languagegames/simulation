@@ -7,14 +7,14 @@ import agent.Agent;
 import agent.Assertion;
 import conceptualspace.PerceptualObject;
 
-public class ClassificationExperiment {
+public class ClassificationTrial {
 
 	private final List<PerceptualObject> trainingData = new ArrayList<>();
 	private final List<PerceptualObject> testData = new ArrayList<>();
 	private final Agent pupil;
 	private final Agent teacher;
 
-	public ClassificationExperiment(
+	public ClassificationTrial(
 			final Agent pupil,
 			final Agent teacher,
 			final List<PerceptualObject> trainingData,
@@ -26,7 +26,7 @@ public class ClassificationExperiment {
 		this.testData.addAll(testData);
 	}
 
-	public ClassificationExperiment(final ExperimentData data, final Agent pupil, final Agent teacher) {
+	public ClassificationTrial(final ExperimentData data, final Agent pupil, final Agent teacher) {
 		this(pupil, teacher, data.trainingSet(), data.testSet());
 	}
 
@@ -37,8 +37,8 @@ public class ClassificationExperiment {
 
 	private double classificationScore(final Agent trainedPupil) {
 		double score = 0;
-		for (final PerceptualObject material : testData) {
-			if (pupilClassifiesAccurately(trainedPupil, material)) {
+		for (final PerceptualObject object : testData) {
+			if (pupilClassifiesAccurately(trainedPupil, object)) {
 				score++;
 			}
 		}
@@ -53,8 +53,8 @@ public class ClassificationExperiment {
 
 	private Agent trainPupil() {
 		Agent trainedPupil = pupil;
-		for (final PerceptualObject material : trainingData) {
-			final Assertion assertion = teacher.assertion(material);
+		for (final PerceptualObject object : trainingData) {
+			final Assertion assertion = teacher.assertion(object);
 			trainedPupil = trainedPupil.learn(assertion);
 		}
 		return trainedPupil;

@@ -16,14 +16,15 @@ import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
 
-public class TestClassificationExperiment {
+public class TestClassificationTrial {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 
 	@Mock Agent teacher, pupil, trainedPupil;
 
-	private final PerceptualObject trainingSample = someMaterial(), testSample0 = someMaterial(), testSample1 = someMaterial();
-	private final Assertion assertion = new Assertion(someMaterial(), 0, 0.42),
-			anotherAssertion = new Assertion(someMaterial(), 1, 0.42);
+	private final PerceptualObject trainingSample = someObject(),
+			testSample0 = someObject(), testSample1 = someObject();
+	private final Assertion assertion = new Assertion(someObject(), 0, 0.42),
+			anotherAssertion = new Assertion(someObject(), 1, 0.42);
 
 	private final ExperimentData data =
 			new ExperimentData(asList(
@@ -32,8 +33,8 @@ public class TestClassificationExperiment {
 
 	@Test
 	public void getAverageClassificationScoreOverTestSet() {
-		final ClassificationExperiment experiment =
-				new ClassificationExperiment(pupil, teacher, data.trainingSet(), data.testSet());
+		final ClassificationTrial experiment =
+				new ClassificationTrial(pupil, teacher, data.trainingSet(), data.testSet());
 
 		context.checking(new Expectations() {{
 			exactly(3).of(teacher).assertion(trainingSample); will(returnValue(assertion));
@@ -48,7 +49,7 @@ public class TestClassificationExperiment {
 		assertThat(experiment.classificationScore(), equalTo(0.5));
 	}
 
-	private PerceptualObject someMaterial() {
+	private PerceptualObject someObject() {
 		return new SimpleObject(new Point(0.42));
 	}
 
