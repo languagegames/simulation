@@ -26,8 +26,8 @@ public class MultivariateGaussianConcept implements Concept {
 	}
 
 	public static MultivariateGaussianConcept randomConcept(final int numDimensions, final Random random) {
-		final double[][] vals = new double[2][numDimensions];
-		for (int i=0; i<2; i++) {
+		final double[][] vals = new double[numDimensions+1][numDimensions];
+		for (int i=0; i<numDimensions+1; i++) {
 			for (int j=0; j<numDimensions; j++) {
 				vals[i][j] = random.nextDouble();
 			}
