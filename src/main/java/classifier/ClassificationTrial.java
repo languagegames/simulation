@@ -26,10 +26,6 @@ public class ClassificationTrial {
 		this.testData.addAll(testData);
 	}
 
-	public ClassificationTrial(final ExperimentData data, final Agent pupil, final Agent teacher) {
-		this(pupil, teacher, data.trainingSet(), data.testSet());
-	}
-
 	public double classificationScore() {
 		final Agent trainedPupil = trainPupil();
 		return classificationScore(trainedPupil);
