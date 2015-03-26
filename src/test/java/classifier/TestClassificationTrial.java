@@ -4,9 +4,13 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -26,15 +30,19 @@ public class TestClassificationTrial {
 	private final Assertion assertion = new Assertion(someObject(), 0, 0.42),
 			anotherAssertion = new Assertion(someObject(), 1, 0.42);
 
-	private final ExperimentData data =
-			new ExperimentData(asList(
-					trainingSample, trainingSample, trainingSample, testSample0, testSample1),
-					0.6);
+	private final List<PerceptualObject> trainingData = new ArrayList<>();
+	private final List<PerceptualObject> testData = new ArrayList<>();
+
+	@Before
+	public void setUp() {
+		trainingData.addAll(asList(trainingSample, trainingSample, trainingSample));
+		testData.addAll(asList(testSample0, testSample1));
+	}
 
 	@Test
 	public void getAverageClassificationScoreOverTestSet() {
 		final ClassificationTrial experiment =
-				new ClassificationTrial(pupil, teacher, data.trainingSet(), data.testSet());
+				new ClassificationTrial(pupil, teacher, trainingData, testData);
 
 		context.checking(new Expectations() {{
 			exactly(3).of(teacher).assertion(trainingSample); will(returnValue(assertion));

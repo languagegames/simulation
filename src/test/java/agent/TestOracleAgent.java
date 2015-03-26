@@ -7,9 +7,9 @@ import static org.hamcrest.Matchers.equalTo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import classifier.ExperimentData;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
@@ -19,12 +19,17 @@ public class TestOracleAgent {
 	private final PerceptualObject object0 = someObject(0.42);
 	private final PerceptualObject object1 = someObject(0.43);
 	private final PerceptualObject object2 = someObject(0.44);
-	private final ExperimentData data = new ExperimentData(asList(object0, object1, object2), 0.42);
+	private final List<PerceptualObject> objects = new ArrayList<>();
 	private final double someWeight = 0.42;
+
+	@Before
+	public void setUp() {
+		objects.addAll(asList(object0, object1, object2));
+	}
 
 	@Test
 	public void guessesZeroIfNoObjectMatchesAssertionLabel() {
-		final OracleAgent agent = new OracleAgent(new LabelMapping(data, asList(1, 2, 0)), someWeight);
+		final OracleAgent agent = new OracleAgent(new LabelMapping(objects, asList(1, 2, 0)), someWeight);
 
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(asList(object0, object1));
@@ -34,17 +39,17 @@ public class TestOracleAgent {
 
 	@Test
 	public void guessesFirstObjectWhichMatchesAssertionLabel() {
-		final OracleAgent agent = new OracleAgent(new LabelMapping(data, asList(1, 2, 0)), someWeight);
+		final OracleAgent agent = new OracleAgent(new LabelMapping(objects, asList(1, 2, 0)), someWeight);
 
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
-		guessingSet.addAll(asList(object0, object1, object2));
+		guessingSet.addAll(objects);
 
 		assertThat(agent.guess(guessingSet, new Assertion(object0, 0, someWeight)), equalTo(2));
 	}
 
 	@Test
 	public void classifiesAccordingToPredefinedLabelMapping() {
-		final OracleAgent agent = new OracleAgent(new LabelMapping(data, asList(1, 2, 0)), someWeight);
+		final OracleAgent agent = new OracleAgent(new LabelMapping(objects, asList(1, 2, 0)), someWeight);
 
 		assertThat(agent.assertion(object0), equalTo(new Assertion(object0, 1, someWeight)));
 		assertThat(agent.assertion(object1), equalTo(new Assertion(object1, 2, someWeight)));
