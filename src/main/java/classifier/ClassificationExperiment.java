@@ -1,5 +1,6 @@
 package classifier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import agent.Agent;
@@ -7,18 +8,48 @@ import conceptualspace.PerceptualObject;
 
 public class ClassificationExperiment {
 
+	private final Agent pupil;
+	private final Agent teacher;
+	private final List<PerceptualObject> data = new ArrayList<>();
+	private final int crossValFactor;
+
 	public ClassificationExperiment(
 			final Agent pupil,
 			final Agent teacher,
 			final List<PerceptualObject> data,
 			final int crossValFactor)
 	{
-		// TODO Auto-generated constructor stub
+		this.pupil = pupil;
+		this.teacher = teacher;
+		this.data.addAll(data);
+		this.crossValFactor = crossValFactor;
 	}
 
-	public Double score() {
-		// TODO Auto-generated method stub
-		return null;
+	public double score() {
+		final int setSize = data.size() / crossValFactor;
+		double sum = 0;
+		for (int i=0; i<crossValFactor; i++) {
+			final List<PerceptualObject> testData = testData(setSize, i);
+			final List<PerceptualObject> trainingData = trainingData(testData);
+			sum += classificationScore(testData, trainingData);
+		}
+		return sum / crossValFactor;
+	}
+
+	private List<PerceptualObject> trainingData(final List<PerceptualObject> testData) {
+		final List<PerceptualObject> trainingData = new ArrayList<>(data);
+		trainingData.removeAll(testData);
+		return trainingData;
+	}
+
+	private List<PerceptualObject> testData(final int setSize, final int i) {
+		return data.subList(i*setSize, (i+1)*setSize);
+	}
+
+	private double classificationScore(
+			final List<PerceptualObject> testData, final List<PerceptualObject> trainingData) {
+		final ClassificationTrial trial = new ClassificationTrial(pupil, teacher, trainingData, testData);
+		return trial.classificationScore();
 	}
 
 }
