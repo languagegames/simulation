@@ -1,5 +1,6 @@
 package classifier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import agent.Agent;
@@ -8,16 +9,25 @@ import conceptualspace.PerceptualObject;
 
 public class ClassificationExperiment {
 
-	private final List<PerceptualObject> trainingData;
-	private final List<PerceptualObject> testData;
+	private final List<PerceptualObject> trainingData = new ArrayList<>();
+	private final List<PerceptualObject> testData = new ArrayList<>();
 	private final Agent pupil;
 	private final Agent teacher;
 
-	public ClassificationExperiment(final ExperimentData data, final Agent pupil, final Agent teacher) {
-		trainingData = data.trainingSet();
-		testData = data.testSet();
+	public ClassificationExperiment(
+			final Agent pupil,
+			final Agent teacher,
+			final List<PerceptualObject> trainingData,
+			final List<PerceptualObject> testData)
+	{
 		this.pupil = pupil;
 		this.teacher = teacher;
+		this.trainingData.addAll(trainingData);
+		this.testData.addAll(testData);
+	}
+
+	public ClassificationExperiment(final ExperimentData data, final Agent pupil, final Agent teacher) {
+		this(pupil, teacher, data.trainingSet(), data.testSet());
 	}
 
 	public double classificationScore() {

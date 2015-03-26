@@ -10,8 +10,6 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
-import classifier.ClassificationExperiment;
-import classifier.ExperimentData;
 import agent.Agent;
 import agent.Assertion;
 import conceptualspace.PerceptualObject;
@@ -34,7 +32,8 @@ public class TestClassificationExperiment {
 
 	@Test
 	public void getAverageClassificationScoreOverTestSet() {
-		final ClassificationExperiment experiment = new ClassificationExperiment(data, pupil, teacher);
+		final ClassificationExperiment experiment =
+				new ClassificationExperiment(pupil, teacher, data.trainingSet(), data.testSet());
 
 		context.checking(new Expectations() {{
 			exactly(3).of(teacher).assertion(trainingSample); will(returnValue(assertion));
