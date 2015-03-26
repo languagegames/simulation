@@ -67,7 +67,7 @@ public class TestPopulationSimulation {
 				.withWeight(0.4)
 				.build();
 
-		objects = SimpleObject.makeListFrom(dataReader.points("randomdata.csv"));
+		objects = SimpleObject.makeListFrom(dataReader.points("randomdata.csv", 2));
 		objectPool = new StaticObjectPool(objects);
 		analysisPool = new StaticObjectPool(objects);
 		staticPairer = new StaticPairer(dataReader.integers("interaction-specs.csv"));

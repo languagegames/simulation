@@ -31,7 +31,7 @@ public class TestClassificationExperiment {
 	public void fiveObjectsTwoConceptsUsingDataFromFile() {
 
 		final List<PerceptualObject> objects = SimpleObject.makeListFrom(
-				new DataReader().points("testdata.csv"));
+				new DataReader().points("testdata.csv", 2));
 		final List<Integer> labels = new DataReader().integers("testlabels.csv");
 
 		final Agent teacher = new OracleAgent(new LabelMapping(objects, labels), 0.95);

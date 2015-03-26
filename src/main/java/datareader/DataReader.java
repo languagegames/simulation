@@ -51,20 +51,20 @@ public class DataReader {
 		return integers;
 	}
 
-	public List<Point> points(final String fileName) {
+	public List<Point> points(final String fileName, final int numDimensions) {
 		final List<String> lines = lines(fileName);
 		final List<Point> points = new ArrayList<>();
 		for (final String line : lines) {
-			points.add(point(line));
+			points.add(point(line, numDimensions));
 		}
 		return points;
 	}
 
-	private Point point(final String line) {
+	private Point point(final String line, final int numDimensions) {
 		final List<String> strings = asList(line.split(","));
 		final List<Double> coordinates = new ArrayList<>();
-		for (final String string : strings) {
-			coordinates.add(Double.valueOf(string));
+		for (int i=0; i<numDimensions; i++) {
+			coordinates.add(Double.valueOf(strings.get(i)));
 		}
 		return new Point(coordinates);
 	}

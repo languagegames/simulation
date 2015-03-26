@@ -34,7 +34,7 @@ public class TestDataReader {
 	@Test
 	public void createsListOfPointsFromDataFile() {
 		final DataReader reader = new DataReader();
-		assertThat(reader.points("testdata.csv"), contains(
+		assertThat(reader.points("testdata.csv", 2), contains(
 				point(0.1, 0.8), point(0.5, 0.5), point(0.4, 0.2), point(0.9, 0.8), point(0.7, 0.3), point(0.8, 0.5)));
 	}
 
