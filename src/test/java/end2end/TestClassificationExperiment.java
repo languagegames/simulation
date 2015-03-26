@@ -19,7 +19,7 @@ import conceptualspace.Point;
 import conceptualspace.SimpleObject;
 import datareader.DataReader;
 
-public class TestLearningInteraction {
+public class TestClassificationExperiment {
 
 	private final Agent pupil = new BasicAgentBuilder()
 			.withConcepts(
