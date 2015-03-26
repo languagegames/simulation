@@ -12,8 +12,8 @@ import agent.BasicAgentBuilder;
 import agent.FuzzyConcept;
 import agent.LabelMapping;
 import agent.OracleAgent;
+import classifier.ClassificationExperiment;
 import classifier.ClassificationTrial;
-import classifier.ExperimentData;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
@@ -30,19 +30,21 @@ public class TestClassificationExperiment {
 	@Test
 	public void fiveObjectsTwoConceptsUsingDataFromFile() {
 
-		final DataReader dataReader = new DataReader();
-
 		final List<PerceptualObject> objects = SimpleObject.makeListFrom(
-				dataReader.points("testdata.csv"));
-		final ExperimentData data = new ExperimentData(objects, 0.8);
-		final List<Integer> labels = dataReader.integers("testlabels.csv");
+				new DataReader().points("testdata.csv"));
+		final List<Integer> labels = new DataReader().integers("testlabels.csv");
 
 		final Agent teacher = new OracleAgent(new LabelMapping(objects, labels), 0.95);
 
-		final ClassificationTrial experiment =
-				new ClassificationTrial(pupil, teacher, data.trainingSet(), data.testSet());
+		final ClassificationExperiment experiment = new ClassificationExperiment(pupil, teacher, objects, 2);
 
-		assertThat(experiment.classificationScore(), equalTo(1.0));
+		final ClassificationTrial trial0 =
+				new ClassificationTrial(pupil, teacher, objects.subList(0, 3), objects.subList(3, 5));
+		final ClassificationTrial trial1 =
+				new ClassificationTrial(pupil, teacher, objects.subList(3, 5), objects.subList(0, 3));
+
+		assertThat(experiment.score(),
+				equalTo((trial0.classificationScore() + trial1.classificationScore())/2));
 	}
 
 }
