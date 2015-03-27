@@ -13,7 +13,7 @@ import conceptualspace.Point;
 
 public class DataReader {
 
-	public double[][] array2d(final String fileName) {
+	public static double[][] array2d(final String fileName) {
 		final List<String> lines = lines(fileName);
 		final double[][] array = new double[lines.size()][0];
 		int index = 0;
@@ -23,7 +23,7 @@ public class DataReader {
 		return array;
 	}
 
-	private double[] array(final String line) {
+	private static double[] array(final String line) {
 		final List<String> strings = asList(line.split(","));
 		final double[] array = new double[strings.size()];
 		int index = 0;
@@ -33,7 +33,7 @@ public class DataReader {
 		return array;
 	}
 
-	public List<Integer> integers(final String fileName) {
+	public static List<Integer> integers(final String fileName) {
 		final List<String> lines = lines(fileName);
 		final List<Integer> integers = new ArrayList<>();
 		for (final String line : lines) {
@@ -42,7 +42,7 @@ public class DataReader {
 		return integers;
 	}
 
-	private List<Integer> lineInts(final String line) {
+	private static List<Integer> lineInts(final String line) {
 		final List<String> strings = asList(line.split(","));
 		final List<Integer> integers = new ArrayList<>();
 		for (final String string : strings) {
@@ -51,7 +51,7 @@ public class DataReader {
 		return integers;
 	}
 
-	public List<Point> points(final String fileName, final int numDimensions) {
+	public static List<Point> points(final String fileName, final int numDimensions) {
 		final List<String> lines = lines(fileName);
 		final List<Point> points = new ArrayList<>();
 		for (final String line : lines) {
@@ -60,7 +60,7 @@ public class DataReader {
 		return points;
 	}
 
-	private Point point(final String line, final int numDimensions) {
+	private static Point point(final String line, final int numDimensions) {
 		final List<String> strings = asList(line.split(","));
 		final List<Double> coordinates = new ArrayList<>();
 		for (int i=0; i<numDimensions; i++) {
@@ -69,13 +69,13 @@ public class DataReader {
 		return new Point(coordinates);
 	}
 
-	private List<String> lines(final String fileName) {
+	private static List<String> lines(final String fileName) {
 		final List<String> lines = read(fileName);
 		removeEmptyLines(lines);
 		return lines;
 	}
 
-	private void removeEmptyLines(final List<String> lines) {
+	private static void removeEmptyLines(final List<String> lines) {
 		for (final Iterator<String> iterator = lines.iterator(); iterator.hasNext();) {
 		    final String line = iterator.next();
 		    if (line.isEmpty()) {
@@ -84,9 +84,9 @@ public class DataReader {
 		}
 	}
 
-	private List<String> read(final String fileName) {
+	private static List<String> read(final String fileName) {
 		final List<String> result = new ArrayList<>();
-		final ClassLoader classLoader = getClass().getClassLoader();
+		final ClassLoader classLoader = DataReader.class.getClassLoader();
 		final File file = new File(classLoader.getResource(fileName).getFile());
 		try (Scanner scanner = new Scanner(file)) {
 			while (scanner.hasNextLine()) {

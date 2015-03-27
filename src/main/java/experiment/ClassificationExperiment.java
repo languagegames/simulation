@@ -43,9 +43,8 @@ public class ClassificationExperiment {
 
 		pupil = randomAgent(numDimensions, numLabels, 0, new BasicAssertionModel(), conceptFactory);
 
-		final DataReader dataReader = new DataReader();
-		data = SimpleObject.makeListFrom(dataReader.points(dataFile, numDimensions));
-		teacher = new OracleAgent(new LabelMapping(data, dataReader.integers(labelsFile)), 0.95);
+		data = SimpleObject.makeListFrom(DataReader.points(dataFile, numDimensions));
+		teacher = new OracleAgent(new LabelMapping(data, DataReader.integers(labelsFile)), 0.95);
 
 	}
 

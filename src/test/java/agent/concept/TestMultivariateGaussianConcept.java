@@ -9,8 +9,6 @@ import org.junit.Test;
 import utility.DataReader;
 import utility.matrix.Matrix;
 import agent.assertions.Assertion;
-import agent.concept.Concept;
-import agent.concept.MultivariateConcept;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
 
@@ -41,7 +39,7 @@ public class TestMultivariateGaussianConcept {
 
 	@Test
 	public void computesLikelihoodGivenPoint() {
-		final Matrix data = new Matrix(new DataReader().array2d("randomdata.csv"));
+		final Matrix data = new Matrix(DataReader.array2d("randomdata.csv"));
 		final MultivariateConcept concept = new MultivariateConcept(data);
 
 		final Point observation = new Point(0.5, 0.5);

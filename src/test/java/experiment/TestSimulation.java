@@ -22,15 +22,12 @@ import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
 import conceptualspace.StaticObjectPool;
-import experiment.Simulation;
-import experiment.SimulationHistory;
 import experiment.analysis.Analysis;
 import experiment.analysis.CommunicationAnalysis;
 import experiment.analysis.TimeSeries;
 
 public class TestSimulation {
 
-	private final DataReader dataReader = new DataReader();
 	private Agent agent0, agent1, agent2, agent3;
 	private List<PerceptualObject> objects;
 	private ObjectPool objectPool, analysisPool;
@@ -66,10 +63,10 @@ public class TestSimulation {
 				.withWeight(0.4)
 				.build();
 
-		objects = SimpleObject.makeListFrom(dataReader.points("randomdata.csv", 2));
+		objects = SimpleObject.makeListFrom(DataReader.points("randomdata.csv", 2));
 		objectPool = new StaticObjectPool(objects);
 		analysisPool = new StaticObjectPool(objects);
-		staticPairer = new StaticPairer(dataReader.integers("interaction-specs.csv"));
+		staticPairer = new StaticPairer(DataReader.integers("interaction-specs.csv"));
 	}
 
 	@Test

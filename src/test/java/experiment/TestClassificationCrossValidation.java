@@ -16,8 +16,6 @@ import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
-import experiment.ClassificationCrossValidation;
-import experiment.ClassificationTrial;
 
 public class TestClassificationCrossValidation {
 
@@ -31,8 +29,8 @@ public class TestClassificationCrossValidation {
 	public void fiveObjectsTwoConceptsUsingDataFromFile() {
 
 		final List<PerceptualObject> objects = SimpleObject.makeListFrom(
-				new DataReader().points("testdata.csv", 2));
-		final List<Integer> labels = new DataReader().integers("testlabels.csv");
+				DataReader.points("testdata.csv", 2));
+		final List<Integer> labels = DataReader.integers("testlabels.csv");
 
 		final Agent teacher = new OracleAgent(new LabelMapping(objects, labels), 0.95);
 
