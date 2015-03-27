@@ -16,7 +16,7 @@ public class MultivariateConceptFactory implements RandomConceptFactory {
 				vals[i][j] = random.nextDouble();
 			}
 		}
-		return new MultivariateGaussianConcept(new Matrix(vals));
+		return new MultivariateConcept(new Matrix(vals));
 	}
 
 	@Override

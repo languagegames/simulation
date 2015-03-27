@@ -14,26 +14,26 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import agent.Assertion;
 import conceptualspace.Point;
 
-public class MultivariateGaussianConcept implements Concept {
+public class MultivariateConcept implements Concept {
 
 	private final Matrix data;
 	private final Matrix mu;
 	private final Matrix sigma;
 
-	public MultivariateGaussianConcept(final Matrix data) {
+	public MultivariateConcept(final Matrix data) {
 		this.data = data;
 		mu = data.mean();
 		sigma = data.covariance();
 	}
 
-	public static MultivariateGaussianConcept randomConcept(final int numDimensions, final Random random) {
+	public static MultivariateConcept randomConcept(final int numDimensions, final Random random) {
 		final double[][] vals = new double[numDimensions+1][numDimensions];
 		for (int i=0; i<numDimensions+1; i++) {
 			for (int j=0; j<numDimensions; j++) {
 				vals[i][j] = random.nextDouble();
 			}
 		}
-		return new MultivariateGaussianConcept(new Matrix(vals));
+		return new MultivariateConcept(new Matrix(vals));
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class MultivariateGaussianConcept implements Concept {
 			data = data.removeFirstRow();
 		}
 		final Matrix x = assertion.object.observation().asMatrix();
-		return new MultivariateGaussianConcept(data.vertCat(x));
+		return new MultivariateConcept(data.vertCat(x));
 	}
 
 	@Override
