@@ -1,4 +1,4 @@
-package end2end;
+package experiment;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,7 +28,7 @@ import experiment.analysis.Analysis;
 import experiment.analysis.CommunicationAnalysis;
 import experiment.analysis.TimeSeries;
 
-public class TestPopulationSimulation {
+public class TestSimulation {
 
 	private final DataReader dataReader = new DataReader();
 	private Agent agent0, agent1, agent2, agent3;

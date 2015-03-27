@@ -1,4 +1,4 @@
-package languagegames;
+package population;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;

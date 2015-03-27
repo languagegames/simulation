@@ -1,4 +1,4 @@
-package agent;
+package agent.concept;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;

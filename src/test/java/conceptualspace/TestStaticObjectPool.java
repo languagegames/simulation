@@ -1,4 +1,4 @@
-package languagegames;
+package conceptualspace;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
