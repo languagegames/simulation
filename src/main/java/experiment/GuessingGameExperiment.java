@@ -14,6 +14,8 @@ import languagegames.RandomObjectPool;
 import agent.Agent;
 import agent.Assertion;
 import agent.ConjunctionAssertionModel;
+import agent.concept.FuzzyConceptFactory;
+import agent.concept.RandomConceptFactory;
 import conceptualspace.PerceptualObject;
 
 
@@ -29,6 +31,7 @@ public class GuessingGameExperiment {
 	private final int numObjects = 20;
 	private final double weight = 0.42;
 	private final ObjectPool objectPool = new RandomObjectPool(numDimensions);
+	final RandomConceptFactory factory;
 
 	public static void main(final String[] args) {
 		final GuessingGameExperiment experiment = new GuessingGameExperiment(2, 0, 1);
@@ -39,7 +42,7 @@ public class GuessingGameExperiment {
 		this.threshold = threshold;
 		this.pMin = pMin;
 		this.pMax = pMax;
-
+		factory = new FuzzyConceptFactory(threshold);
 	}
 
 	public void run() {
@@ -60,14 +63,13 @@ public class GuessingGameExperiment {
 		return pValues;
 	}
 
-	private List<Double> scores(final double p, final int numRuns)
-	{
+	private List<Double> scores(final double p, final int numRuns) {
 		final List<Double> scores = new ArrayList<>();
 		for (int i=0; i<numRuns; i++) {
 			final ConjunctionAssertionModel assertionModel = new ConjunctionAssertionModel(p);
 			double score = 0;
 			for (int j = 0; j<numTrials; j++) {
-				final Agent describer = randomAgent(numDimensions, numLabels, threshold, weight, assertionModel);
+				final Agent describer = randomAgent(numDimensions, numLabels, weight, assertionModel, factory);
 				final Agent guesser = describer;
 				score += success(describer, guesser) ? 1 : 0;
 			}
