@@ -16,10 +16,10 @@ import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
-import experiment.ClassificationExperiment;
+import experiment.ClassificationCrossValidation;
 import experiment.ClassificationTrial;
 
-public class TestClassificationExperiment {
+public class TestClassificationCrossValidation {
 
 	private final Agent pupil = new BasicAgentBuilder()
 			.withConcepts(
@@ -36,7 +36,7 @@ public class TestClassificationExperiment {
 
 		final Agent teacher = new OracleAgent(new LabelMapping(objects, labels), 0.95);
 
-		final ClassificationExperiment experiment = new ClassificationExperiment(pupil, teacher, objects, 2);
+		final ClassificationCrossValidation experiment = new ClassificationCrossValidation(pupil, teacher, objects, 2);
 
 		final List<PerceptualObject> firstSet = objects.subList(0, 3);
 		final List<PerceptualObject> secondSet = objects.subList(3, 6);

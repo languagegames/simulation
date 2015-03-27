@@ -6,14 +6,14 @@ import java.util.List;
 import agent.Agent;
 import conceptualspace.PerceptualObject;
 
-public class ClassificationExperiment {
+public class ClassificationCrossValidation {
 
 	private final Agent pupil;
 	private final Agent teacher;
 	private final List<PerceptualObject> data = new ArrayList<>();
 	private final int crossValFactor;
 
-	public ClassificationExperiment(
+	public ClassificationCrossValidation(
 			final Agent pupil,
 			final Agent teacher,
 			final List<PerceptualObject> data,
