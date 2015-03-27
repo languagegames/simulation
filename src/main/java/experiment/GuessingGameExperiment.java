@@ -1,6 +1,6 @@
 package experiment;
 
-import static agent.AgentFactory.randomAgent;
+import static agent.BasicAgent.randomAgent;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static utility.ResultsPrinter.print;
