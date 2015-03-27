@@ -3,8 +3,6 @@ package agent.concept;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 
-import java.util.Random;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -19,10 +17,6 @@ public class FuzzyConcept implements Concept {
 	public FuzzyConcept(final Point prototype, final double threshold) {
 		this.prototype = prototype;
 		this.threshold = threshold;
-	}
-
-	public static FuzzyConcept randomConcept(final int numDimensions, final double threshold, final Random random) {
-		return new FuzzyConcept(Point.randomPoint(numDimensions, random), threshold);
 	}
 
 	public double overlapWith(final FuzzyConcept other) {

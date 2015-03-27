@@ -6,8 +6,6 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import jama.Matrix;
 
-import java.util.Random;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -24,16 +22,6 @@ public class MultivariateConcept implements Concept {
 		this.data = data;
 		mu = data.mean();
 		sigma = data.covariance();
-	}
-
-	public static MultivariateConcept randomConcept(final int numDimensions, final Random random) {
-		final double[][] vals = new double[numDimensions+1][numDimensions];
-		for (int i=0; i<numDimensions+1; i++) {
-			for (int j=0; j<numDimensions; j++) {
-				vals[i][j] = random.nextDouble();
-			}
-		}
-		return new MultivariateConcept(new Matrix(vals));
 	}
 
 	@Override

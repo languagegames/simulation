@@ -10,7 +10,6 @@ import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -32,21 +31,6 @@ public class MaxLikelihoodConcept implements Concept {
 
 	public MaxLikelihoodConcept(final Point...points) {
 		this(asList(points));
-	}
-
-	public static MaxLikelihoodConcept randomConcept(final int numDimensions, final Random random) {
-		final List<Point> points = new ArrayList<>();
-		points.add(randomPoint(numDimensions, random));
-		points.add(randomPoint(numDimensions, random));
-		return new MaxLikelihoodConcept(points);
-	}
-
-	private static Point randomPoint(final int numDimensions, final Random random) {
-		final List<Double> coordinates = new ArrayList<>();
-		for (int i=0; i<numDimensions; i++) {
-			coordinates.add(random.nextDouble());
-		}
-		return new Point(coordinates);
 	}
 
 	@Override
