@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import agent.concept.Concept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 

@@ -1,4 +1,4 @@
-package agent;
+package agent.concept;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.exp;
@@ -11,6 +11,7 @@ import java.util.Random;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import agent.Assertion;
 import conceptualspace.Point;
 
 public class MultivariateGaussianConcept implements Concept {

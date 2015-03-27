@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import agent.concept.Concept;
+import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;

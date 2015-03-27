@@ -5,6 +5,8 @@ import static java.util.Arrays.asList;
 import java.util.ArrayList;
 import java.util.List;
 
+import agent.concept.Concept;
+
 public class BasicAgentBuilder {
 
 	private final List<Concept> concepts = new ArrayList<>();

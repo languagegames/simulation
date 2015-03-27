@@ -23,7 +23,7 @@ import org.junit.Test;
 
 import agent.Agent;
 import agent.BasicAgentBuilder;
-import agent.FuzzyConcept;
+import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;

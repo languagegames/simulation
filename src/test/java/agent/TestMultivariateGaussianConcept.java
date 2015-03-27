@@ -7,6 +7,8 @@ import jama.Matrix;
 
 import org.junit.Test;
 
+import agent.concept.Concept;
+import agent.concept.MultivariateGaussianConcept;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
 import datareader.DataReader;

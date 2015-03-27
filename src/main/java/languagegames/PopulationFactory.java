@@ -8,10 +8,10 @@ import agent.Agent;
 import agent.AssertionModel;
 import agent.BasicAgent;
 import agent.BasicAgentBuilder;
-import agent.BayesianConcept;
-import agent.Concept;
-import agent.FuzzyConcept;
-import agent.MaxLikelihoodConcept;
+import agent.concept.BayesianConcept;
+import agent.concept.Concept;
+import agent.concept.FuzzyConcept;
+import agent.concept.MaxLikelihoodConcept;
 
 public class PopulationFactory {
 

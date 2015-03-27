@@ -2,6 +2,7 @@ package agent;
 
 import java.util.List;
 
+import agent.concept.Concept;
 import conceptualspace.PerceptualObject;
 
 public interface AssertionModel {

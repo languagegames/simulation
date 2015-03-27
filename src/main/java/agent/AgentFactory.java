@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import agent.concept.Concept;
+import agent.concept.FuzzyConcept;
+
 public class AgentFactory {
 
 	public static BasicAgent randomAgent(

@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import agent.Agent;
 import agent.BasicAgentBuilder;
-import agent.FuzzyConcept;
 import agent.LabelMapping;
 import agent.OracleAgent;
+import agent.concept.FuzzyConcept;
 import classifier.ClassificationExperiment;
 import classifier.ClassificationTrial;
 import conceptualspace.PerceptualObject;

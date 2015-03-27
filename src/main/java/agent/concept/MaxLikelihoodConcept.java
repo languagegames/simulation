@@ -1,4 +1,4 @@
-package agent;
+package agent.concept;
 
 import static conceptualspace.Point.mean;
 import static conceptualspace.Point.standardDeviation;
@@ -15,6 +15,7 @@ import java.util.Random;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import agent.Assertion;
 import conceptualspace.Point;
 
 public class MaxLikelihoodConcept implements Concept {
