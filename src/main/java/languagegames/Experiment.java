@@ -12,6 +12,8 @@ import languagegames.analysis.GuessingAnalysis;
 import languagegames.analysis.TimeSeries;
 import agent.AssertionModel;
 import agent.BasicAssertionModel;
+import agent.concept.FuzzyConceptFactory;
+import agent.concept.RandomConceptFactory;
 
 public class Experiment {
 
@@ -19,7 +21,6 @@ public class Experiment {
 
 		final String fileID = "default";
 
-		final double initialThreshold = 2.0;
 		final int numAgents = 100;
 		final int numDimensions = 3;
 		final int numLabels = 10;
@@ -29,15 +30,15 @@ public class Experiment {
 
 		final ObjectPool objectPool = new RandomObjectPool(numDimensions);
 		final AssertionModel assertionModel = new BasicAssertionModel();
+		final RandomConceptFactory factory = new FuzzyConceptFactory(2.0);
 
-		final Experiment experiment = new Experiment(fileID, initialThreshold, numAgents, numDimensions,
-				numLabels, numRuns, timeSteps, weightIncrement, objectPool, assertionModel);
+		final Experiment experiment = new Experiment(fileID, numAgents, numDimensions,
+				numLabels, numRuns, timeSteps, weightIncrement, objectPool, assertionModel, factory);
 
 		experiment.run();
 	}
 
 	private final String fileID;
-	private final double initialThreshold;
 	private final int numAgents;
 	private final int numDimensions;
 	private final int numLabels;
@@ -46,10 +47,10 @@ public class Experiment {
 	private final double weightIncrement;
 	private final ObjectPool objectPool;
 	private final AssertionModel assertionModel;
+	private final RandomConceptFactory factory;
 
 	public Experiment(
 			final String fileID,
-			final double initialThreshold,
 			final int numAgents,
 			final int numDimensions,
 			final int numLabels,
@@ -57,10 +58,10 @@ public class Experiment {
 			final int timeSteps,
 			final double weightIncrement,
 			final ObjectPool objectPool,
-			final AssertionModel assertionModel)
+			final AssertionModel assertionModel,
+			final RandomConceptFactory factory)
 	{
 				this.fileID = fileID;
-				this.initialThreshold = initialThreshold;
 				this.numAgents = numAgents;
 				this.numDimensions = numDimensions;
 				this.numLabels = numLabels;
@@ -69,6 +70,7 @@ public class Experiment {
 				this.weightIncrement = weightIncrement;
 				this.objectPool = objectPool;
 				this.assertionModel = assertionModel;
+				this.factory = factory;
 	}
 
 	public void run() {
@@ -77,7 +79,7 @@ public class Experiment {
 		for (int run=0; run<numRuns; run++) {
 
 			final Population population = PopulationFactory.basicPopulation(
-					numAgents, numDimensions, numLabels, initialThreshold, objectPool, assertionModel);
+					numAgents, numDimensions, numLabels, objectPool, assertionModel, factory);
 
 			final Simulation simulation = new Simulation(population, weightIncrement);
 			final SimulationHistory history = simulation.run(timeSteps);

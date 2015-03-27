@@ -2,109 +2,71 @@ package languagegames;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import agent.Agent;
 import agent.AssertionModel;
 import agent.BasicAgent;
 import agent.BasicAgentBuilder;
-import agent.concept.BayesianConcept;
 import agent.concept.Concept;
-import agent.concept.FuzzyConcept;
-import agent.concept.MaxLikelihoodConcept;
+import agent.concept.RandomConceptFactory;
 
 public class PopulationFactory {
-
-	public static Population maxLikelihoodPopulation(
-			final int numAgents,
-			final int numDimensions,
-			final int numLabels,
-			final ObjectPool objectPool)
-	{
-		final List<Agent> agents = new ArrayList<>();
-		for (double i=0; i<numAgents; i++) {
-			final double weight = i/numAgents;
-			agents.add(maxLikelihoodAgent(numDimensions, numLabels, weight));
-		}
-		return new BasicPopulation(agents, objectPool, new RandomPairer());
-	}
-
-	private static Agent maxLikelihoodAgent(final int numDimensions, final int numLabels, final double weight) {
-		final List<Concept> concepts = new ArrayList<>();
-		final Random random = new Random();
-		for (int i=0; i<numLabels; i++) {
-			concepts.add(MaxLikelihoodConcept.randomConcept(numDimensions, random));
-		}
-		return agent().withConcepts(concepts).withWeight(weight).build();
-	}
-
-	public static BasicPopulation bayesianPopulation(
-			final int numAgents,
-			final int numDimensions,
-			final int numLabels,
-			final ObjectPool objectPool)
-	{
-		final List<Agent> agents = new ArrayList<>();
-		for (double i=0; i<numAgents; i++) {
-			final double weight = i/numAgents;
-			agents.add(bayesianAgent(numDimensions, numLabels, weight));
-		}
-		return new BasicPopulation(agents, objectPool, new RandomPairer());
-	}
-
-	private static BasicAgent bayesianAgent(final int numDimensions, final int numLabels, final double weight) {
-		final List<Concept> concepts = new ArrayList<>();
-		final Random random = new Random();
-		for (int i=0; i<numLabels; i++) {
-			concepts.add(BayesianConcept.randomConcept(numDimensions, random));
-		}
-		return agent().withConcepts(concepts).withWeight(weight).build();
-	}
 
 	public static OraclePopulation oraclePopulation(
 			final List<Agent> oracles,
 			final int numAgents,
 			final int numDimensions,
 			final int numLabels,
-			final double initialThreshold,
 			final ObjectPool objectPool,
-			final AssertionModel assertionModel)
+			final AssertionModel assertionModel,
+			final RandomConceptFactory factory)
 	{
-		final List<Agent> agents = new ArrayList<>();
-		for (double i=0; i<numAgents; i++) {
-			final double weight = i/numAgents;
-			agents.add(randomAgent(numDimensions, numLabels, initialThreshold, weight, assertionModel));
-		}
-		return new OraclePopulation(agents, oracles, objectPool, new RandomPairer());
+		return new OraclePopulation(
+				agents(numAgents, numDimensions, numLabels, assertionModel, factory),
+				oracles,
+				objectPool,
+				new RandomPairer());
 	}
 
 	public static BasicPopulation basicPopulation(
 			final int numAgents,
 			final int numDimensions,
 			final int numLabels,
-			final double initialThreshold,
 			final ObjectPool objectPool,
-			final AssertionModel assertionModel)
+			final AssertionModel assertionModel,
+			final RandomConceptFactory factory)
+	{
+		return new BasicPopulation(
+				agents(numAgents, numDimensions, numLabels, assertionModel, factory),
+				objectPool,
+				new RandomPairer());
+	}
+
+	private static List<Agent> agents(
+			final int numAgents,
+			final int numDimensions,
+			final int numLabels,
+			final AssertionModel assertionModel,
+			final RandomConceptFactory factory)
 	{
 		final List<Agent> agents = new ArrayList<>();
 		for (double i=0; i<numAgents; i++) {
 			final double weight = i/numAgents;
-			agents.add(randomAgent(numDimensions, numLabels, initialThreshold, weight, assertionModel));
+			agents.add(randomAgent(numDimensions, numLabels, weight, assertionModel, factory));
 		}
-		return new BasicPopulation(agents, objectPool, new RandomPairer());
+		return agents;
 	}
 
 	private static BasicAgent randomAgent(
 			final int numDimensions,
 			final int numLabels,
-			final double initialThreshold,
 			final double weight,
-			final AssertionModel assertionModel)
+			final AssertionModel assertionModel,
+			final RandomConceptFactory factory)
 	{
 		final List<Concept> concepts = new ArrayList<>();
-		final Random random = new Random();
 		for (int i=0; i<numLabels; i++) {
-			concepts.add(FuzzyConcept.randomConcept(numDimensions, initialThreshold, random));
+			concepts.add(factory.randomConcept(numDimensions));
 		}
 		return agent().withConcepts(concepts).withWeight(weight).withAssertionModel(assertionModel).build();
 	}
