@@ -19,9 +19,4 @@ public class MultivariateConceptFactory implements RandomConceptFactory {
 		return new MultivariateConcept(new Matrix(vals));
 	}
 
-	@Override
-	public Concept randomConcept(final int numDimensions, final double threshold) {
-		return randomConcept(numDimensions);
-	}
-
 }

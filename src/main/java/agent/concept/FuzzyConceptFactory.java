@@ -6,16 +6,16 @@ import java.util.Random;
 
 public class FuzzyConceptFactory implements RandomConceptFactory {
 
+	private final double threshold;
 	private final Random random = new Random();
 
-	@Override
-	public Concept randomConcept(final int numDimensions, final double threshold) {
-		return new FuzzyConcept(randomPoint(numDimensions, random), threshold);
+	public FuzzyConceptFactory(final double threshold) {
+		this.threshold = threshold;
 	}
 
 	@Override
 	public Concept randomConcept(final int numDimensions) {
-		return randomConcept(numDimensions, 2.0);
+		return new FuzzyConcept(randomPoint(numDimensions, random), threshold);
 	}
 
 }

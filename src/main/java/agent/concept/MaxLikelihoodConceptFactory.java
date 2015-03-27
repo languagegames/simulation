@@ -26,9 +26,4 @@ public class MaxLikelihoodConceptFactory implements RandomConceptFactory {
 		return new Point(coordinates);
 	}
 
-	@Override
-	public Concept randomConcept(final int numDimensions, final double threshold) {
-		return randomConcept(numDimensions);
-	}
-
 }
