@@ -1,15 +1,15 @@
-package languagegames;
+package population;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import languagegames.analysis.Analysis;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import conceptualspace.ObjectPool;
+import experiment.analysis.Analysis;
 import agent.Agent;
-import agent.Assertion;
+import agent.assertions.Assertion;
 
 public class BasicPopulation implements Population {
 

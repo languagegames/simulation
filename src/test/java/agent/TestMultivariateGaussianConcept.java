@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import utility.DataReader;
 import utility.matrix.Matrix;
+import agent.assertions.Assertion;
 import agent.concept.Concept;
 import agent.concept.MultivariateConcept;
 import conceptualspace.Point;

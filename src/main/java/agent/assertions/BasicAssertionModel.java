@@ -1,4 +1,4 @@
-package agent;
+package agent.assertions;
 
 import java.util.List;
 

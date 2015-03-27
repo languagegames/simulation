@@ -1,8 +1,6 @@
-package languagegames;
+package conceptualspace;
 
 import java.util.List;
-
-import conceptualspace.PerceptualObject;
 
 public interface ObjectPool {
 

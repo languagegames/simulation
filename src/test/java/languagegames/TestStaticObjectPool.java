@@ -9,6 +9,7 @@ import org.junit.Test;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
+import conceptualspace.StaticObjectPool;
 
 public class TestStaticObjectPool {
 

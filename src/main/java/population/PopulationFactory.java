@@ -1,12 +1,13 @@
-package languagegames;
+package population;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import conceptualspace.ObjectPool;
 import agent.Agent;
-import agent.AssertionModel;
 import agent.BasicAgent;
 import agent.BasicAgentBuilder;
+import agent.assertions.AssertionModel;
 import agent.concept.Concept;
 import agent.concept.RandomConceptFactory;
 

@@ -3,14 +3,17 @@ package languagegames;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import languagegames.analysis.Analysis;
-import languagegames.analysis.TimeSeries;
 
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
+
+import population.Population;
+import experiment.SimulationHistory;
+import experiment.analysis.Analysis;
+import experiment.analysis.TimeSeries;
 
 public class TestSimulationHistory {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();

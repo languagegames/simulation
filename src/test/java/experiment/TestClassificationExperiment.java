@@ -1,4 +1,4 @@
-package end2end;
+package experiment;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -13,11 +13,11 @@ import agent.BasicAgentBuilder;
 import agent.LabelMapping;
 import agent.OracleAgent;
 import agent.concept.FuzzyConcept;
-import classifier.ClassificationExperiment;
-import classifier.ClassificationTrial;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
+import experiment.ClassificationExperiment;
+import experiment.ClassificationTrial;
 
 public class TestClassificationExperiment {
 

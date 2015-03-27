@@ -1,6 +1,6 @@
 package agent.concept;
 
-import agent.Assertion;
+import agent.assertions.Assertion;
 import conceptualspace.Point;
 
 public interface Concept {

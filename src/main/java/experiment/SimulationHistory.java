@@ -1,10 +1,11 @@
-package languagegames;
+package experiment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import languagegames.analysis.Analysis;
-import languagegames.analysis.TimeSeries;
+import population.Population;
+import experiment.analysis.Analysis;
+import experiment.analysis.TimeSeries;
 
 public class SimulationHistory {
 

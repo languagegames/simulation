@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import agent.assertions.Assertion;
+import agent.assertions.ConjunctionAssertionModel;
 import agent.concept.Concept;
 import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;

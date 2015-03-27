@@ -10,9 +10,13 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
+import population.AgentPairer;
+import population.BasicPopulation;
+import population.StaticPairer;
 import agent.Agent;
-import agent.Assertion;
 import agent.BasicAgentBuilder;
+import agent.assertions.Assertion;
+import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;

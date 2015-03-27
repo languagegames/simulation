@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import agent.assertions.Assertion;
+import agent.assertions.AssertionModel;
 import agent.concept.Concept;
 import agent.concept.RandomConceptFactory;
 import conceptualspace.PerceptualObject;

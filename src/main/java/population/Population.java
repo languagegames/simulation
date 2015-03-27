@@ -1,6 +1,6 @@
-package languagegames;
+package population;
 
-import languagegames.analysis.Analysis;
+import experiment.analysis.Analysis;
 
 public interface Population {
 

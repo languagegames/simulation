@@ -14,7 +14,7 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import agent.Assertion;
+import agent.assertions.Assertion;
 import conceptualspace.Point;
 
 public class MaxLikelihoodConcept implements Concept {

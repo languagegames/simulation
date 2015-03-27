@@ -8,6 +8,7 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
+import agent.assertions.Assertion;
 import agent.concept.Concept;
 import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;

@@ -1,12 +1,12 @@
-package languagegames.analysis;
+package experiment.analysis;
 
 import java.util.List;
 
-import languagegames.AgentPairer;
-import languagegames.ObjectPool;
-import languagegames.RandomPairer;
+import population.AgentPairer;
+import population.RandomPairer;
 import agent.Agent;
-import agent.Assertion;
+import agent.assertions.Assertion;
+import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 
 public class CommunicationAnalysis implements Analysis {

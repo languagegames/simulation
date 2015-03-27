@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+import experiment.analysis.TimeSeries;
+import experiment.analysis.TimeSeriesAverage;
+
 public class TestTimeSeries {
 
 	@Test

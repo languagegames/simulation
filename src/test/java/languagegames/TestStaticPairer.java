@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.contains;
 
 import org.junit.Test;
 
+import population.StaticPairer;
+
 public class TestStaticPairer {
 
 	@Test

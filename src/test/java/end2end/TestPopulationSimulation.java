@@ -6,28 +6,27 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.util.List;
 
-import languagegames.AgentPairer;
-import languagegames.BasicPopulation;
-import languagegames.ObjectPool;
-import languagegames.Population;
-import languagegames.Simulation;
-import languagegames.SimulationHistory;
-import languagegames.StaticObjectPool;
-import languagegames.StaticPairer;
-import languagegames.analysis.Analysis;
-import languagegames.analysis.CommunicationAnalysis;
-import languagegames.analysis.TimeSeries;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import population.AgentPairer;
+import population.BasicPopulation;
+import population.Population;
+import population.StaticPairer;
 import utility.DataReader;
 import agent.Agent;
 import agent.BasicAgentBuilder;
 import agent.concept.FuzzyConcept;
+import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
+import conceptualspace.StaticObjectPool;
+import experiment.Simulation;
+import experiment.SimulationHistory;
+import experiment.analysis.Analysis;
+import experiment.analysis.CommunicationAnalysis;
+import experiment.analysis.TimeSeries;
 
 public class TestPopulationSimulation {
 

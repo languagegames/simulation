@@ -6,7 +6,7 @@ import static java.lang.Math.max;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import agent.Assertion;
+import agent.assertions.Assertion;
 import conceptualspace.Point;
 
 public class FuzzyConcept implements Concept {

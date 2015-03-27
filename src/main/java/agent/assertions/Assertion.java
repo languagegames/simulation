@@ -1,4 +1,4 @@
-package agent;
+package agent.assertions;
 
 import static java.util.Arrays.asList;
 

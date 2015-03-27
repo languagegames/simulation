@@ -1,21 +1,22 @@
-package languagegames;
+package conceptualspace;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-import conceptualspace.PerceptualObject;
+public class SuppliedObjectPool implements ObjectPool {
 
-public class StaticObjectPool implements ObjectPool {
+	private final List<PerceptualObject> objects = new ArrayList<>();
+	private final Random random;
 
-	List<PerceptualObject> objects = new ArrayList<>();
-
-	public StaticObjectPool(final List<PerceptualObject> objects) {
+	public SuppliedObjectPool(final List<PerceptualObject> objects) {
 		this.objects.addAll(objects);
+		random = new Random();
 	}
 
 	@Override
 	public PerceptualObject pick() {
-		return objects.remove(0);
+		return objects.get(random.nextInt(objects.size()));
 	}
 
 	@Override

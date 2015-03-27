@@ -1,24 +1,26 @@
-package languagegames;
+package conceptualspace;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import conceptualspace.PerceptualObject;
+public class RandomObjectPool implements ObjectPool {
 
-public class SuppliedObjectPool implements ObjectPool {
-
-	private final List<PerceptualObject> objects = new ArrayList<>();
+	private final int numDimensions;
 	private final Random random;
 
-	public SuppliedObjectPool(final List<PerceptualObject> objects) {
-		this.objects.addAll(objects);
+	public RandomObjectPool(final int numDimensions) {
+		this.numDimensions = numDimensions;
 		random = new Random();
 	}
 
 	@Override
 	public PerceptualObject pick() {
-		return objects.get(random.nextInt(objects.size()));
+		final List<Double> coordinates = new ArrayList<>();
+		for (int i=0; i<numDimensions; i++) {
+			coordinates.add(random.nextDouble());
+		}
+		return new SimpleObject(new Point(coordinates));
 	}
 
 	@Override

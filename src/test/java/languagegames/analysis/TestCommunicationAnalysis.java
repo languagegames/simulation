@@ -7,21 +7,21 @@ import static org.hamcrest.Matchers.equalTo;
 import java.util.ArrayList;
 import java.util.List;
 
-import languagegames.AgentPairer;
-import languagegames.ObjectPool;
-import languagegames.StaticPairer;
-
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
+import population.AgentPairer;
+import population.StaticPairer;
 import agent.Agent;
-import agent.Assertion;
+import agent.assertions.Assertion;
+import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
+import experiment.analysis.CommunicationAnalysis;
 
 public class TestCommunicationAnalysis {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();

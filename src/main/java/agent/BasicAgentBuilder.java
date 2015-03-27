@@ -5,6 +5,8 @@ import static java.util.Arrays.asList;
 import java.util.ArrayList;
 import java.util.List;
 
+import agent.assertions.AssertionModel;
+import agent.assertions.BasicAssertionModel;
 import agent.concept.Concept;
 
 public class BasicAgentBuilder {

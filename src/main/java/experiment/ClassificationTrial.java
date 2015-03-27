@@ -1,10 +1,10 @@
-package classifier;
+package experiment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import agent.Agent;
-import agent.Assertion;
+import agent.assertions.Assertion;
 import conceptualspace.PerceptualObject;
 
 public class ClassificationTrial {

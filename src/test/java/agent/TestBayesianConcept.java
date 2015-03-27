@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import agent.assertions.Assertion;
 import agent.concept.BayesianConcept;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;

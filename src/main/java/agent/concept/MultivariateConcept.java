@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import utility.matrix.Matrix;
-import agent.Assertion;
+import agent.assertions.Assertion;
 import conceptualspace.Point;
 
 public class MultivariateConcept implements Concept {

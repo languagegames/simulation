@@ -1,4 +1,4 @@
-package languagegames.analysis;
+package experiment.analysis;
 
 import java.util.ArrayList;
 import java.util.List;

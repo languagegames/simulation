@@ -1,4 +1,4 @@
-package classifier;
+package experiment;
 
 import java.util.ArrayList;
 import java.util.List;

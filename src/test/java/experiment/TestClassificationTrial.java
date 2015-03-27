@@ -1,4 +1,4 @@
-package classifier;
+package experiment;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,10 +15,11 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import agent.Agent;
-import agent.Assertion;
+import agent.assertions.Assertion;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
+import experiment.ClassificationTrial;
 
 public class TestClassificationTrial {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();

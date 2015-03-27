@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import languagegames.ObjectPool;
-import languagegames.RandomObjectPool;
 import agent.Agent;
-import agent.Assertion;
-import agent.ConjunctionAssertionModel;
+import agent.assertions.Assertion;
+import agent.assertions.ConjunctionAssertionModel;
 import agent.concept.FuzzyConceptFactory;
 import agent.concept.RandomConceptFactory;
+import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
+import conceptualspace.RandomObjectPool;
 
 
 public class GuessingGameExperiment {

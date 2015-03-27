@@ -7,10 +7,6 @@ import static org.hamcrest.Matchers.equalTo;
 import java.util.ArrayList;
 import java.util.List;
 
-import languagegames.AgentPairer;
-import languagegames.ObjectPool;
-import languagegames.StaticPairer;
-
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
@@ -18,12 +14,16 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import population.AgentPairer;
+import population.StaticPairer;
 import utility.FakeRandom;
 import agent.Agent;
-import agent.Assertion;
+import agent.assertions.Assertion;
+import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
+import experiment.analysis.GuessingAnalysis;
 
 public class TestGuessingAnalysis {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();

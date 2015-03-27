@@ -1,21 +1,25 @@
-package languagegames;
+package experiment;
 
-import static languagegames.analysis.TimeSeries.average;
+import static experiment.analysis.TimeSeries.average;
 import static utility.ResultsPrinter.print;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import languagegames.analysis.Analysis;
-import languagegames.analysis.CommunicationAnalysis;
-import languagegames.analysis.GuessingAnalysis;
-import languagegames.analysis.TimeSeries;
-import agent.AssertionModel;
-import agent.BasicAssertionModel;
+import conceptualspace.ObjectPool;
+import conceptualspace.RandomObjectPool;
+import population.Population;
+import population.PopulationFactory;
+import experiment.analysis.Analysis;
+import experiment.analysis.CommunicationAnalysis;
+import experiment.analysis.GuessingAnalysis;
+import experiment.analysis.TimeSeries;
+import agent.assertions.AssertionModel;
+import agent.assertions.BasicAssertionModel;
 import agent.concept.FuzzyConceptFactory;
 import agent.concept.RandomConceptFactory;
 
-public class Experiment {
+public class PopulationExperiment {
 
 	public static void main(final String[] args) {
 
@@ -32,7 +36,7 @@ public class Experiment {
 		final AssertionModel assertionModel = new BasicAssertionModel();
 		final RandomConceptFactory factory = new FuzzyConceptFactory(2.0);
 
-		final Experiment experiment = new Experiment(fileID, numAgents, numDimensions,
+		final PopulationExperiment experiment = new PopulationExperiment(fileID, numAgents, numDimensions,
 				numLabels, numRuns, timeSteps, weightIncrement, objectPool, assertionModel, factory);
 
 		experiment.run();
@@ -49,7 +53,7 @@ public class Experiment {
 	private final AssertionModel assertionModel;
 	private final RandomConceptFactory factory;
 
-	public Experiment(
+	public PopulationExperiment(
 			final String fileID,
 			final int numAgents,
 			final int numDimensions,

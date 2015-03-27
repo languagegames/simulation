@@ -1,4 +1,4 @@
-package languagegames;
+package population;
 
 import java.util.List;
 

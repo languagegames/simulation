@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 
 import org.junit.Test;
 
+import population.RandomPairer;
+
 public class TestRandomPairer {
 
 	@Test
