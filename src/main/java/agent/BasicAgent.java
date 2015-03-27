@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import agent.concept.Concept;
+import agent.concept.RandomConceptFactory;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 
@@ -21,6 +22,28 @@ public class BasicAgent implements Agent {
 		this.concepts.addAll(concepts);
 		this.weight = weight;
 		this.assertionModel = assertionModel;
+	}
+
+	public static BasicAgent randomAgent(
+			final int numDimensions,
+			final int numLabels,
+			final double weight,
+			final AssertionModel assertionModel,
+			final RandomConceptFactory factory)
+	{
+		return new BasicAgent(randomConcepts(numDimensions, numLabels, factory), weight, assertionModel);
+	}
+
+	private static List<Concept> randomConcepts(
+			final int numDimensions,
+			final int numLabels,
+			final RandomConceptFactory factory)
+	{
+		final List<Concept> concepts = new ArrayList<>();
+		for (int i=0; i<numLabels; i++) {
+			concepts.add(factory.randomConcept(numDimensions));
+		}
+		return concepts;
 	}
 
 	@Override
