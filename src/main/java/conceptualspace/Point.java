@@ -3,7 +3,6 @@ package conceptualspace;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static java.util.Arrays.asList;
-import jama.Matrix;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,8 @@ import java.util.Random;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import utility.matrix.Matrix;
 
 public class Point {
 

@@ -1,4 +1,4 @@
-package jama;
+package utility.matrix;
 
 import java.util.Arrays;
 

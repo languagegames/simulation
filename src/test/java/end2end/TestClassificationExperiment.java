@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import utility.DataReader;
 import agent.Agent;
 import agent.BasicAgentBuilder;
 import agent.LabelMapping;
@@ -17,7 +18,6 @@ import classifier.ClassificationTrial;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
-import datareader.DataReader;
 
 public class TestClassificationExperiment {
 

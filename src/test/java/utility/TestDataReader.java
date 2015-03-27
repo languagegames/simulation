@@ -1,4 +1,4 @@
-package datareader;
+package utility;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
+import utility.DataReader;
 import conceptualspace.Point;
 
 public class TestDataReader {

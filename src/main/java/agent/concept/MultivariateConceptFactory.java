@@ -1,8 +1,8 @@
 package agent.concept;
 
-import jama.Matrix;
-
 import java.util.Random;
+
+import utility.matrix.Matrix;
 
 public class MultivariateConceptFactory implements RandomConceptFactory {
 

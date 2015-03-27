@@ -4,11 +4,11 @@ import static java.lang.Math.PI;
 import static java.lang.Math.exp;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
-import jama.Matrix;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import utility.matrix.Matrix;
 import agent.Assertion;
 import conceptualspace.Point;
 

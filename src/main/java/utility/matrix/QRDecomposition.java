@@ -1,4 +1,4 @@
-package jama;
+package utility.matrix;
 
 class QRDecomposition implements java.io.Serializable {
 

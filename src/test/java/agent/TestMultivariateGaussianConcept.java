@@ -3,15 +3,15 @@ package agent;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.equalTo;
-import jama.Matrix;
 
 import org.junit.Test;
 
+import utility.DataReader;
+import utility.matrix.Matrix;
 import agent.concept.Concept;
 import agent.concept.MultivariateConcept;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
-import datareader.DataReader;
 
 public class TestMultivariateGaussianConcept {
 

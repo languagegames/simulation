@@ -1,11 +1,12 @@
-package jama;
+package utility.matrix;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
-import datareader.DataReader;
+import utility.DataReader;
+import utility.matrix.Matrix;
 
 public class TestMatrix {
 

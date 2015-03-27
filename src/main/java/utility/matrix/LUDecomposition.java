@@ -1,4 +1,4 @@
-package jama;
+package utility.matrix;
 
 class LUDecomposition implements java.io.Serializable {
 

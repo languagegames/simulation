@@ -21,13 +21,13 @@ import languagegames.analysis.TimeSeries;
 import org.junit.Before;
 import org.junit.Test;
 
+import utility.DataReader;
 import agent.Agent;
 import agent.BasicAgentBuilder;
 import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
-import datareader.DataReader;
 
 public class TestPopulationSimulation {
 
