@@ -10,23 +10,22 @@ import java.util.List;
 import org.junit.Test;
 
 import agent.assertions.Assertion;
-import agent.concept.MaxLikelihoodConcept;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
 
-public class TestMaxLikelihoodConcept {
+public class TestIndependentGaussianModel {
 
 	@Test
 	public void stores20PointsAtMost() {
 		final Point point = new Point(0.42);
 		final Assertion assertion = new Assertion(new SimpleObject(point), 42, 0.42);
-		MaxLikelihoodConcept concept = new MaxLikelihoodConcept(point, point);
+		IndependentGaussianModel concept = new IndependentGaussianModel(point, point);
 		final List<Point> points = new ArrayList<>();
 		for (int i=0; i<20; i++) {
 			points.add(point);
-			concept = concept.update(assertion);
+			concept = concept.update(assertion.object.observation());
 		}
-		assertThat(concept, equalTo(new MaxLikelihoodConcept(points)));
+		assertThat(concept, equalTo(new IndependentGaussianModel(points)));
 	}
 
 	@Test
@@ -34,19 +33,19 @@ public class TestMaxLikelihoodConcept {
 		final Point point0 = new Point(0.0);
 		final Point point1 = new Point(0.1);
 		final Point point2 = new Point(0.2);
-		final MaxLikelihoodConcept concept = new MaxLikelihoodConcept(point1, point0);
+		final IndependentGaussianModel concept = new IndependentGaussianModel(point1, point0);
 		final Assertion assertion = new Assertion(new SimpleObject(point2), 42, 0.42);
-		assertThat(concept.update(assertion), equalTo(new MaxLikelihoodConcept(point2, point1, point0)));
+		assertThat(concept.update(assertion.object.observation()), equalTo(new IndependentGaussianModel(point2, point1, point0)));
 	}
 
 	@Test
 	public void computesLikelihoodGivenPoint() {
-		final MaxLikelihoodConcept concept = new MaxLikelihoodConcept(
+		final IndependentGaussianModel concept = new IndependentGaussianModel(
 				new Point(0.5, 0.2), new Point(0.3, 0.4), new Point(0.7, 0.4));
 
 		final Point observation = new Point(0.5, 0.5);
 
-		assertThat(concept.appropriatenessOf(observation), closeTo(2.432, 0.001));
+		assertThat(concept.likelihood(observation), closeTo(2.432, 0.001));
 	}
 
 }
