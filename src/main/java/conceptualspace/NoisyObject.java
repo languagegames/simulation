@@ -1,69 +1,39 @@
 package conceptualspace;
 
-import static conceptualspace.Point.mean;
-import static conceptualspace.Point.standardDeviation;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import utility.matrix.Matrix;
+
 public class NoisyObject implements PerceptualObject {
 
-	private final List<Double> mean = new ArrayList<>();
-	private final List<Double> standardDeviation = new ArrayList<>();
+	private final Matrix mu;
+	private final Matrix sigma;
 	private final Random random;
 
-	public NoisyObject(final List<Double> mean, final List<Double> standardDeviation, final Random random) {
-		this.mean.addAll(mean);
-		this.standardDeviation.addAll(standardDeviation);
+	public NoisyObject(final Matrix data, final Random random) {
+		mu = data.mean();
+		sigma = data.covariance();
 		this.random = random;
-	}
-
-	public NoisyObject(final List<Double> mean, final List<Double> standardDeviation) {
-		this(mean, standardDeviation, new Random());
-	}
-
-	public static List<PerceptualObject> makeListFrom(
-			final List<Point> points, final int pointsPerObject, final int numDimensions) {
-		final int numObjects = points.size() / pointsPerObject;
-		final List<PerceptualObject> objects = new ArrayList<>();
-		for (int i=0; i<numObjects; i++) {
-			final List<Point> objectPoints = points.subList(i*pointsPerObject, i*pointsPerObject+pointsPerObject);
-			final NoisyObject object = new NoisyObject(
-					coordinates(mean(objectPoints), numDimensions),
-					coordinates(standardDeviation(objectPoints), numDimensions));
-			objects.add(object);
-		}
-		return objects;
-	}
-
-	private static List<Double> coordinates(final Point point, final int numDimensions) {
-		return point.coordinates().subList(0, numDimensions);
 	}
 
 	@Override
 	public Point observation() {
-		final List<Double> coordinates = new ArrayList<>();
-		for (int i=0; i<mean.size(); i++) {
-			coordinates.add(nextCoordinate(mean.get(i), standardDeviation.get(i)));
+		final int numDimensions = mu.getColumnDimension();
+		final double[][] coordinates = new double[1][numDimensions];
+		for (int i=0; i<numDimensions; i++) {
+			coordinates[0][i] = random.nextGaussian();
 		}
-		return new Point(coordinates);
-	}
-
-	private double nextCoordinate(final double mean, final double standardDeviation) {
-		double coordinate = mean + standardDeviation*random.nextGaussian();
-		while (coordinate > 1) {
-			coordinate = mean + standardDeviation*random.nextGaussian();
-		}
-		return coordinate;
+		final Matrix standardObservation = new Matrix(coordinates);
+		final Matrix observation = standardObservation.times(sigma).plus(mu);
+		return new Point(observation.getArray()[0]);
 	}
 
 	@Override
 	public String toString() {
-		return "Gaussian object with mean " + mean.toString() + " and SD " + standardDeviation.toString();
+		return "Noisy object with mean " + mu.toString() + " and covariance " + sigma.toString();
 	}
 
 	@Override
@@ -71,8 +41,8 @@ public class NoisyObject implements PerceptualObject {
 		if (obj instanceof NoisyObject) {
 			final NoisyObject other = (NoisyObject) obj;
 			return new EqualsBuilder()
-			.append(mean, other.mean)
-			.append(standardDeviation, other.standardDeviation)
+			.append(mu, other.mu)
+			.append(sigma, other.sigma)
 			.isEquals();
 		} else {
 			return false;
@@ -82,8 +52,8 @@ public class NoisyObject implements PerceptualObject {
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder()
-		.append(mean)
-		.append(standardDeviation)
+		.append(mu)
+		.append(sigma)
 		.toHashCode();
 	}
 
