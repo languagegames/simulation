@@ -84,7 +84,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
 		return X;
 	}
 
-	double[][] getArray () {
+	public double[][] getArray () {
 		return A;
 	}
 
