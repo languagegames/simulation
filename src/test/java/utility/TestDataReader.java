@@ -34,7 +34,7 @@ public class TestDataReader {
 				point(0.1, 0.8), point(0.5, 0.5), point(0.4, 0.2), point(0.9, 0.8), point(0.7, 0.3), point(0.8, 0.5)));
 	}
 
-	private Point point(final Double...coordinates) {
+	private Point point(final double...coordinates) {
 		return new Point(coordinates);
 	}
 

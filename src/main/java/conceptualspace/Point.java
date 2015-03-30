@@ -2,7 +2,6 @@ package conceptualspace;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
-import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +20,10 @@ public class Point {
 		this.coordinates.addAll(coordinates);
 	}
 
-	public Point(final Double...coordinates) {
-		this(asList(coordinates));
+	public Point(final double...coordinates) {
+		for (final double coordinate : coordinates) {
+			this.coordinates.add(coordinate);
+		}
 	}
 
 	public static Point randomPoint(final int numDimensions, final Random random) {
