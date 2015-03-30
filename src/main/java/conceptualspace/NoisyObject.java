@@ -1,5 +1,9 @@
 package conceptualspace;
 
+import static java.util.Arrays.copyOfRange;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -17,6 +21,32 @@ public class NoisyObject implements PerceptualObject {
 		mu = data.mean();
 		sigma = data.covariance();
 		this.random = random;
+	}
+
+	public static List<NoisyObject> makeListFrom(
+			final double[][] data, final int pointsPerObject, final int numDimensions) {
+		final int numObjects = data.length / pointsPerObject;
+		final List<NoisyObject> objects = new ArrayList<>();
+		for (int i=0; i<numObjects; i++) {
+			objects.add(object(data, pointsPerObject, numDimensions, i));
+		}
+		return objects;
+	}
+
+	private static NoisyObject object(final double[][] data,
+			final int pointsPerObject, final int numDimensions, final int i) {
+		final double[][] objectData = copyOfRange(data, i*pointsPerObject, i*pointsPerObject+pointsPerObject);
+		final NoisyObject object = new NoisyObject(
+				new Matrix(dimensionalise(objectData, numDimensions)), new Random());
+		return object;
+	}
+
+	private static double[][] dimensionalise(final double[][] data, final int numDimensions) {
+		final double[][] result = new double[data.length][numDimensions];
+		for (int i=0; i<data.length; i++) {
+			result[i] = copyOfRange(data[i], 0, numDimensions);
+		}
+		return result;
 	}
 
 	@Override
