@@ -33,7 +33,7 @@ public class IndependentGaussianModel implements LikelihoodModel {
 	}
 
 	@Override
-	public LikelihoodModel update(final Point point) {
+	public IndependentGaussianModel update(final Point point) {
 		List<Point> points = new ArrayList<>(this.points);
 		points.add(0, point);
 		final int maxCapacity = 20;
