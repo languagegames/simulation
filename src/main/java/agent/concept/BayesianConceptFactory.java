@@ -15,7 +15,7 @@ public class BayesianConceptFactory implements RandomConceptFactory {
 		final List<Point> points = new ArrayList<>();
 		points.add(randomPoint(numDimensions));
 		points.add(randomPoint(numDimensions));
-		return new BayesianConcept(points);
+		return new BayesianConcept(new IndependentGaussianModel(points), points.size());
 	}
 
 	private Point randomPoint(final int numDimensions) {
