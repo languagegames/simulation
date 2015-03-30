@@ -21,28 +21,37 @@ import conceptualspace.RandomObjectPool;
 
 public class GuessingGameExperiment {
 
-	private final int threshold;
+	private final double threshold;
 	private final double pMin, pMax;
+	private final int numDimensions;
+	private final int numLabels;
+	private final int numObjects;
+	private final int numRuns;
+	private final int numTrials;
+	private final ObjectPool objectPool;
+	private final RandomConceptFactory conceptFactory;
 
-	private final int numRuns = 100;
-	private final int numTrials = 10000;
-	private final int numDimensions = 3;
-	private final int numLabels = 10;
-	private final int numObjects = 20;
-	private final double weight = 0.42;
-	private final ObjectPool objectPool = new RandomObjectPool(numDimensions);
-	final RandomConceptFactory factory;
-
-	public static void main(final String[] args) {
-		final GuessingGameExperiment experiment = new GuessingGameExperiment(2, 0, 1);
-		experiment.run();
-	}
-
-	public GuessingGameExperiment(final int threshold, final double pMin, final double pMax) {
+	public GuessingGameExperiment(
+			final double threshold,
+			final double pMin,
+			final double pMax,
+			final int numDimensions,
+			final int numLabels,
+			final int numObjects,
+			final int numRuns,
+			final int numTrials)
+	{
 		this.threshold = threshold;
 		this.pMin = pMin;
 		this.pMax = pMax;
-		factory = new FuzzyConceptFactory(threshold);
+		this.numDimensions = numDimensions;
+		this.numLabels = numLabels;
+		this.numObjects = numObjects;
+		this.numRuns = numRuns;
+		this.numTrials = numTrials;
+
+		objectPool = new RandomObjectPool(numDimensions);
+		conceptFactory = new FuzzyConceptFactory(threshold);
 	}
 
 	public void run() {
@@ -69,7 +78,7 @@ public class GuessingGameExperiment {
 			final ConjunctionAssertionModel assertionModel = new ConjunctionAssertionModel(p);
 			double score = 0;
 			for (int j = 0; j<numTrials; j++) {
-				final Agent describer = randomAgent(numDimensions, numLabels, weight, assertionModel, factory);
+				final Agent describer = randomAgent(numDimensions, numLabels, 0.42, assertionModel, conceptFactory);
 				final Agent guesser = describer;
 				score += success(describer, guesser) ? 1 : 0;
 			}
