@@ -10,19 +10,19 @@ import java.util.Random;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class GaussianObject implements PerceptualObject {
+public class NoisyObject implements PerceptualObject {
 
 	private final List<Double> mean = new ArrayList<>();
 	private final List<Double> standardDeviation = new ArrayList<>();
 	private final Random random;
 
-	public GaussianObject(final List<Double> mean, final List<Double> standardDeviation, final Random random) {
+	public NoisyObject(final List<Double> mean, final List<Double> standardDeviation, final Random random) {
 		this.mean.addAll(mean);
 		this.standardDeviation.addAll(standardDeviation);
 		this.random = random;
 	}
 
-	public GaussianObject(final List<Double> mean, final List<Double> standardDeviation) {
+	public NoisyObject(final List<Double> mean, final List<Double> standardDeviation) {
 		this(mean, standardDeviation, new Random());
 	}
 
@@ -32,7 +32,7 @@ public class GaussianObject implements PerceptualObject {
 		final List<PerceptualObject> objects = new ArrayList<>();
 		for (int i=0; i<numObjects; i++) {
 			final List<Point> objectPoints = points.subList(i*pointsPerObject, i*pointsPerObject+pointsPerObject);
-			final GaussianObject object = new GaussianObject(
+			final NoisyObject object = new NoisyObject(
 					coordinates(mean(objectPoints), numDimensions),
 					coordinates(standardDeviation(objectPoints), numDimensions));
 			objects.add(object);
@@ -68,8 +68,8 @@ public class GaussianObject implements PerceptualObject {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj instanceof GaussianObject) {
-			final GaussianObject other = (GaussianObject) obj;
+		if (obj instanceof NoisyObject) {
+			final NoisyObject other = (NoisyObject) obj;
 			return new EqualsBuilder()
 			.append(mean, other.mean)
 			.append(standardDeviation, other.standardDeviation)
