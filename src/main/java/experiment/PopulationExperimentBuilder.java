@@ -50,7 +50,7 @@ public class PopulationExperimentBuilder {
 		return this;
 	}
 
-	public PopulationExperimentBuilder withNumRuns(final double weightIncrement) {
+	public PopulationExperimentBuilder withWeightIncrement(final double weightIncrement) {
 		this.weightIncrement = weightIncrement;
 		return this;
 	}
