@@ -23,10 +23,10 @@ public class NoisyObject implements PerceptualObject {
 		this.random = random;
 	}
 
-	public static List<NoisyObject> makeListFrom(
+	public static List<PerceptualObject> makeListFrom(
 			final double[][] data, final int pointsPerObject, final int numDimensions) {
 		final int numObjects = data.length / pointsPerObject;
-		final List<NoisyObject> objects = new ArrayList<>();
+		final List<PerceptualObject> objects = new ArrayList<>();
 		for (int i=0; i<numObjects; i++) {
 			objects.add(object(data, pointsPerObject, numDimensions, i));
 		}
