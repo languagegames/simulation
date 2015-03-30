@@ -6,41 +6,17 @@ import static utility.ResultsPrinter.print;
 import java.util.ArrayList;
 import java.util.List;
 
-import conceptualspace.ObjectPool;
-import conceptualspace.RandomObjectPool;
 import population.Population;
 import population.PopulationFactory;
+import agent.assertions.AssertionModel;
+import agent.concept.RandomConceptFactory;
+import conceptualspace.ObjectPool;
 import experiment.analysis.Analysis;
 import experiment.analysis.CommunicationAnalysis;
 import experiment.analysis.GuessingAnalysis;
 import experiment.analysis.TimeSeries;
-import agent.assertions.AssertionModel;
-import agent.assertions.BasicAssertionModel;
-import agent.concept.FuzzyConceptFactory;
-import agent.concept.RandomConceptFactory;
 
 public class PopulationExperiment {
-
-	public static void main(final String[] args) {
-
-		final String fileID = "default";
-
-		final int numAgents = 100;
-		final int numDimensions = 3;
-		final int numLabels = 10;
-		final int numRuns = 50;
-		final int timeSteps = 10000;
-		final double weightIncrement = 0.0001;
-
-		final ObjectPool objectPool = new RandomObjectPool(numDimensions);
-		final AssertionModel assertionModel = new BasicAssertionModel();
-		final RandomConceptFactory factory = new FuzzyConceptFactory(2.0);
-
-		final PopulationExperiment experiment = new PopulationExperiment(fileID, numAgents, numDimensions,
-				numLabels, numRuns, timeSteps, weightIncrement, objectPool, assertionModel, factory);
-
-		experiment.run();
-	}
 
 	private final String fileID;
 	private final int numAgents;
