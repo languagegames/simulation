@@ -1,4 +1,4 @@
-package experiment;
+package experiment.classification;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

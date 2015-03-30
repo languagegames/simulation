@@ -1,4 +1,4 @@
-package experiment;
+package experiment.population;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
