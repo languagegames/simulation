@@ -151,6 +151,18 @@ public class Matrix implements Cloneable, java.io.Serializable {
 		return X;
 	}
 
+	public Matrix plus (final Matrix B) {
+		checkMatrixDimensions(B);
+		final Matrix X = new Matrix(m,n);
+		final double[][] C = X.getArray();
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				C[i][j] = A[i][j] + B.A[i][j];
+			}
+		}
+		return X;
+	}
+
 	public Matrix minus (final Matrix B) {
 		checkMatrixDimensions(B);
 		final Matrix X = new Matrix(m,n);
