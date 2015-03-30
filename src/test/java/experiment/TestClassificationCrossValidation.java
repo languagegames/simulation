@@ -16,6 +16,8 @@ import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
+import experiment.classification.ClassificationCrossValidation;
+import experiment.classification.ClassificationTrial;
 
 public class TestClassificationCrossValidation {
 

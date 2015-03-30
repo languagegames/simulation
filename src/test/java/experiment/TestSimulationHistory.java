@@ -10,10 +10,10 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
+import analysis.Analysis;
+import analysis.TimeSeries;
 import population.Population;
-import experiment.SimulationHistory;
-import experiment.analysis.Analysis;
-import experiment.analysis.TimeSeries;
+import experiment.population.SimulationHistory;
 
 public class TestSimulationHistory {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();

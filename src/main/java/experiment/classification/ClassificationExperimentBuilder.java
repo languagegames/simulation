@@ -1,4 +1,4 @@
-package experiment;
+package experiment.classification;
 
 import agent.concept.FuzzyConceptFactory;
 import agent.concept.RandomConceptFactory;

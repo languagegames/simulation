@@ -1,6 +1,6 @@
-package experiment;
+package experiment.population;
 
-import static experiment.analysis.TimeSeries.average;
+import static analysis.TimeSeries.average;
 import static utility.ResultsPrinter.print;
 
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ import population.Population;
 import population.PopulationFactory;
 import agent.assertions.AssertionModel;
 import agent.concept.RandomConceptFactory;
+import analysis.Analysis;
+import analysis.CommunicationAnalysis;
+import analysis.GuessingAnalysis;
+import analysis.TimeSeries;
 import conceptualspace.ObjectPool;
-import experiment.analysis.Analysis;
-import experiment.analysis.CommunicationAnalysis;
-import experiment.analysis.GuessingAnalysis;
-import experiment.analysis.TimeSeries;
 
 public class PopulationExperiment {
 

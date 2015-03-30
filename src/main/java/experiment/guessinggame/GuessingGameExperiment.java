@@ -1,4 +1,4 @@
-package experiment;
+package experiment.guessinggame;
 
 import static agent.BasicAgent.randomAgent;
 import static java.lang.Math.pow;

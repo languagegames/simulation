@@ -1,4 +1,4 @@
-package experiment.analysis;
+package analysis;
 
 import java.util.List;
 

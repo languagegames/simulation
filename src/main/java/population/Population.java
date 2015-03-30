@@ -1,6 +1,6 @@
 package population;
 
-import experiment.analysis.Analysis;
+import analysis.Analysis;
 
 public interface Population {
 

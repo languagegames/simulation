@@ -1,4 +1,4 @@
-package experiment;
+package experiment.classification;
 
 import static agent.BasicAgent.randomAgent;
 import static utility.ResultsPrinter.print;

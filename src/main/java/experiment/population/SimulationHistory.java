@@ -1,11 +1,11 @@
-package experiment;
+package experiment.population;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import analysis.Analysis;
+import analysis.TimeSeries;
 import population.Population;
-import experiment.analysis.Analysis;
-import experiment.analysis.TimeSeries;
 
 public class SimulationHistory {
 

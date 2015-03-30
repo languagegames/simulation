@@ -19,11 +19,11 @@ import population.StaticPairer;
 import utility.FakeRandom;
 import agent.Agent;
 import agent.assertions.Assertion;
+import analysis.GuessingAnalysis;
 import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
-import experiment.analysis.GuessingAnalysis;
 
 public class TestGuessingAnalysis {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();

@@ -1,4 +1,4 @@
-package experiment.analysis;
+package analysis;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;

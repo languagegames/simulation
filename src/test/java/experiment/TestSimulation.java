@@ -17,14 +17,16 @@ import utility.DataReader;
 import agent.Agent;
 import agent.BasicAgentBuilder;
 import agent.concept.FuzzyConcept;
+import analysis.Analysis;
+import analysis.CommunicationAnalysis;
+import analysis.TimeSeries;
 import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
 import conceptualspace.StaticObjectPool;
-import experiment.analysis.Analysis;
-import experiment.analysis.CommunicationAnalysis;
-import experiment.analysis.TimeSeries;
+import experiment.population.Simulation;
+import experiment.population.SimulationHistory;
 
 public class TestSimulation {
 

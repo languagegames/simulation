@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import experiment.analysis.TimeSeries;
-import experiment.analysis.TimeSeriesAverage;
+import analysis.TimeSeries;
+import analysis.TimeSeriesAverage;
 
 public class TestTimeSeries {
 

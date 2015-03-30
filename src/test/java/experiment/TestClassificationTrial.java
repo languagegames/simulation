@@ -19,7 +19,7 @@ import agent.assertions.Assertion;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
-import experiment.ClassificationTrial;
+import experiment.classification.ClassificationTrial;
 
 public class TestClassificationTrial {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();

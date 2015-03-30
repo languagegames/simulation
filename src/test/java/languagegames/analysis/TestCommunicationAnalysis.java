@@ -17,11 +17,11 @@ import population.AgentPairer;
 import population.StaticPairer;
 import agent.Agent;
 import agent.assertions.Assertion;
+import analysis.CommunicationAnalysis;
 import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
-import experiment.analysis.CommunicationAnalysis;
 
 public class TestCommunicationAnalysis {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();

@@ -1,4 +1,4 @@
-package experiment;
+package experiment.guessinggame;
 
 
 public class GuessingGameExperimentBuilder {

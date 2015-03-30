@@ -7,9 +7,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import conceptualspace.ObjectPool;
-import experiment.analysis.Analysis;
 import agent.Agent;
 import agent.assertions.Assertion;
+import analysis.Analysis;
 
 public class BasicPopulation implements Population {
 
