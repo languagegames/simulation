@@ -6,7 +6,7 @@ import java.util.Random;
 
 import conceptualspace.Point;
 
-public class MaxLikelihoodConceptFactory implements RandomConceptFactory {
+public class SimpleMaxLikelihoodFactory implements RandomConceptFactory {
 
 	private final Random random = new Random();
 

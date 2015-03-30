@@ -6,7 +6,7 @@ import java.util.Random;
 
 import conceptualspace.Point;
 
-public class BayesianConceptFactory implements RandomConceptFactory {
+public class SimpleBayesianFactory implements RandomConceptFactory {
 
 	private final Random random = new Random();
 
