@@ -11,7 +11,7 @@ public class ClassificationExperimentBuilder {
 	private int numRuns = 50;
 	private int crossValFactor = 10;
 	private RandomConceptFactory conceptFactory = new FuzzyConceptFactory(2.0);
-	private String dataFile = "normalised.csv";
+	private String dataFile = "data.csv";
 	private String labelsFile = "labels10d.csv";
 
 	public ClassificationExperimentBuilder withName(final String fileID) {
