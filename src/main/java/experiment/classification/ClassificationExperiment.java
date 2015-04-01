@@ -57,7 +57,7 @@ public class ClassificationExperiment {
 			scores.add(crossValidation.score());
 		}
 
-		print(mean(scores) + ", " + standardDeviation(scores) + ".txt", fileID);
+		print(mean(scores) + ", " + standardDeviation(scores), fileID + ".txt");
 	}
 
 }
