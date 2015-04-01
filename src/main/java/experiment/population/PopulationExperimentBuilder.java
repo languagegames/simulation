@@ -1,11 +1,15 @@
 package experiment.population;
 
+import java.util.List;
+
 import agent.assertions.AssertionModel;
 import agent.assertions.BasicAssertionModel;
 import agent.concept.FuzzyConceptFactory;
 import agent.concept.RandomConceptFactory;
 import conceptualspace.ObjectPool;
+import conceptualspace.PerceptualObject;
 import conceptualspace.RandomObjectPool;
+import conceptualspace.SuppliedObjectPool;
 
 public class PopulationExperimentBuilder {
 
@@ -55,8 +59,8 @@ public class PopulationExperimentBuilder {
 		return this;
 	}
 
-	public PopulationExperimentBuilder withObjectsFrom(final ObjectPool objectPool) {
-		this.objectPool = objectPool;
+	public PopulationExperimentBuilder withObjectsFrom(final List<PerceptualObject> objects) {
+		objectPool = new SuppliedObjectPool(objects);
 		return this;
 	}
 
