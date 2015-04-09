@@ -6,10 +6,10 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import conceptualspace.ObjectPool;
 import agent.Agent;
 import agent.assertions.Assertion;
 import analysis.Analysis;
+import conceptualspace.ObjectPool;
 
 public class OraclePopulation implements Population {
 
@@ -84,7 +84,9 @@ public class OraclePopulation implements Population {
 
 	private void updateListener(final List<Agent> updatedAgents, final Agent speaker, final Agent listener) {
 		final Assertion speakerAssertion = speaker.assertion(objectPool.pick());
-		updatedAgents.set(agents.indexOf(listener), listener.learn(speakerAssertion));
+		if (agents.contains(listener)) {
+			updatedAgents.set(agents.indexOf(listener), listener.learn(speakerAssertion));
+		}
 	}
 
 	@Override
