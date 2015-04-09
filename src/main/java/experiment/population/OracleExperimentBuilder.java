@@ -9,7 +9,7 @@ public class OracleExperimentBuilder {
 
 	private String fileID = "oracle";
 	private String dataFile = "data.csv";
-	private String labelsFile = "labels.csv";
+	private String labelsFile = "labels10d.csv";
 	private int numOracles = 1;
 	private int numAgents = 100;
 	private int numDimensions = 3;
