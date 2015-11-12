@@ -3,6 +3,7 @@ package agent;
 import java.util.List;
 
 import agent.assertions.Assertion;
+import agent.concept.LabelCounts;
 import conceptualspace.PerceptualObject;
 
 public interface Agent {
@@ -16,5 +17,7 @@ public interface Agent {
 	Agent incrementWeight(double weightIncrement);
 
 	int guess(List<PerceptualObject> guessingSet, Assertion assertion);
+
+	LabelCounts labelCounts();
 
 }
