@@ -12,6 +12,7 @@ import org.junit.Test;
 import agent.assertions.Assertion;
 import agent.concept.Concept;
 import agent.concept.FuzzyConcept;
+import agent.concept.LabelCount;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
@@ -22,6 +23,15 @@ public class TestBasicAgent {
 	private final PerceptualObject someObject = object(0.42);
 	private final Concept aConcept = new FuzzyConcept(new Point(0.7), 1, 1),
 			anotherConcept = new FuzzyConcept(new Point(0.5), 1, 1);
+
+	@Test
+	public void countsObservationsOfEachLabel() {
+		final BasicAgent agent = agent().withConcepts(
+				new FuzzyConcept(new Point(0.42), 0.42, 4),
+				new FuzzyConcept(new Point(0.42), 0.42, 2))
+				.build();
+		assertThat(agent.labelCount(), equalTo(new LabelCount(4,2)));
+	}
 
 	@Test
 	public void guessesMostAppropriateObjectGivenConjunctionAssertion() {

@@ -17,6 +17,11 @@ public class BayesianConcept implements Concept {
 	}
 
 	@Override
+	public int numObservations() {
+		return numObservations;
+	}
+
+	@Override
 	public BayesianConcept update(final Assertion assertion) {
 		return new BayesianConcept(likelihoodModel.update(assertion.object.observation()), numObservations+1);
 	}

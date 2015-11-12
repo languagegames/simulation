@@ -50,6 +50,15 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
+	public LabelCount labelCount() {
+		final List<Integer> values = new ArrayList<>();
+		for (final Concept concept : concepts) {
+			values.add(concept.numObservations());
+		}
+		return new LabelCount(values);
+	}
+
+	@Override
 	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
 		int guess = 0; double highestAppropriateness = 0;
 		for (final PerceptualObject object : guessingSet) {
@@ -111,12 +120,6 @@ public class BasicAgent implements Agent {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	@Override
-	public LabelCount labelCount() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

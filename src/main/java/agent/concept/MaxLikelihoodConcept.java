@@ -17,6 +17,11 @@ public class MaxLikelihoodConcept implements Concept {
 	}
 
 	@Override
+	public int numObservations() {
+		return numObservations;
+	}
+
+	@Override
 	public MaxLikelihoodConcept update(final Assertion assertion) {
 		return new MaxLikelihoodConcept(likelihoodModel.update(assertion.object.observation()), numObservations+1);
 	}

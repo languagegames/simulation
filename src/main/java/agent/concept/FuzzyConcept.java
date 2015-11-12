@@ -22,6 +22,11 @@ public class FuzzyConcept implements Concept {
 	}
 
 	@Override
+	public int numObservations() {
+		return numObservations;
+	}
+
+	@Override
 	public FuzzyConcept update(final Assertion assertion) {
 		final Point target = assertion.object.observation();
 		if (appropriatenessOf(target) < assertion.weight) {
