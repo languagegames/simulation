@@ -1,24 +1,26 @@
 package analysis;
 
+import static agent.concept.LabelCount.sum;
 import static java.lang.Math.log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import agent.Agent;
-import agent.concept.LabelCounts;
+import agent.concept.LabelCount;
 
 public class EntropyAnalysis implements Analysis {
 
 	@Override
 	public double analyse(final List<Agent> agents) {
-		LabelCounts counts = null;
+		final List<LabelCount> counts = new ArrayList<>();
 		for (final Agent agent : agents) {
-			counts = agent.labelCounts();
+			counts.add(agent.labelCount());
 		}
-		return entropy(counts);
+		return entropy(sum(counts));
 	}
 
-	private double entropy(final LabelCounts counts) {
+	private double entropy(final LabelCount counts) {
 		double result = 0;
 		final List<Double> frequencies = counts.frequencies();
 		for (final Double frequency : frequencies) {

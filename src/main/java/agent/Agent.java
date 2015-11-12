@@ -3,7 +3,7 @@ package agent;
 import java.util.List;
 
 import agent.assertions.Assertion;
-import agent.concept.LabelCounts;
+import agent.concept.LabelCount;
 import conceptualspace.PerceptualObject;
 
 public interface Agent {
@@ -18,6 +18,6 @@ public interface Agent {
 
 	int guess(List<PerceptualObject> guessingSet, Assertion assertion);
 
-	LabelCounts labelCounts();
+	LabelCount labelCount();
 
 }

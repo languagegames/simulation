@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import agent.assertions.Assertion;
 import agent.assertions.AssertionModel;
 import agent.concept.Concept;
-import agent.concept.LabelCounts;
+import agent.concept.LabelCount;
 import agent.concept.RandomConceptFactory;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
@@ -114,7 +114,7 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
-	public LabelCounts labelCounts() {
+	public LabelCount labelCount() {
 		// TODO Auto-generated method stub
 		return null;
 	}

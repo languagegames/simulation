@@ -3,7 +3,7 @@ package agent;
 import java.util.List;
 
 import agent.assertions.Assertion;
-import agent.concept.LabelCounts;
+import agent.concept.LabelCount;
 import conceptualspace.PerceptualObject;
 
 
@@ -49,7 +49,7 @@ public class OracleAgent implements Agent {
 	}
 
 	@Override
-	public LabelCounts labelCounts() {
+	public LabelCount labelCount() {
 		// TODO Auto-generated method stub
 		return null;
 	}
