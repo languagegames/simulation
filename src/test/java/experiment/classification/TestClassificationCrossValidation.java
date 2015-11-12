@@ -16,15 +16,13 @@ import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
-import experiment.classification.ClassificationCrossValidation;
-import experiment.classification.ClassificationTrial;
 
 public class TestClassificationCrossValidation {
 
 	private final Agent pupil = new BasicAgentBuilder()
 			.withConcepts(
-					new FuzzyConcept(new Point(0.3, 0.4), 1.0),
-					new FuzzyConcept(new Point(0.6, 0.5), 0.7))
+					new FuzzyConcept(new Point(0.3, 0.4), 1.0, 1),
+					new FuzzyConcept(new Point(0.6, 0.5), 0.7, 1))
 			.build();
 
 	@Test

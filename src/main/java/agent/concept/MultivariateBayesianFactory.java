@@ -16,7 +16,7 @@ public class MultivariateBayesianFactory implements RandomConceptFactory {
 				vals[i][j] = random.nextDouble();
 			}
 		}
-		return new BayesianConcept(new MultivariateGaussianModel(new Matrix(vals)), numDimensions+1);
+		return new BayesianConcept(new MultivariateGaussianModel(new Matrix(vals)), 1);
 	}
 
 }

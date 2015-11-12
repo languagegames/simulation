@@ -16,7 +16,7 @@ public class MultivariateMaxLikelihoodFactory implements RandomConceptFactory {
 				vals[i][j] = random.nextDouble();
 			}
 		}
-		return new MaxLikelihoodConcept(new MultivariateGaussianModel(new Matrix(vals)));
+		return new MaxLikelihoodConcept(new MultivariateGaussianModel(new Matrix(vals)), 1);
 	}
 
 }

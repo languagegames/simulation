@@ -15,7 +15,7 @@ public class SimpleMaxLikelihoodFactory implements RandomConceptFactory {
 		final List<Point> points = new ArrayList<>();
 		points.add(randomPoint(numDimensions));
 		points.add(randomPoint(numDimensions));
-		return new MaxLikelihoodConcept(new IndependentGaussianModel(points));
+		return new MaxLikelihoodConcept(new IndependentGaussianModel(points), 1);
 	}
 
 	private Point randomPoint(final int numDimensions) {

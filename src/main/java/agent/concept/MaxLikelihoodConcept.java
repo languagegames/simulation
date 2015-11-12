@@ -9,14 +9,16 @@ import conceptualspace.Point;
 public class MaxLikelihoodConcept implements Concept {
 
 	private final LikelihoodModel likelihoodModel;
+	private final int numObservations;
 
-	public MaxLikelihoodConcept(final LikelihoodModel likelihoodModel) {
+	public MaxLikelihoodConcept(final LikelihoodModel likelihoodModel, final int numObservations) {
 		this.likelihoodModel = likelihoodModel;
+		this.numObservations = numObservations;
 	}
 
 	@Override
 	public MaxLikelihoodConcept update(final Assertion assertion) {
-		return new MaxLikelihoodConcept(likelihoodModel.update(assertion.object.observation()));
+		return new MaxLikelihoodConcept(likelihoodModel.update(assertion.object.observation()), numObservations+1);
 	}
 
 	@Override

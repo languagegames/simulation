@@ -25,8 +25,6 @@ import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
 import conceptualspace.StaticObjectPool;
-import experiment.population.Simulation;
-import experiment.population.SimulationHistory;
 
 public class TestSimulation {
 
@@ -39,29 +37,29 @@ public class TestSimulation {
 	public void setUp() {
 		agent0 = agent()
 					.withConcepts(
-							new FuzzyConcept(new Point(0.7, 0.5), 1.3),
-							new FuzzyConcept(new Point(0.2, 0.8), 0.7))
+							new FuzzyConcept(new Point(0.7, 0.5), 1.3, 1),
+							new FuzzyConcept(new Point(0.2, 0.8), 0.7, 1))
 					.withWeight(0.8)
 					.build();
 
 		agent1 = agent()
 				.withConcepts(
-						new FuzzyConcept(new Point(0.4, 0.6), 1.6),
-						new FuzzyConcept(new Point(0.7, 0.6), 1.3))
+						new FuzzyConcept(new Point(0.4, 0.6), 1.6, 1),
+						new FuzzyConcept(new Point(0.7, 0.6), 1.3, 1))
 				.withWeight(0.2)
 				.build();
 
 		agent2 = agent()
 				.withConcepts(
-						new FuzzyConcept(new Point(0.7, 0.2), 0.9),
-						new FuzzyConcept(new Point(0.3, 0.4), 2.0))
+						new FuzzyConcept(new Point(0.7, 0.2), 0.9, 1),
+						new FuzzyConcept(new Point(0.3, 0.4), 2.0, 1))
 				.withWeight(0.3)
 				.build();
 
 		agent3 = agent()
 				.withConcepts(
-						new FuzzyConcept(new Point(0.9, 1.0), 1.9),
-						new FuzzyConcept(new Point(0.9, 0.1), 1.6))
+						new FuzzyConcept(new Point(0.9, 1.0), 1.9, 1),
+						new FuzzyConcept(new Point(0.9, 0.1), 1.6, 1))
 				.withWeight(0.4)
 				.build();
 

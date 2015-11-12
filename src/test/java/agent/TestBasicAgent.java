@@ -20,8 +20,8 @@ public class TestBasicAgent {
 
 	private final double someWeight = 0.42;
 	private final PerceptualObject someObject = object(0.42);
-	private final Concept aConcept = new FuzzyConcept(new Point(0.7), 1),
-			anotherConcept = new FuzzyConcept(new Point(0.5), 1);
+	private final Concept aConcept = new FuzzyConcept(new Point(0.7), 1, 1),
+			anotherConcept = new FuzzyConcept(new Point(0.5), 1, 1);
 
 	@Test
 	public void guessesMostAppropriateObjectGivenConjunctionAssertion() {
@@ -56,8 +56,8 @@ public class TestBasicAgent {
 	public void assertsAccordingToMostAppropriateConcept() {
 		final BasicAgent agent = agent()
 				.withConcepts(
-						new FuzzyConcept(new Point(0.2), 0.7),
-						new FuzzyConcept(new Point(0.5), 0.5))
+						new FuzzyConcept(new Point(0.2), 0.7, 1),
+						new FuzzyConcept(new Point(0.5), 0.5, 1))
 				.withWeight(someWeight)
 				.build();
 
@@ -72,15 +72,15 @@ public class TestBasicAgent {
 	public void learnsByUpdatingAppropriateConcept() {
 		final BasicAgent agent = agent()
 				.withConcepts(
-						new FuzzyConcept(new Point(0.42), 0.42),
-						new FuzzyConcept(new Point(0.5), 0.5))
+						new FuzzyConcept(new Point(0.42), 0.42, 1),
+						new FuzzyConcept(new Point(0.5), 0.5, 1))
 				.withWeight(someWeight)
 				.build();
 
 		final Agent updatedAgent = agent()
 				.withConcepts(
-						new FuzzyConcept(new Point(0.42), 0.42),
-						new FuzzyConcept(new Point(0.74), 0.8))
+						new FuzzyConcept(new Point(0.42), 0.42, 1),
+						new FuzzyConcept(new Point(0.74), 0.8, 2))
 				.withWeight(someWeight)
 				.build();
 

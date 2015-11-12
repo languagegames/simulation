@@ -10,8 +10,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import agent.assertions.Assertion;
-import agent.assertions.ConjunctionAssertionModel;
 import agent.concept.Concept;
 import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;
@@ -26,11 +24,11 @@ public class TestConjunctionAssertionModel {
 	@Before
 	public void setUp() {
 		concepts.addAll(asList(
-				new FuzzyConcept(new Point(0.0, 0.5), 2.2),
-				new FuzzyConcept(new Point(0.5, 0.0), 1.7),
-				new FuzzyConcept(new Point(0.6, 0.2), 1.9),
-				new FuzzyConcept(new Point(0.6, 0.9), 2.0),
-				new FuzzyConcept(new Point(0.6, 0.2), 2.2)));
+				new FuzzyConcept(new Point(0.0, 0.5), 2.2, 1),
+				new FuzzyConcept(new Point(0.5, 0.0), 1.7, 1),
+				new FuzzyConcept(new Point(0.6, 0.2), 1.9, 1),
+				new FuzzyConcept(new Point(0.6, 0.9), 2.0, 1),
+				new FuzzyConcept(new Point(0.6, 0.2), 2.2, 1)));
 	}
 
 	@Test

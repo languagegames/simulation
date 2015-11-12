@@ -13,10 +13,23 @@ public class FuzzyConcept implements Concept {
 
 	private final Point prototype;
 	private final double threshold;
+	private final int numObservations;
 
-	public FuzzyConcept(final Point prototype, final double threshold) {
+	public FuzzyConcept(final Point prototype, final double threshold, final int numObservations) {
 		this.prototype = prototype;
 		this.threshold = threshold;
+		this.numObservations = numObservations;
+	}
+
+	@Override
+	public FuzzyConcept update(final Assertion assertion) {
+		final Point target = assertion.object.observation();
+		if (appropriatenessOf(target) < assertion.weight) {
+			final Point newPrototype = prototype.plus((target.minus(prototype)).times(lambda(assertion.weight, target)));
+			final double newThreshold = alpha(assertion.weight, target) * threshold;
+			return new FuzzyConcept(newPrototype, newThreshold, numObservations+1);
+		}
+		return this;
 	}
 
 	public double overlapWith(final FuzzyConcept other) {
@@ -35,17 +48,6 @@ public class FuzzyConcept implements Concept {
 	@Override
 	public double appropriatenessOf(final Point observation) {
 		return max(1 - observation.minus(prototype).norm()/threshold, 0);
-	}
-
-	@Override
-	public FuzzyConcept update(final Assertion assertion) {
-		final Point target = assertion.object.observation();
-		if (appropriatenessOf(target) < assertion.weight) {
-			final Point newPrototype = prototype.plus((target.minus(prototype)).times(lambda(assertion.weight, target)));
-			final double newThreshold = alpha(assertion.weight, target) * threshold;
-			return new FuzzyConcept(newPrototype, newThreshold);
-		}
-		return this;
 	}
 
 	private double lambda(final double weight, final Point target) {
