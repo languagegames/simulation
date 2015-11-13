@@ -18,13 +18,19 @@ public class AssertionAnalysis implements Analysis {
 	@Override
 	public double analyse(final List<Agent> agents) {
 		AssertionCount count = new AssertionCount();
-		final Agent agent = agents.get(0);
+		for (final Agent agent : agents) {
+			count = updateCountFor(count, agent);
+		}
+		return (double) (count.max()) / count.total();
+	}
+
+	private AssertionCount updateCountFor(AssertionCount count, final Agent agent) {
 		for (int i=0; i<10; i++) {
 			final PerceptualObject object = objectPool.pick();
 			final Assertion assertion = agent.assertion(object);
 			count = count.add(assertion.label);
 		}
-		return (double) (count.max()) / count.total();
+		return count;
 	}
 
 }
