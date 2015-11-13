@@ -31,7 +31,24 @@ public class TestEntropyAnalysis {
 	private final Assertion assertion2 = new Assertion(object, 2, 0.42);
 
 	@Test
-	public void returnsFrequencyOfAnAgentsMostCommonLabel() {
+	public void returnsLabelEntropyOverMultipleAgents() {
+		final EntropyAnalysis analysis = new EntropyAnalysis(pool);
+		agents.add(agent1);
+		agents.add(agent2);
+
+		context.checking(new Expectations() {{
+			exactly(20).of(pool).pick(); will(returnValue(object));
+			exactly(8).of(agent1).assertion(object); will(returnValue(assertion1));
+			exactly(2).of(agent1).assertion(object); will(returnValue(assertion2));
+			exactly(6).of(agent2).assertion(object); will(returnValue(assertion1));
+			exactly(4).of(agent2).assertion(object); will(returnValue(assertion2));
+		}});
+
+		assertThat(analysis.analyse(agents), closeTo(0.88129, 0.00001));
+	}
+
+	@Test
+	public void returnsEntropyOverAnAgentsLabelFrequencies() {
 		final EntropyAnalysis analysis = new EntropyAnalysis(pool);
 		agents.add(agent1);
 
