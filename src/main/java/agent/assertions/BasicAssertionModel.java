@@ -1,6 +1,7 @@
 package agent.assertions;
 
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -13,7 +14,7 @@ public class BasicAssertionModel implements AssertionModel {
 
 	@Override
 	public Assertion assertion(final PerceptualObject object, final List<Concept> concepts, final double weight) {
-		Concept mostAppropriate = concepts.get(0);
+		Concept mostAppropriate = concepts.get(new Random().nextInt(concepts.size()));
 		double maxAppropriateness = 0;
 		for (final Concept concept : concepts) {
 			final Point observation = object.observation();
