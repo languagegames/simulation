@@ -2,10 +2,11 @@ package analysis;
 
 import java.util.List;
 
+import population.AgentInteractor;
 import population.AgentPairer;
+import population.DifferentObservationInteractor;
 import population.RandomPairer;
 import agent.Agent;
-import agent.assertions.Assertion;
 import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 
@@ -14,6 +15,7 @@ public class CommunicationAnalysis implements Analysis {
 	private final int numGames;
 	private final AgentPairer agentPairer;
 	private final ObjectPool objectPool;
+	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	public CommunicationAnalysis(final int numGames, final AgentPairer agentPairer, final ObjectPool objectPool) {
 		this.numGames = numGames;
@@ -41,9 +43,7 @@ public class CommunicationAnalysis implements Analysis {
 		final List<PerceptualObject> objects = objectPool.pick(numGames);
 		double sumOfScores = 0;
 		for (final PerceptualObject object : objects) {
-			final Assertion first = agent.assertion(object.observation());
-			final Assertion second = other.assertion(object.observation());
-			sumOfScores += (first.matches(second)) ? 1 : 0;
+			sumOfScores += agentInteractor.communicationGameResult(agent, other, object);
 		}
 		return sumOfScores / numGames;
 	}

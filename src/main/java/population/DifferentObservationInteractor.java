@@ -13,6 +13,14 @@ import conceptualspace.PerceptualObject;
 public class DifferentObservationInteractor implements AgentInteractor {
 
 	@Override
+	public int communicationGameResult(final Agent agent, final Agent other,
+			final PerceptualObject object) {
+		final Assertion first = agent.assertion(object.observation());
+		final Assertion second = other.assertion(object.observation());
+		return first.matches(second) ? 1 : 0;
+	}
+
+	@Override
 	public void updateListener(
 			final List<Agent> agents,
 			final List<Agent> updatedAgents,
