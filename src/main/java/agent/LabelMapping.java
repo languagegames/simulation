@@ -23,9 +23,4 @@ public class LabelMapping {
 		return labels.get(index);
 	}
 
-	public int label(final PerceptualObject object) {
-		final int index = data.indexOf(object);
-		return labels.get(index);
-	}
-
 }
