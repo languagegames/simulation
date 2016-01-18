@@ -14,7 +14,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import population.AgentInteractor;
 import population.AgentPairer;
+import population.DifferentObservationInteractor;
 import population.StaticPairer;
 import utility.FakeRandom;
 import agent.Agent;
@@ -36,6 +38,7 @@ public class TestGuessingAnalysis {
 	private final PerceptualObject otherObject = new SimpleObject(new Point(0.43));
 	private final List<Agent> agents = new ArrayList<>();
 	private final List<PerceptualObject> guessingSet = new ArrayList<>();
+	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	@Before
 	public void setUp() {
@@ -46,7 +49,8 @@ public class TestGuessingAnalysis {
 	public void targetObjectIsSelectedAtRandom() {
 		final int targetIndex = 2;
 		guessingSet.addAll(asList(otherObject, otherObject, target, otherObject, otherObject));
-		final GuessingAnalysis analysis = new GuessingAnalysis(1, 5, agentPairer, objectPool, new FakeRandom(targetIndex));
+		final GuessingAnalysis analysis = new GuessingAnalysis(
+				1, 5, agentPairer, objectPool, new FakeRandom(targetIndex), agentInteractor);
 
 		final Assertion assertion = new Assertion(targetIndex, 0.42);
 
@@ -62,7 +66,8 @@ public class TestGuessingAnalysis {
 	@Test
 	public void pairSucceedsIfTargetObjectIsGuessedCorrectly() {
 		guessingSet.addAll(asList(target, otherObject, otherObject, otherObject, otherObject));
-		final GuessingAnalysis analysis = new GuessingAnalysis(1, 5, agentPairer, objectPool, new FakeRandom(0));
+		final GuessingAnalysis analysis = new GuessingAnalysis(
+				1, 5, agentPairer, objectPool, new FakeRandom(0), agentInteractor);
 
 		final Assertion assertion = new Assertion(0, 0.42);
 

@@ -5,7 +5,6 @@ import java.util.Random;
 
 import population.AgentInteractor;
 import population.AgentPairer;
-import population.DifferentObservationInteractor;
 import population.RandomPairer;
 import agent.Agent;
 import conceptualspace.ObjectPool;
@@ -17,24 +16,26 @@ public class GuessingAnalysis implements Analysis {
 	private final AgentPairer agentPairer;
 	private final ObjectPool objectPool;
 	private final Random random;
-	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
+	private final AgentInteractor agentInteractor;
 
 	public GuessingAnalysis(
 			final int numGames,
 			final int numObjects,
 			final AgentPairer agentPairer,
 			final ObjectPool objectPool,
-			final Random random)
+			final Random random,
+			final AgentInteractor agentInteractor)
 	{
 		this.numGames = numGames;
 		this.numObjects = numObjects;
 		this.agentPairer = agentPairer;
 		this.objectPool = objectPool;
 		this.random = random;
+		this.agentInteractor = agentInteractor;
 	}
 
-	public GuessingAnalysis(final ObjectPool objectPool) {
-		this(10, 5, new RandomPairer(), objectPool, new Random());
+	public GuessingAnalysis(final ObjectPool objectPool, final AgentInteractor agentInteractor) {
+		this(10, 5, new RandomPairer(), objectPool, new Random(), agentInteractor);
 	}
 
 	@Override

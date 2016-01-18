@@ -84,7 +84,7 @@ public class OracleExperiment {
 			final SimulationHistory history = simulation.run(timeSteps);
 
 			final Analysis communicationAnalysis = new CommunicationAnalysis(objectPool, agentInteractor);
-			final Analysis guessingAnalysis = new GuessingAnalysis(objectPool);
+			final Analysis guessingAnalysis = new GuessingAnalysis(objectPool, agentInteractor);
 			communicationResults.add(history.timeSeriesFrom(communicationAnalysis, 10));
 			guessingResults.add(history.timeSeriesFrom(guessingAnalysis, 10));
 		}
