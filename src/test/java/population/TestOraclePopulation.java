@@ -27,7 +27,7 @@ public class TestOraclePopulation {
 	private final PerceptualObject object = new SimpleObject(new Point(0.42));
 	private final Assertion assertion0 = new Assertion(object, 42, 0.42);
 	private final Assertion assertion1 = new Assertion(object, 43, 0.42);
-	private final AgentInteractor agentInteractor = new SameObservationInteractor();
+	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	@Test
 	public void worksWhenNumberOfAllAgentsIsOdd() {

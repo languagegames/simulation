@@ -10,7 +10,7 @@ import agent.assertions.Assertion;
 import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 
-public class SameObservationInteractor implements AgentInteractor {
+public class DifferentObservationInteractor implements AgentInteractor {
 
 	@Override
 	public void updateListener(
