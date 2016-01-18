@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import population.AgentInteractor;
 import population.AgentPairer;
 import population.BasicPopulation;
 import population.DifferentObservationInteractor;
@@ -33,6 +34,7 @@ public class TestSimulation {
 	private List<PerceptualObject> objects;
 	private ObjectPool objectPool, analysisPool;
 	private AgentPairer staticPairer;
+	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	@Before
 	public void setUp() {
@@ -78,7 +80,7 @@ public class TestSimulation {
 		final Simulation simulation = new Simulation(population, 0.1);
 		final SimulationHistory history = simulation.run(3);
 
-		final Analysis communicationAnalysis = new CommunicationAnalysis(1, staticPairer, analysisPool);
+		final Analysis communicationAnalysis = new CommunicationAnalysis(1, staticPairer, analysisPool, agentInteractor);
 
 		assertThat(history.timeSeriesFrom(communicationAnalysis), equalTo(
 				new TimeSeries(0.5, 0.0, 0.5, 0.5)));

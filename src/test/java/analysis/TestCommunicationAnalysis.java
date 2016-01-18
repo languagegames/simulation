@@ -13,7 +13,9 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
+import population.AgentInteractor;
 import population.AgentPairer;
+import population.DifferentObservationInteractor;
 import population.StaticPairer;
 import agent.Agent;
 import agent.assertions.Assertion;
@@ -32,12 +34,13 @@ public class TestCommunicationAnalysis {
 	private final Point observation = new Point(0.42);
 	private final PerceptualObject object = new SimpleObject(observation);
 	private final List<Agent> agents = new ArrayList<>();
+	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	@Test
 	public void assertionWeightIsIrrelevant() {
 		agents.addAll(asList(agent0, agent1));
 		final int numGames = 1;
-		final CommunicationAnalysis analysis = new CommunicationAnalysis(numGames, agentPairer, objectPool);
+		final CommunicationAnalysis analysis = new CommunicationAnalysis(numGames, agentPairer, objectPool, agentInteractor);
 
 		final Assertion assertion = new Assertion(0, 0.4);
 		final Assertion equivalentAssertion = new Assertion(0, 0.5);
@@ -55,7 +58,7 @@ public class TestCommunicationAnalysis {
 	public void comparesAssertionsAcrossPairsOfAgents() {
 		agents.addAll(asList(agent0, agent1, agent2, agent3));
 		final int numGames = 1;
-		final CommunicationAnalysis analysis = new CommunicationAnalysis(numGames, agentPairer, objectPool);
+		final CommunicationAnalysis analysis = new CommunicationAnalysis(numGames, agentPairer, objectPool, agentInteractor);
 
 		final Assertion assertion0 = new Assertion(0, 0.42);
 		final Assertion assertion1 = new Assertion(1, 0.42);

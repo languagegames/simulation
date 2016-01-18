@@ -6,6 +6,8 @@ import static utility.ResultsPrinter.print;
 import java.util.ArrayList;
 import java.util.List;
 
+import population.AgentInteractor;
+import population.DifferentObservationInteractor;
 import population.Population;
 import population.PopulationFactory;
 import agent.assertions.AssertionModel;
@@ -28,6 +30,7 @@ public class PopulationExperiment {
 	private final ObjectPool objectPool;
 	private final AssertionModel assertionModel;
 	private final RandomConceptFactory factory;
+	private final AgentInteractor agentInteractor;
 
 	public PopulationExperiment(
 			final String fileID,
@@ -51,6 +54,7 @@ public class PopulationExperiment {
 				this.objectPool = objectPool;
 				this.assertionModel = assertionModel;
 				this.factory = factory;
+				agentInteractor = new DifferentObservationInteractor();
 	}
 
 	public void run() {
@@ -64,7 +68,7 @@ public class PopulationExperiment {
 			final Simulation simulation = new Simulation(population, weightIncrement);
 			final SimulationHistory history = simulation.run(timeSteps);
 
-			final Analysis communicationAnalysis = new CommunicationAnalysis(objectPool);
+			final Analysis communicationAnalysis = new CommunicationAnalysis(objectPool, agentInteractor);
 			final Analysis guessingAnalysis = new GuessingAnalysis(objectPool);
 			communicationResults.add(history.timeSeriesFrom(communicationAnalysis, 10));
 			guessingResults.add(history.timeSeriesFrom(guessingAnalysis, 10));

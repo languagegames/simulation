@@ -4,7 +4,6 @@ import java.util.List;
 
 import population.AgentInteractor;
 import population.AgentPairer;
-import population.DifferentObservationInteractor;
 import population.RandomPairer;
 import agent.Agent;
 import conceptualspace.ObjectPool;
@@ -15,16 +14,21 @@ public class CommunicationAnalysis implements Analysis {
 	private final int numGames;
 	private final AgentPairer agentPairer;
 	private final ObjectPool objectPool;
-	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
+	private final AgentInteractor agentInteractor;
 
-	public CommunicationAnalysis(final int numGames, final AgentPairer agentPairer, final ObjectPool objectPool) {
+	public CommunicationAnalysis(
+			final int numGames,
+			final AgentPairer agentPairer,
+			final ObjectPool objectPool,
+			final AgentInteractor agentInteractor) {
 		this.numGames = numGames;
 		this.agentPairer = agentPairer;
 		this.objectPool = objectPool;
+		this.agentInteractor = agentInteractor;
 	}
 
-	public CommunicationAnalysis(final ObjectPool objectPool) {
-		this(10, new RandomPairer(), objectPool);
+	public CommunicationAnalysis(final ObjectPool objectPool, final AgentInteractor agentInteractor) {
+		this(10, new RandomPairer(), objectPool, agentInteractor);
 	}
 
 	@Override

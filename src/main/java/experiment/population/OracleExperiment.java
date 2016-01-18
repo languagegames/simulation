@@ -10,6 +10,8 @@ import static utility.ResultsPrinter.print;
 import java.util.ArrayList;
 import java.util.List;
 
+import population.AgentInteractor;
+import population.DifferentObservationInteractor;
 import population.Population;
 import agent.Agent;
 import agent.LabelMapping;
@@ -37,6 +39,7 @@ public class OracleExperiment {
 	private final double weightIncrement;
 	private final AssertionModel assertionModel;
 	private final RandomConceptFactory conceptFactory;
+	private final AgentInteractor agentInteractor;
 
 	public OracleExperiment(
 			final String fileID,
@@ -61,6 +64,7 @@ public class OracleExperiment {
 				this.weightIncrement = weightIncrement;
 				this.assertionModel = assertionModel;
 				this.conceptFactory = conceptFactory;
+				agentInteractor = new DifferentObservationInteractor();
 
 				final List<PerceptualObject> data = makeListFrom(points(dataFile, numDimensions));
 				objectPool = new SuppliedObjectPool(data);
@@ -79,7 +83,7 @@ public class OracleExperiment {
 			final Simulation simulation = new Simulation(population, weightIncrement);
 			final SimulationHistory history = simulation.run(timeSteps);
 
-			final Analysis communicationAnalysis = new CommunicationAnalysis(objectPool);
+			final Analysis communicationAnalysis = new CommunicationAnalysis(objectPool, agentInteractor);
 			final Analysis guessingAnalysis = new GuessingAnalysis(objectPool);
 			communicationResults.add(history.timeSeriesFrom(communicationAnalysis, 10));
 			guessingResults.add(history.timeSeriesFrom(guessingAnalysis, 10));
