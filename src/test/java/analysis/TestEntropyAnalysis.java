@@ -25,7 +25,8 @@ public class TestEntropyAnalysis {
 	@Mock Agent agent1, agent2;
 	@Mock ObjectPool pool;
 
-	private final PerceptualObject object = new SimpleObject(new Point(0.42));
+	private final Point observation = new Point(0.42);
+	private final PerceptualObject object = new SimpleObject(observation);
 	private final List<Agent> agents = new ArrayList<>();
 	private final Assertion assertion1 = new Assertion(1, 0.42);
 	private final Assertion assertion2 = new Assertion(2, 0.42);
@@ -38,10 +39,10 @@ public class TestEntropyAnalysis {
 
 		context.checking(new Expectations() {{
 			exactly(20).of(pool).pick(); will(returnValue(object));
-			exactly(8).of(agent1).assertion(object); will(returnValue(assertion1));
-			exactly(2).of(agent1).assertion(object); will(returnValue(assertion2));
-			exactly(6).of(agent2).assertion(object); will(returnValue(assertion1));
-			exactly(4).of(agent2).assertion(object); will(returnValue(assertion2));
+			exactly(8).of(agent1).assertion(observation); will(returnValue(assertion1));
+			exactly(2).of(agent1).assertion(observation); will(returnValue(assertion2));
+			exactly(6).of(agent2).assertion(observation); will(returnValue(assertion1));
+			exactly(4).of(agent2).assertion(observation); will(returnValue(assertion2));
 		}});
 
 		assertThat(analysis.analyse(agents), closeTo(0.88129, 0.00001));
@@ -54,8 +55,8 @@ public class TestEntropyAnalysis {
 
 		context.checking(new Expectations() {{
 			exactly(10).of(pool).pick(); will(returnValue(object));
-			exactly(8).of(agent1).assertion(object); will(returnValue(assertion1));
-			exactly(2).of(agent1).assertion(object); will(returnValue(assertion2));
+			exactly(8).of(agent1).assertion(observation); will(returnValue(assertion1));
+			exactly(2).of(agent1).assertion(observation); will(returnValue(assertion2));
 		}});
 
 		assertThat(analysis.analyse(agents), closeTo(0.72193, 0.00001));

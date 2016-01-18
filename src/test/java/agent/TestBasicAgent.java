@@ -60,11 +60,11 @@ public class TestBasicAgent {
 				.withWeight(someWeight)
 				.build();
 
-		final PerceptualObject material0 = new SimpleObject(new Point(0.35));
-		final PerceptualObject material1 = new SimpleObject(new Point(0.4));
+		final Point observation0 = new Point(0.35);
+		final Point observation1 = new Point(0.4);
 
-		assertThat(agent.assertion(material0), equalTo(new Assertion(0, someWeight)));
-		assertThat(agent.assertion(material1), equalTo(new Assertion(1, someWeight)));
+		assertThat(agent.assertion(observation0), equalTo(new Assertion(0, someWeight)));
+		assertThat(agent.assertion(observation1), equalTo(new Assertion(1, someWeight)));
 	}
 
 	@Test

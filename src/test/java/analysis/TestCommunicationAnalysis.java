@@ -29,7 +29,8 @@ public class TestCommunicationAnalysis {
 	@Mock ObjectPool objectPool;
 
 	private final AgentPairer agentPairer = new StaticPairer(asList(1, 0, 2, 3));
-	private final PerceptualObject object = new SimpleObject(new Point(0.42));
+	private final Point observation = new Point(0.42);
+	private final PerceptualObject object = new SimpleObject(observation);
 	private final List<Agent> agents = new ArrayList<>();
 
 	@Test
@@ -43,8 +44,8 @@ public class TestCommunicationAnalysis {
 
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(numGames); will(returnValue(asList(object)));
-			oneOf(agent1).assertion(object); will(returnValue(assertion));
-			oneOf(agent0).assertion(object); will(returnValue(equivalentAssertion));
+			oneOf(agent1).assertion(observation); will(returnValue(assertion));
+			oneOf(agent0).assertion(observation); will(returnValue(equivalentAssertion));
 		}});
 
 		assertThat(analysis.analyse(agents), equalTo(1.0));
@@ -61,10 +62,10 @@ public class TestCommunicationAnalysis {
 
 		context.checking(new Expectations() {{
 			exactly(2).of(objectPool).pick(numGames); will(returnValue(asList(object)));
-			oneOf(agent1).assertion(object); will(returnValue(assertion0));
-			oneOf(agent0).assertion(object); will(returnValue(assertion0));
-			oneOf(agent2).assertion(object); will(returnValue(assertion0));
-			oneOf(agent3).assertion(object); will(returnValue(assertion1));
+			oneOf(agent1).assertion(observation); will(returnValue(assertion0));
+			oneOf(agent0).assertion(observation); will(returnValue(assertion0));
+			oneOf(agent2).assertion(observation); will(returnValue(assertion0));
+			oneOf(agent3).assertion(observation); will(returnValue(assertion1));
 		}});
 
 		assertThat(analysis.analyse(agents), equalTo(0.5));

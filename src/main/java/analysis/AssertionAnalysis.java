@@ -27,7 +27,7 @@ public class AssertionAnalysis implements Analysis {
 	private AssertionCount updateCountFor(AssertionCount count, final Agent agent) {
 		for (int i=0; i<10; i++) {
 			final PerceptualObject object = objectPool.pick();
-			final Assertion assertion = agent.assertion(object);
+			final Assertion assertion = agent.assertion(object.observation());
 			count = count.add(assertion.label);
 		}
 		return count;

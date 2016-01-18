@@ -18,6 +18,11 @@ public class OracleAgent implements Agent {
 	}
 
 	@Override
+	public Assertion assertion(final Point observation) {
+		return new Assertion(labelMapping.label(observation), weight);
+	}
+
+	@Override
 	public OracleAgent learn(final Point observation, final Assertion assertion) {
 		return this;
 	}
@@ -41,11 +46,6 @@ public class OracleAgent implements Agent {
 	@Override
 	public double weight() {
 		return weight;
-	}
-
-	@Override
-	public Assertion assertion(final PerceptualObject object) {
-		return new Assertion(labelMapping.label(object), weight);
 	}
 
 }

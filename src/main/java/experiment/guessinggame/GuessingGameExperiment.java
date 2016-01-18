@@ -108,7 +108,7 @@ public class GuessingGameExperiment {
 		final Random random = new Random();
 		final List<PerceptualObject> guessingSet = objectPool.pick(numObjects);
 		final int targetIndex = random.nextInt(numObjects);
-		final Assertion assertion = describer.assertion(guessingSet.get(targetIndex));
+		final Assertion assertion = describer.assertion(guessingSet.get(targetIndex).observation());
 		return (guesser.guess(guessingSet, assertion) == targetIndex);
 	}
 

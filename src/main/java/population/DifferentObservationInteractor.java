@@ -21,7 +21,7 @@ public class DifferentObservationInteractor implements AgentInteractor {
 			final ObjectPool objectPool)
 	{
 		final PerceptualObject object = objectPool.pick();
-		final Assertion speakerAssertion = speaker.assertion(object);
+		final Assertion speakerAssertion = speaker.assertion(object.observation());
 		updatedAgents.set(agents.indexOf(listener), listener.learn(object.observation(), speakerAssertion));
 	}
 

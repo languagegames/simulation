@@ -8,7 +8,7 @@ import conceptualspace.Point;
 
 public interface Agent {
 
-	Assertion assertion(PerceptualObject object);
+	Assertion assertion(Point observation);
 
 	Agent learn(Point observation, Assertion assertion);
 

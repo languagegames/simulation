@@ -52,9 +52,9 @@ public class TestOracleAgent {
 	public void classifiesAccordingToPredefinedLabelMapping() {
 		final OracleAgent agent = new OracleAgent(new LabelMapping(objects, asList(1, 2, 0)), someWeight);
 
-		assertThat(agent.assertion(object0), equalTo(new Assertion(1, someWeight)));
-		assertThat(agent.assertion(object1), equalTo(new Assertion(2, someWeight)));
-		assertThat(agent.assertion(object2), equalTo(new Assertion(0, someWeight)));
+		assertThat(agent.assertion(object0.observation()), equalTo(new Assertion(1, someWeight)));
+		assertThat(agent.assertion(object1.observation()), equalTo(new Assertion(2, someWeight)));
+		assertThat(agent.assertion(object2.observation()), equalTo(new Assertion(0, someWeight)));
 	}
 
 	private PerceptualObject someObject(final double d) {

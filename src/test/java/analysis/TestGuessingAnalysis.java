@@ -31,7 +31,8 @@ public class TestGuessingAnalysis {
 	@Mock ObjectPool objectPool;
 
 	private final AgentPairer agentPairer = new StaticPairer(asList(1, 0));
-	private final PerceptualObject target = new SimpleObject(new Point(0.42));
+	private final Point observation = new Point(0.42);
+	private final PerceptualObject target = new SimpleObject(observation);
 	private final PerceptualObject otherObject = new SimpleObject(new Point(0.43));
 	private final List<Agent> agents = new ArrayList<>();
 	private final List<PerceptualObject> guessingSet = new ArrayList<>();
@@ -51,7 +52,7 @@ public class TestGuessingAnalysis {
 
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(5); will(returnValue(guessingSet));
-			oneOf(agent1).assertion(target); will(returnValue(assertion));
+			oneOf(agent1).assertion(observation); will(returnValue(assertion));
 			oneOf(agent0).guess(guessingSet, assertion); will(returnValue(targetIndex));
 		}});
 
@@ -67,7 +68,7 @@ public class TestGuessingAnalysis {
 
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(5); will(returnValue(guessingSet));
-			oneOf(agent1).assertion(target); will(returnValue(assertion));
+			oneOf(agent1).assertion(observation); will(returnValue(assertion));
 			oneOf(agent0).guess(guessingSet, assertion); will(returnValue(0));
 		}});
 

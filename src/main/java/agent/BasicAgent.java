@@ -49,6 +49,11 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
+	public Assertion assertion(final Point observation) {
+		return assertionModel.assertion(observation, concepts, weight);
+	}
+
+	@Override
 	public Agent learn(final Point observation, final Assertion assertion) {
 		final Concept toUpdate = concepts.get(assertion.label);
 		final Concept updated = toUpdate.update(observation, assertion);
@@ -90,11 +95,6 @@ public class BasicAgent implements Agent {
 	@Override
 	public double weight() {
 		return weight;
-	}
-
-	@Override
-	public Assertion assertion(final PerceptualObject object) {
-		return assertionModel.assertion(object.observation(), concepts, weight);
 	}
 
 	@Override

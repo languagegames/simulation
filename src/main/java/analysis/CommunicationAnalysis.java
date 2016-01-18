@@ -41,8 +41,8 @@ public class CommunicationAnalysis implements Analysis {
 		final List<PerceptualObject> objects = objectPool.pick(numGames);
 		double sumOfScores = 0;
 		for (final PerceptualObject object : objects) {
-			final Assertion first = agent.assertion(object);
-			final Assertion second = other.assertion(object);
+			final Assertion first = agent.assertion(object.observation());
+			final Assertion second = other.assertion(object.observation());
 			sumOfScores += (first.matches(second)) ? 1 : 0;
 		}
 		return sumOfScores / numGames;

@@ -57,7 +57,7 @@ public class TestBasicPopulation {
 			oneOf(agent0).weight(); will(returnValue(highWeight));
 			oneOf(agent1).weight(); will(returnValue(lowWeight));
 			oneOf(objectPool).pick(); will(returnValue(object));
-			oneOf(agent0).assertion(object); will(returnValue(assertion0));
+			oneOf(agent0).assertion(object.observation()); will(returnValue(assertion0));
 			oneOf(agent1).learn(object.observation(), assertion0); will(returnValue(updatedAgent));
 		}});
 
@@ -72,8 +72,8 @@ public class TestBasicPopulation {
 
 		context.checking(new Expectations() {{
 			exactly(2).of(objectPool).pick(); will(returnValue(object));
-			oneOf(agent1).assertion(object); will(returnValue(assertion0));
-			oneOf(agent2).assertion(object); will(returnValue(assertion1));
+			oneOf(agent1).assertion(object.observation()); will(returnValue(assertion0));
+			oneOf(agent2).assertion(object.observation()); will(returnValue(assertion1));
 			oneOf(agent0).learn(object.observation(), assertion0); will(returnValue(updatedAgent));
 			oneOf(agent3).learn(object.observation(), assertion1); will(returnValue(updatedAgent));
 			ignoring(agent0).weight(); ignoring(agent1).weight(); ignoring(agent2).weight(); ignoring(agent3).weight();

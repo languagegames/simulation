@@ -45,13 +45,13 @@ public class TestClassificationTrial {
 				new ClassificationTrial(pupil, teacher, trainingData, testData);
 
 		context.checking(new Expectations() {{
-			exactly(3).of(teacher).assertion(trainingSample); will(returnValue(assertion));
+			exactly(3).of(teacher).assertion(trainingSample.observation()); will(returnValue(assertion));
 			oneOf(pupil).learn(someObject().observation(), assertion); will(returnValue(trainedPupil));
 			exactly(2).of(trainedPupil).learn(someObject().observation(), assertion); will(returnValue(trainedPupil));
-			oneOf(teacher).assertion(testSample0); will(returnValue(assertion));
-			oneOf(teacher).assertion(testSample1); will(returnValue(assertion));
-			oneOf(trainedPupil).assertion(testSample0); will(returnValue(assertion));
-			oneOf(trainedPupil).assertion(testSample1); will(returnValue(anotherAssertion));
+			oneOf(teacher).assertion(testSample0.observation()); will(returnValue(assertion));
+			oneOf(teacher).assertion(testSample1.observation()); will(returnValue(assertion));
+			oneOf(trainedPupil).assertion(testSample0.observation()); will(returnValue(assertion));
+			oneOf(trainedPupil).assertion(testSample1.observation()); will(returnValue(anotherAssertion));
 		}});
 
 		assertThat(experiment.classificationScore(), equalTo(0.5));
