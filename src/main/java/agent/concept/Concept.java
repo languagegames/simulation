@@ -7,6 +7,6 @@ public interface Concept {
 
 	double appropriatenessOf(Point observation);
 
-	Concept update(Assertion assertion);
+	Concept update(Point observation, Assertion assertion);
 
 }

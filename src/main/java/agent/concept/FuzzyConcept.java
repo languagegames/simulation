@@ -38,11 +38,10 @@ public class FuzzyConcept implements Concept {
 	}
 
 	@Override
-	public FuzzyConcept update(final Assertion assertion) {
-		final Point target = assertion.object.observation();
-		if (appropriatenessOf(target) < assertion.weight) {
-			final Point newPrototype = prototype.plus((target.minus(prototype)).times(lambda(assertion.weight, target)));
-			final double newThreshold = alpha(assertion.weight, target) * threshold;
+	public FuzzyConcept update(final Point observation, final Assertion assertion) {
+		if (appropriatenessOf(observation) < assertion.weight) {
+			final Point newPrototype = prototype.plus((observation.minus(prototype)).times(lambda(assertion.weight, observation)));
+			final double newThreshold = alpha(assertion.weight, observation) * threshold;
 			return new FuzzyConcept(newPrototype, newThreshold);
 		}
 		return this;

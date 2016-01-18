@@ -9,8 +9,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import agent.assertions.Assertion;
-import agent.concept.Concept;
-import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
@@ -32,7 +30,7 @@ public class TestConcept {
 
 		final PerceptualObject object = new SimpleObject(new Point(0.6, 0.8));
 
-		assertThat(concept.update(new Assertion(object, 42, 0.7)),
+		assertThat(concept.update(object.observation(), new Assertion(object, 42, 0.7)),
 				equalTo(concept));
 	}
 
@@ -62,7 +60,7 @@ public class TestConcept {
 		final PerceptualObject object = new SimpleObject(new Point(0.9, 0.1));
 		final Concept updated = new FuzzyConcept(new Point(0.7756239843019817, 0.2865640235470274), 1.1211102550927978);
 
-		assertThat(concept.update(new Assertion(object, 42, 0.8)), equalTo(updated));
+		assertThat(concept.update(object.observation(), new Assertion(object, 42, 0.8)), equalTo(updated));
 	}
 
 }

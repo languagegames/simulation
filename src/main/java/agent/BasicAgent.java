@@ -49,6 +49,15 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
+	public Agent learn(final Assertion assertion) {
+		final Concept toUpdate = concepts.get(assertion.label);
+		final Concept updated = toUpdate.update(assertion.object.observation(), assertion);
+		final List<Concept> newConcepts = new ArrayList<>(concepts);
+		newConcepts.set(assertion.label, updated);
+		return new BasicAgent(newConcepts, weight, assertionModel);
+	}
+
+	@Override
 	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
 		int guess = 0; double highestAppropriateness = 0;
 		for (final PerceptualObject object : guessingSet) {
@@ -86,15 +95,6 @@ public class BasicAgent implements Agent {
 	@Override
 	public Assertion assertion(final PerceptualObject object) {
 		return assertionModel.assertion(object, concepts, weight);
-	}
-
-	@Override
-	public Agent learn(final Assertion assertion) {
-		final Concept toUpdate = concepts.get(assertion.label);
-		final Concept updated = toUpdate.update(assertion);
-		final List<Concept> newConcepts = new ArrayList<>(concepts);
-		newConcepts.set(assertion.label, updated);
-		return new BasicAgent(newConcepts, weight, assertionModel);
 	}
 
 	@Override
