@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import population.AgentInteractor;
-import population.DifferentObservationInteractor;
 import population.Population;
 import agent.Agent;
 import agent.LabelMapping;
@@ -53,7 +52,8 @@ public class OracleExperiment {
 			final int timeSteps,
 			final double weightIncrement,
 			final AssertionModel assertionModel,
-			final RandomConceptFactory conceptFactory)
+			final RandomConceptFactory conceptFactory,
+			final AgentInteractor agentInteractor)
 	{
 				this.fileID = fileID;
 				this.numAgents = numAgents;
@@ -64,7 +64,7 @@ public class OracleExperiment {
 				this.weightIncrement = weightIncrement;
 				this.assertionModel = assertionModel;
 				this.conceptFactory = conceptFactory;
-				agentInteractor = new DifferentObservationInteractor();
+				this.agentInteractor = agentInteractor;
 
 				final List<PerceptualObject> data = makeListFrom(points(dataFile, numDimensions));
 				objectPool = new SuppliedObjectPool(data);

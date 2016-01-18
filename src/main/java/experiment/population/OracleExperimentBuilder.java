@@ -1,5 +1,7 @@
 package experiment.population;
 
+import population.AgentInteractor;
+import population.DifferentObservationInteractor;
 import agent.assertions.AssertionModel;
 import agent.assertions.BasicAssertionModel;
 import agent.concept.FuzzyConceptFactory;
@@ -19,6 +21,7 @@ public class OracleExperimentBuilder {
 	private double weightIncrement = 0.0001;
 	private AssertionModel assertionModel = new BasicAssertionModel();
 	private RandomConceptFactory conceptFactory = new FuzzyConceptFactory(2.0);
+	private AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	public OracleExperimentBuilder withName(final String fileID) {
 		this.fileID = fileID;
@@ -80,9 +83,14 @@ public class OracleExperimentBuilder {
 		return this;
 	}
 
+	public OracleExperimentBuilder withAgentInteractor(final AgentInteractor agentInteractor) {
+		this.agentInteractor = agentInteractor;
+		return this;
+	}
+
 	public OracleExperiment build() {
-		return new OracleExperiment(fileID, dataFile, labelsFile, numOracles, numAgents,
-				numDimensions, numLabels, numRuns, timeSteps, weightIncrement, assertionModel, conceptFactory);
+		return new OracleExperiment(fileID, dataFile, labelsFile, numOracles, numAgents, numDimensions,
+				numLabels, numRuns, timeSteps, weightIncrement, assertionModel, conceptFactory, agentInteractor);
 	}
 
 }
