@@ -29,7 +29,7 @@ public class TestBasicPopulation {
 	private final Assertion assertion0 = new Assertion(object, 42, 0.42);
 	private final Assertion assertion1 = new Assertion(object, 43, 0.42);
 	private final double highWeight = 0.8, lowWeight = 0.4;
-	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
+	private final AgentInteractor agentInteractor = new SameObservationInteractor();
 
 	@Test
 	public void agentsWeightsAreIncremented() {

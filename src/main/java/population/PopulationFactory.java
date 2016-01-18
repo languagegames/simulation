@@ -27,7 +27,7 @@ public class PopulationFactory {
 				oracles,
 				objectPool,
 				new RandomPairer(),
-				new DifferentObservationInteractor());
+				new SameObservationInteractor());
 	}
 
 	public static BasicPopulation basicPopulation(
@@ -42,7 +42,7 @@ public class PopulationFactory {
 				agents(numAgents, numDimensions, numLabels, assertionModel, factory),
 				objectPool,
 				new RandomPairer(),
-				new DifferentObservationInteractor());
+				new SameObservationInteractor());
 	}
 
 	private static List<Agent> agents(

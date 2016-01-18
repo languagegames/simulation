@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import population.AgentPairer;
 import population.BasicPopulation;
-import population.DifferentObservationInteractor;
+import population.SameObservationInteractor;
 import population.Population;
 import population.StaticPairer;
 import utility.DataReader;
@@ -73,7 +73,7 @@ public class TestSimulation {
 	@Test
 	public void fourAgentsTwoConceptsThreeTimeSteps() {
 		final Population population = new BasicPopulation(
-				asList(agent0, agent1, agent2, agent3), objectPool, staticPairer, new DifferentObservationInteractor());
+				asList(agent0, agent1, agent2, agent3), objectPool, staticPairer, new SameObservationInteractor());
 
 		final Simulation simulation = new Simulation(population, 0.1);
 		final SimulationHistory history = simulation.run(3);
