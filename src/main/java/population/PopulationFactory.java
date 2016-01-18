@@ -26,7 +26,8 @@ public class PopulationFactory {
 				agents(numAgents, numDimensions, numLabels, assertionModel, factory),
 				oracles,
 				objectPool,
-				new RandomPairer());
+				new RandomPairer(),
+				new DifferentObservationInteractor());
 	}
 
 	public static BasicPopulation basicPopulation(

@@ -16,18 +16,20 @@ public class OraclePopulation implements Population {
 	private final List<Agent> oracles = new ArrayList<>();
 	private final ObjectPool objectPool;
 	private final AgentPairer agentPairer;
-	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
+	private final AgentInteractor agentInteractor;
 
 	public OraclePopulation(
 			final List<Agent> agents,
 			final List<Agent> oracles,
 			final ObjectPool objectPool,
-			final AgentPairer agentPairer)
+			final AgentPairer agentPairer,
+			final AgentInteractor agentInteractor)
 	{
 		this.agents.addAll(agents);
 		this.oracles.addAll(oracles);
 		this.objectPool = objectPool;
 		this.agentPairer = agentPairer;
+		this.agentInteractor = agentInteractor;
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public class OraclePopulation implements Population {
 	public OraclePopulation incrementWeights(final double weightIncrement) {
 		final List<Agent> updatedAgents = incrementWeights(agents, weightIncrement);
 		final List<Agent> updatedOracles = incrementWeights(oracles, weightIncrement);
-		return new OraclePopulation(updatedAgents, updatedOracles, objectPool, agentPairer);
+		return new OraclePopulation(updatedAgents, updatedOracles, objectPool, agentPairer, agentInteractor);
 	}
 
 	private List<Agent> incrementWeights(final List<Agent> agents, final double weightIncrement) {
@@ -55,7 +57,7 @@ public class OraclePopulation implements Population {
 		final List<Agent> allAgents = mergeAgents();
 		final List<Integer> pairingOrder = agentPairer.pairingOrder(allAgents.size());
 		final List<Agent> updatedAgents = runLanguageGames(allAgents, pairingOrder);
-		return new OraclePopulation(removeOracles(updatedAgents), oracles, objectPool, agentPairer);
+		return new OraclePopulation(removeOracles(updatedAgents), oracles, objectPool, agentPairer, agentInteractor);
 	}
 
 	private List<Agent> mergeAgents() {

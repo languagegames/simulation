@@ -10,9 +10,6 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
-import population.AgentPairer;
-import population.OraclePopulation;
-import population.StaticPairer;
 import agent.Agent;
 import agent.assertions.Assertion;
 import conceptualspace.ObjectPool;
@@ -30,11 +27,12 @@ public class TestOraclePopulation {
 	private final PerceptualObject object = new SimpleObject(new Point(0.42));
 	private final Assertion assertion0 = new Assertion(object, 42, 0.42);
 	private final Assertion assertion1 = new Assertion(object, 43, 0.42);
+	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	@Test
 	public void worksWhenNumberOfAllAgentsIsOdd() {
 		final OraclePopulation population = new OraclePopulation(
-				asList(agent0, agent1), asList(oracle), objectPool, agentPairer);
+				asList(agent0, agent1), asList(oracle), objectPool, agentPairer, agentInteractor);
 
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(); will(returnValue(object));
@@ -44,12 +42,12 @@ public class TestOraclePopulation {
 		}});
 
 		assertThat(population.runLanguageGames(), equalTo(
-				new OraclePopulation(asList(updatedAgent, agent1), asList(oracle), objectPool, agentPairer)));
+				new OraclePopulation(asList(updatedAgent, agent1), asList(oracle), objectPool, agentPairer, agentInteractor)));
 	}
 
 	@Test
 	public void agentsWeightsAreIncremented() {
-		final OraclePopulation population = new OraclePopulation(asList(agent0), asList(oracle), null, null);
+		final OraclePopulation population = new OraclePopulation(asList(agent0), asList(oracle), null, null, null);
 
 		final double weightIncrement = 0.42;
 		context.checking(new Expectations() {{
@@ -58,13 +56,13 @@ public class TestOraclePopulation {
 		}});
 
 		assertThat(population.incrementWeights(weightIncrement),
-				equalTo(new OraclePopulation(asList(updatedAgent), asList(updatedAgent), null, null)));
+				equalTo(new OraclePopulation(asList(updatedAgent), asList(updatedAgent), null, null, null)));
 	}
 
 	@Test
 	public void usesAgentsAndOraclesInLanguageGames() {
 		final OraclePopulation population = new OraclePopulation(
-				asList(agent0, agent1, agent2), asList(oracle), objectPool, agentPairer);
+				asList(agent0, agent1, agent2), asList(oracle), objectPool, agentPairer, agentInteractor);
 
 		context.checking(new Expectations() {{
 			exactly(2).of(objectPool).pick(); will(returnValue(object));
@@ -77,7 +75,7 @@ public class TestOraclePopulation {
 
 		assertThat(population.runLanguageGames(),
 				equalTo(new OraclePopulation(
-						asList(updatedAgent, agent1, updatedAgent), asList(oracle), objectPool, agentPairer)));
+						asList(updatedAgent, agent1, updatedAgent), asList(oracle), objectPool, agentPairer, agentInteractor)));
 
 	}
 
