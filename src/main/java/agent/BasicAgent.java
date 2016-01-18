@@ -51,7 +51,7 @@ public class BasicAgent implements Agent {
 	@Override
 	public Agent learn(final Point observation, final Assertion assertion) {
 		final Concept toUpdate = concepts.get(assertion.label);
-		final Concept updated = toUpdate.update(assertion.object.observation(), assertion);
+		final Concept updated = toUpdate.update(observation, assertion);
 		final List<Concept> newConcepts = new ArrayList<>(concepts);
 		newConcepts.set(assertion.label, updated);
 		return new BasicAgent(newConcepts, weight, assertionModel);
