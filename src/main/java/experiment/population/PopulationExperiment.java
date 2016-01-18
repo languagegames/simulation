@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import population.AgentInteractor;
-import population.DifferentObservationInteractor;
 import population.Population;
 import population.PopulationFactory;
 import agent.assertions.AssertionModel;
@@ -42,7 +41,8 @@ public class PopulationExperiment {
 			final double weightIncrement,
 			final ObjectPool objectPool,
 			final AssertionModel assertionModel,
-			final RandomConceptFactory factory)
+			final RandomConceptFactory factory,
+			final AgentInteractor agentInteractor)
 	{
 				this.fileID = fileID;
 				this.numAgents = numAgents;
@@ -54,7 +54,7 @@ public class PopulationExperiment {
 				this.objectPool = objectPool;
 				this.assertionModel = assertionModel;
 				this.factory = factory;
-				agentInteractor = new DifferentObservationInteractor();
+				this.agentInteractor = agentInteractor;
 	}
 
 	public void run() {

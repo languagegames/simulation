@@ -2,6 +2,8 @@ package experiment.population;
 
 import java.util.List;
 
+import population.AgentInteractor;
+import population.DifferentObservationInteractor;
 import agent.assertions.AssertionModel;
 import agent.assertions.BasicAssertionModel;
 import agent.concept.FuzzyConceptFactory;
@@ -23,6 +25,7 @@ public class PopulationExperimentBuilder {
 	private ObjectPool objectPool = new RandomObjectPool(numDimensions);
 	private AssertionModel assertionModel = new BasicAssertionModel();
 	private RandomConceptFactory conceptFactory = new FuzzyConceptFactory(2.0);
+	private AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	public PopulationExperimentBuilder withName(final String fileID) {
 		this.fileID = fileID;
@@ -74,9 +77,14 @@ public class PopulationExperimentBuilder {
 		return this;
 	}
 
+	public PopulationExperimentBuilder withAgentInteractor(final AgentInteractor agentInteractor) {
+		this.agentInteractor = agentInteractor;
+		return this;
+	}
+
 	public PopulationExperiment build() {
 		return new PopulationExperiment(fileID, numAgents, numDimensions, numLabels, numRuns,
-				timeSteps, weightIncrement, objectPool, assertionModel, conceptFactory);
+				timeSteps, weightIncrement, objectPool, assertionModel, conceptFactory, agentInteractor);
 	}
 
 }
