@@ -46,7 +46,7 @@ public class DifferentObservationInteractor implements AgentInteractor {
 	}
 
 	@Override
-	public void updateListener(
+	public void categoryGame(
 			final List<Agent> agents,
 			final List<Agent> updatedAgents,
 			final Agent speaker,

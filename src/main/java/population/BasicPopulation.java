@@ -45,7 +45,7 @@ public class BasicPopulation implements Population {
 				speaker = agents.get(pairingOrder.get(i+1));
 				listener = agents.get(pairingOrder.get(i));
 			}
-			agentInteractor.updateListener(agents, updatedAgents, speaker, listener, objectPool);
+			agentInteractor.categoryGame(agents, updatedAgents, speaker, listener, objectPool);
 		}
 		return new BasicPopulation(updatedAgents, objectPool, agentPairer, agentInteractor);
 	}

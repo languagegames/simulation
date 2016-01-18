@@ -79,7 +79,7 @@ public class OraclePopulation implements Population {
 				speaker = allAgents.get(pairingOrder.get(i+1));
 				listener = allAgents.get(pairingOrder.get(i));
 			}
-			agentInteractor.updateListener(agents, updatedAgents, speaker, listener, objectPool);
+			agentInteractor.categoryGame(agents, updatedAgents, speaker, listener, objectPool);
 		}
 		return updatedAgents;
 	}

@@ -13,7 +13,7 @@ import conceptualspace.Point;
 public class SameObservationInteractor implements AgentInteractor {
 
 	@Override
-	public void updateListener(final List<Agent> agents, final List<Agent> updatedAgents,
+	public void categoryGame(final List<Agent> agents, final List<Agent> updatedAgents,
 			final Agent speaker, final Agent listener, final ObjectPool objectPool) {
 		final Point observation = objectPool.pick().observation();
 		final Assertion speakerAssertion = speaker.assertion(observation);
