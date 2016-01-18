@@ -3,13 +3,13 @@ package population;
 import java.util.ArrayList;
 import java.util.List;
 
-import conceptualspace.ObjectPool;
 import agent.Agent;
 import agent.BasicAgent;
 import agent.BasicAgentBuilder;
 import agent.assertions.AssertionModel;
 import agent.concept.Concept;
 import agent.concept.RandomConceptFactory;
+import conceptualspace.ObjectPool;
 
 public class PopulationFactory {
 
@@ -40,7 +40,8 @@ public class PopulationFactory {
 		return new BasicPopulation(
 				agents(numAgents, numDimensions, numLabels, assertionModel, factory),
 				objectPool,
-				new RandomPairer());
+				new RandomPairer(),
+				new DifferentObservationInteractor());
 	}
 
 	private static List<Agent> agents(

@@ -10,9 +10,6 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
-import population.AgentPairer;
-import population.BasicPopulation;
-import population.StaticPairer;
 import agent.Agent;
 import agent.BasicAgentBuilder;
 import agent.assertions.Assertion;
@@ -32,18 +29,19 @@ public class TestBasicPopulation {
 	private final Assertion assertion0 = new Assertion(object, 42, 0.42);
 	private final Assertion assertion1 = new Assertion(object, 43, 0.42);
 	private final double highWeight = 0.8, lowWeight = 0.4;
+	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	@Test
 	public void agentsWeightsAreIncremented() {
 		final Agent agent0 = agent().withWeight(0.5).build();
 		final Agent agent1 = agent().withWeight(0.9).build();
-		final BasicPopulation population = new BasicPopulation(asList(agent0, agent1), null, null);
+		final BasicPopulation population = new BasicPopulation(asList(agent0, agent1), null, null, null);
 
 		final Agent updatedAgent0 = agent().withWeight(0.6).build();
 		final Agent updatedAgent1 = agent().withWeight(0.1).build();
 
 		assertThat(population.incrementWeights(0.1),
-				equalTo(new BasicPopulation(asList(updatedAgent0, updatedAgent1), null, null)));
+				equalTo(new BasicPopulation(asList(updatedAgent0, updatedAgent1), null, null, null)));
 	}
 
 	private BasicAgentBuilder agent() {
@@ -53,7 +51,7 @@ public class TestBasicPopulation {
 	@Test
 	public void agentWithHigherWeightIsAlwaysSpeaker() {
 		final BasicPopulation population =
-				new BasicPopulation(asList(agent0, agent1), objectPool, agentPairer);
+				new BasicPopulation(asList(agent0, agent1), objectPool, agentPairer, agentInteractor);
 
 		context.checking(new Expectations() {{
 			oneOf(agent0).weight(); will(returnValue(highWeight));
@@ -64,13 +62,13 @@ public class TestBasicPopulation {
 		}});
 
 		assertThat(population.runLanguageGames(), equalTo(
-				new BasicPopulation(asList(agent0, updatedAgent), objectPool, agentPairer)));
+				new BasicPopulation(asList(agent0, updatedAgent), objectPool, agentPairer, agentInteractor)));
 	}
 
 	@Test
 	public void pairsOffAgentsAndGetsThemToDoLanguageGames() {
 		final BasicPopulation population =
-				new BasicPopulation(asList(agent0, agent1, agent2, agent3), objectPool, agentPairer);
+				new BasicPopulation(asList(agent0, agent1, agent2, agent3), objectPool, agentPairer, agentInteractor);
 
 		context.checking(new Expectations() {{
 			exactly(2).of(objectPool).pick(); will(returnValue(object));
@@ -82,7 +80,7 @@ public class TestBasicPopulation {
 		}});
 
 		assertThat(population.runLanguageGames(), equalTo(
-				new BasicPopulation(asList(updatedAgent, agent1, agent2, updatedAgent), objectPool, agentPairer)));
+				new BasicPopulation(asList(updatedAgent, agent1, agent2, updatedAgent), objectPool, agentPairer, agentInteractor)));
 	}
 
 }

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import population.AgentPairer;
 import population.BasicPopulation;
+import population.DifferentObservationInteractor;
 import population.Population;
 import population.StaticPairer;
 import utility.DataReader;
@@ -25,8 +26,6 @@ import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
 import conceptualspace.StaticObjectPool;
-import experiment.population.Simulation;
-import experiment.population.SimulationHistory;
 
 public class TestSimulation {
 
@@ -74,7 +73,7 @@ public class TestSimulation {
 	@Test
 	public void fourAgentsTwoConceptsThreeTimeSteps() {
 		final Population population = new BasicPopulation(
-				asList(agent0, agent1, agent2, agent3), objectPool, staticPairer);
+				asList(agent0, agent1, agent2, agent3), objectPool, staticPairer, new DifferentObservationInteractor());
 
 		final Simulation simulation = new Simulation(population, 0.1);
 		final SimulationHistory history = simulation.run(3);

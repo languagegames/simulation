@@ -15,16 +15,18 @@ public class BasicPopulation implements Population {
 	private final List<Agent> agents = new ArrayList<>();
 	private final ObjectPool objectPool;
 	private final AgentPairer agentPairer;
-	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
+	private final AgentInteractor agentInteractor;
 
 	public BasicPopulation(
 			final List<Agent> agents,
 			final ObjectPool objectPool,
-			final AgentPairer agentPairer)
+			final AgentPairer agentPairer,
+			final AgentInteractor agentInteractor)
 	{
 		this.agents.addAll(agents);
 		this.objectPool = objectPool;
 		this.agentPairer = agentPairer;
+		this.agentInteractor = agentInteractor;
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public class BasicPopulation implements Population {
 			}
 			agentInteractor.updateListener(agents, updatedAgents, speaker, listener, objectPool);
 		}
-		return new BasicPopulation(updatedAgents, objectPool, agentPairer);
+		return new BasicPopulation(updatedAgents, objectPool, agentPairer, agentInteractor);
 	}
 
 	@Override
@@ -54,7 +56,7 @@ public class BasicPopulation implements Population {
 		for (final Agent agent : agents) {
 			updatedAgents.add(agent.incrementWeight(weightIncrement));
 		}
-		return new BasicPopulation(updatedAgents, objectPool, agentPairer);
+		return new BasicPopulation(updatedAgents, objectPool, agentPairer, agentInteractor);
 	}
 
 	@Override
