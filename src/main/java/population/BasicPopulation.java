@@ -6,16 +6,16 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import conceptualspace.ObjectPool;
 import agent.Agent;
-import agent.assertions.Assertion;
 import analysis.Analysis;
+import conceptualspace.ObjectPool;
 
 public class BasicPopulation implements Population {
 
 	private final List<Agent> agents = new ArrayList<>();
 	private final ObjectPool objectPool;
 	private final AgentPairer agentPairer;
+	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	public BasicPopulation(
 			final List<Agent> agents,
@@ -43,15 +43,9 @@ public class BasicPopulation implements Population {
 				speaker = agents.get(pairingOrder.get(i+1));
 				listener = agents.get(pairingOrder.get(i));
 			}
-			updateListener(updatedAgents, speaker, listener);
+			agentInteractor.updateListener(agents, updatedAgents, speaker, listener, objectPool);
 		}
 		return new BasicPopulation(updatedAgents, objectPool, agentPairer);
-	}
-
-	private void updateListener(
-			final List<Agent> updatedAgents, final Agent speaker, final Agent listener) {
-		final Assertion speakerAssertion = speaker.assertion(objectPool.pick());
-		updatedAgents.set(agents.indexOf(listener), listener.learn(speakerAssertion));
 	}
 
 	@Override
