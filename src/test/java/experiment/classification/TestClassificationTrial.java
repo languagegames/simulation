@@ -19,7 +19,6 @@ import agent.assertions.Assertion;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 import conceptualspace.SimpleObject;
-import experiment.classification.ClassificationTrial;
 
 public class TestClassificationTrial {
 	@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
@@ -47,8 +46,8 @@ public class TestClassificationTrial {
 
 		context.checking(new Expectations() {{
 			exactly(3).of(teacher).assertion(trainingSample); will(returnValue(assertion));
-			oneOf(pupil).learn(assertion); will(returnValue(trainedPupil));
-			exactly(2).of(trainedPupil).learn(assertion); will(returnValue(trainedPupil));
+			oneOf(pupil).learn(someObject().observation(), assertion); will(returnValue(trainedPupil));
+			exactly(2).of(trainedPupil).learn(someObject().observation(), assertion); will(returnValue(trainedPupil));
 			oneOf(teacher).assertion(testSample0); will(returnValue(assertion));
 			oneOf(teacher).assertion(testSample1); will(returnValue(assertion));
 			oneOf(trainedPupil).assertion(testSample0); will(returnValue(assertion));

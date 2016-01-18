@@ -8,6 +8,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import agent.Agent;
 import agent.assertions.Assertion;
 import conceptualspace.ObjectPool;
+import conceptualspace.PerceptualObject;
 
 public class SameObservationInteractor implements AgentInteractor {
 
@@ -19,8 +20,9 @@ public class SameObservationInteractor implements AgentInteractor {
 			final Agent listener,
 			final ObjectPool objectPool)
 	{
-		final Assertion speakerAssertion = speaker.assertion(objectPool.pick());
-		updatedAgents.set(agents.indexOf(listener), listener.learn(speakerAssertion));
+		final PerceptualObject object = objectPool.pick();
+		final Assertion speakerAssertion = speaker.assertion(object);
+		updatedAgents.set(agents.indexOf(listener), listener.learn(object.observation(), speakerAssertion));
 	}
 
 	@Override

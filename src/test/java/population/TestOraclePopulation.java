@@ -37,7 +37,7 @@ public class TestOraclePopulation {
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(); will(returnValue(object));
 			oneOf(agent1).assertion(object); will(returnValue(assertion0));
-			oneOf(agent0).learn(assertion0); will(returnValue(updatedAgent));
+			oneOf(agent0).learn(object.observation(), assertion0); will(returnValue(updatedAgent));
 			ignoring(agent0).weight(); ignoring(agent1).weight();
 		}});
 
@@ -68,8 +68,8 @@ public class TestOraclePopulation {
 			exactly(2).of(objectPool).pick(); will(returnValue(object));
 			oneOf(agent1).assertion(object); will(returnValue(assertion0));
 			oneOf(oracle).assertion(object); will(returnValue(assertion1));
-			oneOf(agent0).learn(assertion0); will(returnValue(updatedAgent));
-			oneOf(agent2).learn(assertion1); will(returnValue(updatedAgent));
+			oneOf(agent0).learn(object.observation(), assertion0); will(returnValue(updatedAgent));
+			oneOf(agent2).learn(object.observation(), assertion1); will(returnValue(updatedAgent));
 			ignoring(agent0).weight(); ignoring(agent1).weight(); ignoring(agent2).weight(); ignoring(oracle).weight();
 		}});
 

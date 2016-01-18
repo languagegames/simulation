@@ -4,12 +4,13 @@ import java.util.List;
 
 import agent.assertions.Assertion;
 import conceptualspace.PerceptualObject;
+import conceptualspace.Point;
 
 public interface Agent {
 
 	Assertion assertion(PerceptualObject object);
 
-	Agent learn(Assertion assertion);
+	Agent learn(Point observation, Assertion assertion);
 
 	double weight();
 

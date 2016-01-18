@@ -84,7 +84,8 @@ public class TestBasicAgent {
 				.withWeight(someWeight)
 				.build();
 
-		assertThat(agent.learn(new Assertion(new SimpleObject(new Point(0.9)), 1, 0.8)),
+		final Point observation = new Point(0.9);
+		assertThat(agent.learn(observation, new Assertion(new SimpleObject(observation), 1, 0.8)),
 				equalTo(updatedAgent));
 	}
 

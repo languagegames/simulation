@@ -4,6 +4,7 @@ import java.util.List;
 
 import agent.assertions.Assertion;
 import conceptualspace.PerceptualObject;
+import conceptualspace.Point;
 
 
 public class OracleAgent implements Agent {
@@ -14,6 +15,11 @@ public class OracleAgent implements Agent {
 	public OracleAgent(final LabelMapping labelMapping, final double weight) {
 		this.labelMapping = labelMapping;
 		this.weight = weight;
+	}
+
+	@Override
+	public OracleAgent learn(final Point observation, final Assertion assertion) {
+		return this;
 	}
 
 	@Override
@@ -40,11 +46,6 @@ public class OracleAgent implements Agent {
 	@Override
 	public Assertion assertion(final PerceptualObject object) {
 		return new Assertion(object, labelMapping.label(object), weight);
-	}
-
-	@Override
-	public OracleAgent learn(final Assertion assertion) {
-		return this;
 	}
 
 }

@@ -51,7 +51,7 @@ public class ClassificationTrial {
 		Agent trainedPupil = pupil;
 		for (final PerceptualObject object : trainingData) {
 			final Assertion assertion = teacher.assertion(object);
-			trainedPupil = trainedPupil.learn(assertion);
+			trainedPupil = trainedPupil.learn(object.observation(), assertion);
 		}
 		return trainedPupil;
 	}
