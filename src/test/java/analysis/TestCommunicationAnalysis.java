@@ -17,7 +17,6 @@ import population.AgentPairer;
 import population.StaticPairer;
 import agent.Agent;
 import agent.assertions.Assertion;
-import analysis.CommunicationAnalysis;
 import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
@@ -39,8 +38,8 @@ public class TestCommunicationAnalysis {
 		final int numGames = 1;
 		final CommunicationAnalysis analysis = new CommunicationAnalysis(numGames, agentPairer, objectPool);
 
-		final Assertion assertion = new Assertion(object, 0, 0.4);
-		final Assertion equivalentAssertion = new Assertion(object, 0, 0.5);
+		final Assertion assertion = new Assertion(0, 0.4);
+		final Assertion equivalentAssertion = new Assertion(0, 0.5);
 
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(numGames); will(returnValue(asList(object)));
@@ -57,8 +56,8 @@ public class TestCommunicationAnalysis {
 		final int numGames = 1;
 		final CommunicationAnalysis analysis = new CommunicationAnalysis(numGames, agentPairer, objectPool);
 
-		final Assertion assertion0 = new Assertion(object, 0, 0.42);
-		final Assertion assertion1 = new Assertion(object, 1, 0.42);
+		final Assertion assertion0 = new Assertion(0, 0.42);
+		final Assertion assertion1 = new Assertion(1, 0.42);
 
 		context.checking(new Expectations() {{
 			exactly(2).of(objectPool).pick(numGames); will(returnValue(asList(object)));

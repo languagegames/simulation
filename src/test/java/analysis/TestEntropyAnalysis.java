@@ -27,8 +27,8 @@ public class TestEntropyAnalysis {
 
 	private final PerceptualObject object = new SimpleObject(new Point(0.42));
 	private final List<Agent> agents = new ArrayList<>();
-	private final Assertion assertion1 = new Assertion(object, 1, 0.42);
-	private final Assertion assertion2 = new Assertion(object, 2, 0.42);
+	private final Assertion assertion1 = new Assertion(1, 0.42);
+	private final Assertion assertion2 = new Assertion(2, 0.42);
 
 	@Test
 	public void returnsLabelEntropyOverMultipleAgents() {

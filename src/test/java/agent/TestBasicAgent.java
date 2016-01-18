@@ -19,7 +19,6 @@ import conceptualspace.SimpleObject;
 public class TestBasicAgent {
 
 	private final double someWeight = 0.42;
-	private final PerceptualObject someObject = object(0.42);
 	private final Concept aConcept = new FuzzyConcept(new Point(0.7), 1),
 			anotherConcept = new FuzzyConcept(new Point(0.5), 1);
 
@@ -31,7 +30,7 @@ public class TestBasicAgent {
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(asList(other, mostAppropriate));
 
-		assertThat(agent.guess(guessingSet, new Assertion(someObject, 0, 1, someWeight)), equalTo(1));
+		assertThat(agent.guess(guessingSet, new Assertion(0, 1, someWeight)), equalTo(1));
 	}
 
 	@Test
@@ -42,7 +41,7 @@ public class TestBasicAgent {
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(asList(other, mostAppropriate));
 
-		assertThat(agent.guess(guessingSet, new Assertion(someObject, 0, someWeight)), equalTo(1));
+		assertThat(agent.guess(guessingSet, new Assertion(0, someWeight)), equalTo(1));
 	}
 
 	@Test
@@ -64,8 +63,8 @@ public class TestBasicAgent {
 		final PerceptualObject material0 = new SimpleObject(new Point(0.35));
 		final PerceptualObject material1 = new SimpleObject(new Point(0.4));
 
-		assertThat(agent.assertion(material0), equalTo(new Assertion(material0, 0, someWeight)));
-		assertThat(agent.assertion(material1), equalTo(new Assertion(material1, 1, someWeight)));
+		assertThat(agent.assertion(material0), equalTo(new Assertion(0, someWeight)));
+		assertThat(agent.assertion(material1), equalTo(new Assertion(1, someWeight)));
 	}
 
 	@Test
@@ -85,7 +84,7 @@ public class TestBasicAgent {
 				.build();
 
 		final Point observation = new Point(0.9);
-		assertThat(agent.learn(observation, new Assertion(new SimpleObject(observation), 1, 0.8)),
+		assertThat(agent.learn(observation, new Assertion(1, 0.8)),
 				equalTo(updatedAgent));
 	}
 

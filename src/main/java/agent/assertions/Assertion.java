@@ -8,28 +8,24 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import conceptualspace.PerceptualObject;
-
 public class Assertion {
 
-	public final PerceptualObject object;
 	private final List<Integer> labels = new ArrayList<>();
 	public final int label;
 	public final double weight;
 
-	private Assertion(final PerceptualObject object, final List<Integer> labels, final double weight) {
-		this.object = object;
+	private Assertion(final List<Integer> labels, final double weight) {
 		this.labels.addAll(labels);
 		label = labels.get(0);
 		this.weight = weight;
 	}
 
-	public Assertion(final PerceptualObject object, final int label, final double weight) {
-		this(object, asList(label), weight);
+	public Assertion(final int label, final double weight) {
+		this(asList(label), weight);
 	}
 
-	public Assertion(final PerceptualObject object, final int label0, final int label1, final double weight) {
-		this(object, asList(label0, label1), weight);
+	public Assertion(final int label0, final int label1, final double weight) {
+		this(asList(label0, label1), weight);
 	}
 
 	public List<Integer> labels() {
@@ -37,12 +33,12 @@ public class Assertion {
 	}
 
 	public boolean matches(final Assertion other) {
-		return label == other.label && object.equals(other.object);
+		return label == other.label;
 	}
 
 	@Override
 	public String toString() {
-		return "Assertion: " + object.toString() + " is " + labels.toString() + ", weight " + weight;
+		return "Assertion: " + labels.toString() + ", weight " + weight;
 	}
 
 	@Override

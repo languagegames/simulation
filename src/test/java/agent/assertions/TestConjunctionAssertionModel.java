@@ -10,8 +10,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import agent.assertions.Assertion;
-import agent.assertions.ConjunctionAssertionModel;
 import agent.concept.Concept;
 import agent.concept.FuzzyConcept;
 import conceptualspace.PerceptualObject;
@@ -37,14 +35,14 @@ public class TestConjunctionAssertionModel {
 	public void assertsConjunctionAppropriately() {
 		final ConjunctionAssertionModel assertionModel = new ConjunctionAssertionModel(0.7);
 		assertThat(assertionModel.assertion(object, concepts, 0.42),
-				equalTo(new Assertion(object, 4, 2, 0.42)));
+				equalTo(new Assertion(4, 2, 0.42)));
 	}
 
 	@Test
 	public void assertsSingleLabelAppropriately() {
 		final ConjunctionAssertionModel assertionModel = new ConjunctionAssertionModel(0.6);
 		assertThat(assertionModel.assertion(object, concepts, 0.42),
-				equalTo(new Assertion(object, 4, 0.42)));
+				equalTo(new Assertion(4, 0.42)));
 	}
 
 }

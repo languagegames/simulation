@@ -35,7 +35,7 @@ public class TestOracleAgent {
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(asList(object0, object1));
 
-		assertThat(agent.guess(guessingSet, new Assertion(object0, 0, someWeight)), equalTo(0));
+		assertThat(agent.guess(guessingSet, new Assertion(0, someWeight)), equalTo(0));
 	}
 
 	@Test
@@ -45,16 +45,16 @@ public class TestOracleAgent {
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(objects);
 
-		assertThat(agent.guess(guessingSet, new Assertion(object0, 0, someWeight)), equalTo(2));
+		assertThat(agent.guess(guessingSet, new Assertion(0, someWeight)), equalTo(2));
 	}
 
 	@Test
 	public void classifiesAccordingToPredefinedLabelMapping() {
 		final OracleAgent agent = new OracleAgent(new LabelMapping(objects, asList(1, 2, 0)), someWeight);
 
-		assertThat(agent.assertion(object0), equalTo(new Assertion(object0, 1, someWeight)));
-		assertThat(agent.assertion(object1), equalTo(new Assertion(object1, 2, someWeight)));
-		assertThat(agent.assertion(object2), equalTo(new Assertion(object2, 0, someWeight)));
+		assertThat(agent.assertion(object0), equalTo(new Assertion(1, someWeight)));
+		assertThat(agent.assertion(object1), equalTo(new Assertion(2, someWeight)));
+		assertThat(agent.assertion(object2), equalTo(new Assertion(0, someWeight)));
 	}
 
 	private PerceptualObject someObject(final double d) {

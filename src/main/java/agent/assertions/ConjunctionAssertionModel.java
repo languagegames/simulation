@@ -25,13 +25,11 @@ public class ConjunctionAssertionModel implements AssertionModel {
 		final double coefficient = coefficient(sortedConcepts, observation, appropriatenessDifferences);
 		if (conjunctionProbability(coefficient) >= singleLabelProbability(appropriatenessDifferences, coefficient)) {
 			return new Assertion(
-					object,
 					concepts.indexOf(sortedConcepts.get(0)),
 					concepts.indexOf(sortedConcepts.get(1)),
 					weight);
 		} else {
 			return new Assertion(
-					object,
 					concepts.indexOf(sortedConcepts.get(0)),
 					weight);
 		}

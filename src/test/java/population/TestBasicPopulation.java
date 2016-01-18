@@ -26,8 +26,8 @@ public class TestBasicPopulation {
 
 	private final AgentPairer agentPairer = new StaticPairer(asList(1, 0, 2, 3));
 	private final PerceptualObject object = new SimpleObject(new Point(0.42));
-	private final Assertion assertion0 = new Assertion(object, 42, 0.42);
-	private final Assertion assertion1 = new Assertion(object, 43, 0.42);
+	private final Assertion assertion0 = new Assertion(42, 0.42);
+	private final Assertion assertion1 = new Assertion(43, 0.42);
 	private final double highWeight = 0.8, lowWeight = 0.4;
 	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
 

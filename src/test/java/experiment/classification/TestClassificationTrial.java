@@ -27,8 +27,8 @@ public class TestClassificationTrial {
 
 	private final PerceptualObject trainingSample = someObject(),
 			testSample0 = someObject(), testSample1 = someObject();
-	private final Assertion assertion = new Assertion(someObject(), 0, 0.42),
-			anotherAssertion = new Assertion(someObject(), 1, 0.42);
+	private final Assertion assertion = new Assertion(0, 0.42),
+			anotherAssertion = new Assertion(1, 0.42);
 
 	private final List<PerceptualObject> trainingData = new ArrayList<>();
 	private final List<PerceptualObject> testData = new ArrayList<>();

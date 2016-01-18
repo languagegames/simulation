@@ -19,7 +19,6 @@ import population.StaticPairer;
 import utility.FakeRandom;
 import agent.Agent;
 import agent.assertions.Assertion;
-import analysis.GuessingAnalysis;
 import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
@@ -48,7 +47,7 @@ public class TestGuessingAnalysis {
 		guessingSet.addAll(asList(otherObject, otherObject, target, otherObject, otherObject));
 		final GuessingAnalysis analysis = new GuessingAnalysis(1, 5, agentPairer, objectPool, new FakeRandom(targetIndex));
 
-		final Assertion assertion = new Assertion(otherObject, targetIndex, 0.42);
+		final Assertion assertion = new Assertion(targetIndex, 0.42);
 
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(5); will(returnValue(guessingSet));
@@ -64,7 +63,7 @@ public class TestGuessingAnalysis {
 		guessingSet.addAll(asList(target, otherObject, otherObject, otherObject, otherObject));
 		final GuessingAnalysis analysis = new GuessingAnalysis(1, 5, agentPairer, objectPool, new FakeRandom(0));
 
-		final Assertion assertion = new Assertion(otherObject, 0, 0.42);
+		final Assertion assertion = new Assertion(0, 0.42);
 
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(5); will(returnValue(guessingSet));

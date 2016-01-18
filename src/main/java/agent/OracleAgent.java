@@ -45,7 +45,7 @@ public class OracleAgent implements Agent {
 
 	@Override
 	public Assertion assertion(final PerceptualObject object) {
-		return new Assertion(object, labelMapping.label(object), weight);
+		return new Assertion(labelMapping.label(object), weight);
 	}
 
 }

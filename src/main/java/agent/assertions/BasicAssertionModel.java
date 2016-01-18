@@ -23,7 +23,7 @@ public class BasicAssertionModel implements AssertionModel {
 				maxAppropriateness = mostAppropriate.appropriatenessOf(observation);
 			}
 		}
-		return new Assertion(object, concepts.indexOf(mostAppropriate), weight);
+		return new Assertion(concepts.indexOf(mostAppropriate), weight);
 	}
 
 	@Override
