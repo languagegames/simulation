@@ -3,10 +3,10 @@ package agent.assertions;
 import java.util.List;
 
 import agent.concept.Concept;
-import conceptualspace.PerceptualObject;
+import conceptualspace.Point;
 
 public interface AssertionModel {
 
-	Assertion assertion(PerceptualObject object, List<Concept> concepts, double weight);
+	Assertion assertion(Point observation, List<Concept> concepts, double weight);
 
 }

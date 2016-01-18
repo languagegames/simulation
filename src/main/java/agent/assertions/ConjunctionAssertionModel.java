@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import agent.concept.Concept;
-import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 
 public class ConjunctionAssertionModel implements AssertionModel {
@@ -18,8 +17,7 @@ public class ConjunctionAssertionModel implements AssertionModel {
 	}
 
 	@Override
-	public Assertion assertion(final PerceptualObject object, final List<Concept> concepts, final double weight) {
-		final Point observation = object.observation();
+	public Assertion assertion(final Point observation, final List<Concept> concepts, final double weight) {
 		final List<Concept> sortedConcepts = sortConcepts(concepts, observation);
 		final List<Double> appropriatenessDifferences = appropriateDifferences(observation, sortedConcepts);
 		final double coefficient = coefficient(sortedConcepts, observation, appropriatenessDifferences);

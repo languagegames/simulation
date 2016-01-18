@@ -12,13 +12,11 @@ import org.junit.Test;
 
 import agent.concept.Concept;
 import agent.concept.FuzzyConcept;
-import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
-import conceptualspace.SimpleObject;
 
 public class TestConjunctionAssertionModel {
 
-	private final PerceptualObject object = new SimpleObject(new Point(0.9, 0.5));
+	private final Point observation = new Point(0.9, 0.5);
 	private final List<Concept> concepts = new ArrayList<>();
 
 	@Before
@@ -34,14 +32,14 @@ public class TestConjunctionAssertionModel {
 	@Test
 	public void assertsConjunctionAppropriately() {
 		final ConjunctionAssertionModel assertionModel = new ConjunctionAssertionModel(0.7);
-		assertThat(assertionModel.assertion(object, concepts, 0.42),
+		assertThat(assertionModel.assertion(observation, concepts, 0.42),
 				equalTo(new Assertion(4, 2, 0.42)));
 	}
 
 	@Test
 	public void assertsSingleLabelAppropriately() {
 		final ConjunctionAssertionModel assertionModel = new ConjunctionAssertionModel(0.6);
-		assertThat(assertionModel.assertion(object, concepts, 0.42),
+		assertThat(assertionModel.assertion(observation, concepts, 0.42),
 				equalTo(new Assertion(4, 0.42)));
 	}
 

@@ -7,17 +7,15 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import agent.concept.Concept;
-import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 
 public class BasicAssertionModel implements AssertionModel {
 
 	@Override
-	public Assertion assertion(final PerceptualObject object, final List<Concept> concepts, final double weight) {
+	public Assertion assertion(final Point observation, final List<Concept> concepts, final double weight) {
 		Concept mostAppropriate = concepts.get(new Random().nextInt(concepts.size()));
 		double maxAppropriateness = 0;
 		for (final Concept concept : concepts) {
-			final Point observation = object.observation();
 			if (concept.appropriatenessOf(observation) > maxAppropriateness) {
 				mostAppropriate = concept;
 				maxAppropriateness = mostAppropriate.appropriatenessOf(observation);

@@ -94,7 +94,7 @@ public class BasicAgent implements Agent {
 
 	@Override
 	public Assertion assertion(final PerceptualObject object) {
-		return assertionModel.assertion(object, concepts, weight);
+		return assertionModel.assertion(object.observation(), concepts, weight);
 	}
 
 	@Override
