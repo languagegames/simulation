@@ -1,6 +1,7 @@
 package population;
 
 import java.util.List;
+import java.util.Random;
 
 import agent.Agent;
 import conceptualspace.ObjectPool;
@@ -12,5 +13,8 @@ public interface AgentInteractor {
 			List<Agent> agents, List<Agent> updatedAgents, Agent speaker, Agent listener, ObjectPool objectPool);
 
 	int communicationGameResult(Agent agent, Agent other, PerceptualObject object);
+
+	int guessingGameResult(Agent describer, Agent guesser,
+			ObjectPool objectPool, int numObjects, Random random);
 
 }

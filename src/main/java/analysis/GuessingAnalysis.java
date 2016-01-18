@@ -1,16 +1,14 @@
 package analysis;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import population.AgentInteractor;
 import population.AgentPairer;
+import population.DifferentObservationInteractor;
 import population.RandomPairer;
 import agent.Agent;
-import agent.assertions.Assertion;
 import conceptualspace.ObjectPool;
-import conceptualspace.PerceptualObject;
-import conceptualspace.Point;
 
 public class GuessingAnalysis implements Analysis {
 
@@ -19,6 +17,7 @@ public class GuessingAnalysis implements Analysis {
 	private final AgentPairer agentPairer;
 	private final ObjectPool objectPool;
 	private final Random random;
+	private final AgentInteractor agentInteractor = new DifferentObservationInteractor();
 
 	public GuessingAnalysis(
 			final int numGames,
@@ -53,24 +52,9 @@ public class GuessingAnalysis implements Analysis {
 	private double guessingScore(final Agent describer, final Agent guesser) {
 		double sumOfScores = 0;
 		for (int i=0; i<numGames; i++) {
-			sumOfScores += success(describer, guesser) ? 1 : 0;
+			sumOfScores += agentInteractor.guessingGameResult(describer, guesser, objectPool, numObjects, random);
 		}
 		return sumOfScores / numGames;
-	}
-
-	private boolean success(final Agent describer, final Agent guesser) {
-		final List<PerceptualObject> guessingSet = objectPool.pick(numObjects);
-		final int targetIndex = random.nextInt(numObjects);
-		final Assertion assertion = describer.assertion(guessingSet.get(targetIndex).observation());
-		return (guesser.guess(observations(guessingSet), assertion) == targetIndex);
-	}
-
-	private List<Point> observations(final List<PerceptualObject> guessingSet) {
-		final List<Point> observations = new ArrayList<>();
-		for (final PerceptualObject object : guessingSet) {
-			observations.add(object.observation());
-		}
-		return observations;
 	}
 
 	@Override
