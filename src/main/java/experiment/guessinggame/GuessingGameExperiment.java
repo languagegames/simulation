@@ -16,6 +16,7 @@ import agent.concept.FuzzyConceptFactory;
 import agent.concept.RandomConceptFactory;
 import conceptualspace.ObjectPool;
 import conceptualspace.PerceptualObject;
+import conceptualspace.Point;
 import conceptualspace.RandomObjectPool;
 
 
@@ -109,7 +110,15 @@ public class GuessingGameExperiment {
 		final List<PerceptualObject> guessingSet = objectPool.pick(numObjects);
 		final int targetIndex = random.nextInt(numObjects);
 		final Assertion assertion = describer.assertion(guessingSet.get(targetIndex).observation());
-		return (guesser.guess(guessingSet, assertion) == targetIndex);
+		return (guesser.guess(observations(guessingSet), assertion) == targetIndex);
+	}
+
+	private List<Point> observations(final List<PerceptualObject> guessingSet) {
+		final List<Point> observations = new ArrayList<>();
+		for (final PerceptualObject object : guessingSet) {
+			observations.add(object.observation());
+		}
+		return observations;
 	}
 
 }

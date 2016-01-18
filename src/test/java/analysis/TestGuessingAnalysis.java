@@ -53,7 +53,7 @@ public class TestGuessingAnalysis {
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(5); will(returnValue(guessingSet));
 			oneOf(agent1).assertion(observation); will(returnValue(assertion));
-			oneOf(agent0).guess(guessingSet, assertion); will(returnValue(targetIndex));
+			oneOf(agent0).guess(observations(guessingSet), assertion); will(returnValue(targetIndex));
 		}});
 
 		assertThat(analysis.analyse(agents), equalTo(1.0));
@@ -69,10 +69,18 @@ public class TestGuessingAnalysis {
 		context.checking(new Expectations() {{
 			oneOf(objectPool).pick(5); will(returnValue(guessingSet));
 			oneOf(agent1).assertion(observation); will(returnValue(assertion));
-			oneOf(agent0).guess(guessingSet, assertion); will(returnValue(0));
+			oneOf(agent0).guess(observations(guessingSet), assertion); will(returnValue(0));
 		}});
 
 		assertThat(analysis.analyse(agents), equalTo(1.0));
+	}
+
+	private List<Point> observations(final List<PerceptualObject> guessingSet) {
+		final List<Point> observations = new ArrayList<>();
+		for (final PerceptualObject object : guessingSet) {
+			observations.add(object.observation());
+		}
+		return observations;
 	}
 
 }

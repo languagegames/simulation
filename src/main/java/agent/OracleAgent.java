@@ -3,7 +3,6 @@ package agent;
 import java.util.List;
 
 import agent.assertions.Assertion;
-import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 
 
@@ -28,10 +27,10 @@ public class OracleAgent implements Agent {
 	}
 
 	@Override
-	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
+	public int guess(final List<Point> guessingSet, final Assertion assertion) {
 		for (int i=0; i<guessingSet.size(); i++) {
-			final PerceptualObject object = guessingSet.get(i);
-			if (labelMapping.label(object) == assertion.label) {
+			final Point observation = guessingSet.get(i);
+			if (labelMapping.label(observation) == assertion.label) {
 				return i;
 			}
 		}

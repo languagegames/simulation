@@ -10,7 +10,6 @@ import agent.assertions.Assertion;
 import agent.assertions.AssertionModel;
 import agent.concept.Concept;
 import agent.concept.RandomConceptFactory;
-import conceptualspace.PerceptualObject;
 import conceptualspace.Point;
 
 
@@ -49,6 +48,19 @@ public class BasicAgent implements Agent {
 	}
 
 	@Override
+	public int guess(final List<Point> guessingSet, final Assertion assertion) {
+		int guess = 0; double highestAppropriateness = 0;
+		for (final Point observation : guessingSet) {
+			final double appropriateness = appropriateness(assertion, observation);
+			if (appropriateness > highestAppropriateness) {
+				guess = guessingSet.indexOf(observation);
+				highestAppropriateness = appropriateness;
+			}
+		}
+		return guess;
+	}
+
+	@Override
 	public Assertion assertion(final Point observation) {
 		return assertionModel.assertion(observation, concepts, weight);
 	}
@@ -60,19 +72,6 @@ public class BasicAgent implements Agent {
 		final List<Concept> newConcepts = new ArrayList<>(concepts);
 		newConcepts.set(assertion.label, updated);
 		return new BasicAgent(newConcepts, weight, assertionModel);
-	}
-
-	@Override
-	public int guess(final List<PerceptualObject> guessingSet, final Assertion assertion) {
-		int guess = 0; double highestAppropriateness = 0;
-		for (final PerceptualObject object : guessingSet) {
-			final double appropriateness = appropriateness(assertion, object.observation());
-			if (appropriateness > highestAppropriateness) {
-				guess = guessingSet.indexOf(object);
-				highestAppropriateness = appropriateness;
-			}
-		}
-		return guess;
 	}
 
 	private double appropriateness(final Assertion assertion, final Point observation) {

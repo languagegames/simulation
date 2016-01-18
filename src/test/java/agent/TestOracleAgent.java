@@ -35,7 +35,7 @@ public class TestOracleAgent {
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(asList(object0, object1));
 
-		assertThat(agent.guess(guessingSet, new Assertion(0, someWeight)), equalTo(0));
+		assertThat(agent.guess(observations(guessingSet), new Assertion(0, someWeight)), equalTo(0));
 	}
 
 	@Test
@@ -45,7 +45,15 @@ public class TestOracleAgent {
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(objects);
 
-		assertThat(agent.guess(guessingSet, new Assertion(0, someWeight)), equalTo(2));
+		assertThat(agent.guess(observations(guessingSet), new Assertion(0, someWeight)), equalTo(2));
+	}
+
+	private List<Point> observations(final List<PerceptualObject> guessingSet) {
+		final List<Point> observations = new ArrayList<>();
+		for (final PerceptualObject object : guessingSet) {
+			observations.add(object.observation());
+		}
+		return observations;
 	}
 
 	@Test

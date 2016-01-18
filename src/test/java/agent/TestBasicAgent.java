@@ -30,7 +30,7 @@ public class TestBasicAgent {
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(asList(other, mostAppropriate));
 
-		assertThat(agent.guess(guessingSet, new Assertion(0, 1, someWeight)), equalTo(1));
+		assertThat(agent.guess(observations(guessingSet), new Assertion(0, 1, someWeight)), equalTo(1));
 	}
 
 	@Test
@@ -41,7 +41,15 @@ public class TestBasicAgent {
 		final List<PerceptualObject> guessingSet = new ArrayList<>();
 		guessingSet.addAll(asList(other, mostAppropriate));
 
-		assertThat(agent.guess(guessingSet, new Assertion(0, someWeight)), equalTo(1));
+		assertThat(agent.guess(observations(guessingSet), new Assertion(0, someWeight)), equalTo(1));
+	}
+
+	private List<Point> observations(final List<PerceptualObject> guessingSet) {
+		final List<Point> observations = new ArrayList<>();
+		for (final PerceptualObject object : guessingSet) {
+			observations.add(object.observation());
+		}
+		return observations;
 	}
 
 	@Test
