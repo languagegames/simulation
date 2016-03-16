@@ -25,7 +25,7 @@ public class ClassificationExperiment {
 	private final int crossValFactor;
 	private final Agent pupil;
 	private final Agent teacher;
-	private List<PerceptualObject> data = new ArrayList<>();
+	private List<PerceptualObject> data = new ArrayList<PerceptualObject>();
 
 	public ClassificationExperiment(
 			final String fileID,
@@ -49,7 +49,7 @@ public class ClassificationExperiment {
 	}
 
 	public void run() {
-		final List<Double> scores = new ArrayList<>();
+		final List<Double> scores = new ArrayList<Double>();
 		for (int i=0; i<numRuns; i++) {
 			Collections.shuffle(data);
 			final ClassificationCrossValidation crossValidation =

@@ -28,7 +28,7 @@ import conceptualspace.SuppliedObjectPool;
 public class OracleExperiment {
 
 	private final String fileID;
-	private final List<Agent> oracles = new ArrayList<>();
+	private final List<Agent> oracles = new ArrayList<Agent>();
 	private final ObjectPool objectPool;
 	private final int numAgents;
 	private final int numDimensions;
@@ -74,8 +74,8 @@ public class OracleExperiment {
 	}
 
 	public void run() {
-		final List<TimeSeries> communicationResults = new ArrayList<>();
-		final List<TimeSeries> guessingResults = new ArrayList<>();
+		final List<TimeSeries> communicationResults = new ArrayList<TimeSeries>();
+		final List<TimeSeries> guessingResults = new ArrayList<TimeSeries>();
 		for (int run=0; run<numRuns; run++) {
 			final Population population = oraclePopulation(
 					oracles, numAgents, numDimensions, numLabels, objectPool, assertionModel, conceptFactory);

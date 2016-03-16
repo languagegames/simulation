@@ -6,26 +6,24 @@ import java.util.Random;
 
 public class SuppliedObjectPool implements ObjectPool {
 
-	private final List<PerceptualObject> objects = new ArrayList<>();
-	private final Random random;
+    private final List<PerceptualObject> objects = new ArrayList<PerceptualObject>();
+    private final Random random;
 
-	public SuppliedObjectPool(final List<PerceptualObject> objects) {
-		this.objects.addAll(objects);
-		random = new Random();
-	}
+    public SuppliedObjectPool(final List<PerceptualObject> objects) {
+        this.objects.addAll(objects);
+        random = new Random();
+    }
 
-	@Override
-	public PerceptualObject pick() {
-		return objects.get(random.nextInt(objects.size()));
-	}
+    public PerceptualObject pick() {
+        return objects.get(random.nextInt(objects.size()));
+    }
 
-	@Override
-	public List<PerceptualObject> pick(final int numObjects) {
-		final List<PerceptualObject> objects = new ArrayList<>();
-		for (int i=0; i<numObjects; i++) {
-			objects.add(pick());
-		}
-		return objects;
-	}
+    public List<PerceptualObject> pick(final int numObjects) {
+        final List<PerceptualObject> objects = new ArrayList<PerceptualObject>();
+        for (int i = 0; i < numObjects; i++) {
+            objects.add(pick());
+        }
+        return objects;
+    }
 
 }
