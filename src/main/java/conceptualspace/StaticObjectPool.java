@@ -5,7 +5,7 @@ import java.util.List;
 
 public class StaticObjectPool implements ObjectPool {
 
-    private List<PerceptualObject> objects = new ArrayList<PerceptualObject>();
+    private final List<PerceptualObject> objects = new ArrayList<PerceptualObject>();
 
     public StaticObjectPool(final List<PerceptualObject> objects) {
         this.objects.addAll(objects);

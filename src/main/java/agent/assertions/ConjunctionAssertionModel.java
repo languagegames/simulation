@@ -61,6 +61,7 @@ public class ConjunctionAssertionModel implements AssertionModel {
         return sortedConcepts;
     }
 
+    @SuppressWarnings("UnusedParameters")
     private double coefficient(
             final List<Concept> concepts, final Point observation, final List<Double> appropriatenessDifferences) {
         final int n = concepts.size();

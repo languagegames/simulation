@@ -20,6 +20,7 @@ import static java.lang.Math.sqrt;
 import static utility.ResultsPrinter.print;
 
 
+@SuppressWarnings("unused")
 public class GuessingGameExperiment {
 
     private final double threshold;
@@ -58,7 +59,8 @@ public class GuessingGameExperiment {
         final StringBuilder builder = new StringBuilder();
         for (final Double p : pValues(pMin, pMax)) {
             final List<Double> scores = scores(p, numRuns);
-            builder.append(p + ", " + mean(scores) + ", " + std(scores) + "\n");
+            final String next = p + ", " + mean(scores) + ", " + std(scores) + "\n";
+            builder.append(next);
         }
         print(builder.toString(), "b" + threshold + ".txt");
     }
@@ -79,7 +81,7 @@ public class GuessingGameExperiment {
             double score = 0;
             for (int j = 0; j < numTrials; j++) {
                 final Agent describer = randomAgent(numDimensions, numLabels, 0.42, assertionModel, conceptFactory);
-                final Agent guesser = describer;
+                final Agent guesser = randomAgent(numDimensions, numLabels, 0.42, assertionModel, conceptFactory);
                 score += success(describer, guesser) ? 1 : 0;
             }
             scores.add(score / numTrials);

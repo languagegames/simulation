@@ -18,6 +18,7 @@ public class TimeSeriesAverage {
         this.standardDeviation.addAll(standardDeviation);
     }
 
+    @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
     @Override
     public String toString() {
         final StringBuilder string = new StringBuilder();

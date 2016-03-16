@@ -84,6 +84,7 @@ public class DataReader {
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     private static List<String> read(final String fileName) {
         final List<String> result = new ArrayList<String>();
         final ClassLoader classLoader = DataReader.class.getClassLoader();

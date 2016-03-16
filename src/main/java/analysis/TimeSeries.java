@@ -80,7 +80,8 @@ public class TimeSeries {
         final StringBuilder string = new StringBuilder();
         for (int t = 0; t < values.size(); t++) {
             string.append(timeSteps.get(t));
-            string.append(", " + values.get(t) + "\n");
+            final String next = ", " + values.get(t) + "\n";
+            string.append(next);
         }
         return string.toString();
     }
