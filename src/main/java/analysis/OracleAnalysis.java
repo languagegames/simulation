@@ -21,6 +21,10 @@ public class OracleAnalysis implements Analysis {
         this.agentInteractor = agentInteractor;
     }
 
+    public OracleAnalysis(Agent oracle, ObjectPool objectPool, AgentInteractor agentInteractor) {
+        this(oracle, 10, objectPool, agentInteractor);
+    }
+
     public double analyse(List<Agent> agents) {
         double sumOfScores = 0;
         for (final Agent agent : agents) {
