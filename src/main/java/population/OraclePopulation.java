@@ -8,11 +8,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OraclePopulation implements Population {
 
-    private final List<Agent> agents = new ArrayList<Agent>();
-    private final List<Agent> oracles = new ArrayList<Agent>();
+    private final List<Agent> agents = new ArrayList<>();
+    private final List<Agent> oracles = new ArrayList<>();
     private final ObjectPool objectPool;
     private final AgentPairer agentPairer;
     private final AgentInteractor agentInteractor;
@@ -41,11 +42,9 @@ public class OraclePopulation implements Population {
     }
 
     private List<Agent> incrementWeights(final List<Agent> agents, final double weightIncrement) {
-        final List<Agent> updatedAgents = new ArrayList<Agent>();
-        for (final Agent agent : agents) {
-            updatedAgents.add(agent.incrementWeight(weightIncrement));
-        }
-        return updatedAgents;
+        return agents.stream()
+                .map(agent -> agent.incrementWeight(weightIncrement))
+                .collect(Collectors.toList());
     }
 
     public OraclePopulation runLanguageGames() {
@@ -56,7 +55,7 @@ public class OraclePopulation implements Population {
     }
 
     private List<Agent> mergeAgents() {
-        final List<Agent> allAgents = new ArrayList<Agent>(agents);
+        final List<Agent> allAgents = new ArrayList<>(agents);
         allAgents.addAll(oracles);
         return allAgents;
     }
@@ -66,7 +65,7 @@ public class OraclePopulation implements Population {
     }
 
     private List<Agent> runLanguageGames(final List<Agent> allAgents, final List<Integer> pairingOrder) {
-        final List<Agent> updatedAgents = new ArrayList<Agent>(allAgents);
+        final List<Agent> updatedAgents = new ArrayList<>(allAgents);
         for (int i = 0; i < allAgents.size() - 1; i += 2) {
             Agent speaker = allAgents.get(pairingOrder.get(i));
             Agent listener = allAgents.get(pairingOrder.get(i + 1));
@@ -74,7 +73,8 @@ public class OraclePopulation implements Population {
                 speaker = allAgents.get(pairingOrder.get(i + 1));
                 listener = allAgents.get(pairingOrder.get(i));
             }
-            agentInteractor.categoryGame(agents, updatedAgents, speaker, listener, objectPool);
+            if (listener.weight() < 0.95)
+                agentInteractor.categoryGame(agents, updatedAgents, speaker, listener, objectPool);
         }
         return updatedAgents;
     }
