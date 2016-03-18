@@ -1,1 +1,5 @@
-/target/
+target/
+out/
+.idea/
+.settings/
+*.iml
