@@ -1,42 +1,46 @@
 package agent.concept;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import agent.assertions.Assertion;
 import conceptualspace.Point;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import utility.matrix.Matrix;
 
 public class MaxLikelihoodConcept implements Concept {
 
-	private final LikelihoodModel likelihoodModel;
+    private final MultivariateGaussianModel likelihoodModel;
 
-	public MaxLikelihoodConcept(final LikelihoodModel likelihoodModel) {
-		this.likelihoodModel = likelihoodModel;
-	}
+    public MaxLikelihoodConcept(final Matrix data) {
+        this.likelihoodModel = new MultivariateGaussianModel(data);
+    }
 
-	@Override
-	public MaxLikelihoodConcept update(final Point observation, final Assertion assertion) {
-		return new MaxLikelihoodConcept(likelihoodModel.update(observation));
-	}
+    public MaxLikelihoodConcept(final MultivariateGaussianModel likelihoodModel) {
+        this.likelihoodModel = likelihoodModel;
+    }
 
-	@Override
-	public double appropriatenessOf(final Point point) {
-		return likelihoodModel.likelihood(point);
-	}
+    @Override
+    public MaxLikelihoodConcept update(final Point observation, final Assertion assertion) {
+        return new MaxLikelihoodConcept(likelihoodModel.update(observation));
+    }
 
-	@Override
-	public String toString() {
-		return "ML concept with " + likelihoodModel.toString();
-	}
+    @Override
+    public double appropriatenessOf(final Point point) {
+        return likelihoodModel.likelihood(point);
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
-	}
+    @Override
+    public String toString() {
+        return "ML concept with " + likelihoodModel.toString();
+    }
 
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
 
 }
